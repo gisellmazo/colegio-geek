@@ -1,5 +1,6 @@
 .btn-p{
-  width: 100%
+  width: 100%;
+  
 }
 body{
   overflow: hidden;
@@ -18,10 +19,13 @@ body{
   .s { grid-area: s;
    }
   .PM { 
+    height: 100% !;
     grid-area: P; 
     padding-bottom: 32% ;
     overflow: hidden;
     background-color: #2C1C4C !important;
+
+    
   }
   .F { grid-area: F; }
 

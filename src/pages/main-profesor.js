@@ -8,7 +8,7 @@ import "../styles/pantallasPrincipales.css";
 function Main({ history }) {
   return (
     <>
-      <div class="grid-container">
+      <div className="grid-container">
         <div class="s">
           <Sidebar name1="Mi espacio" name2="Ingresar notas" ruta1="/profesor" ruta2=""/>
         </div>
@@ -81,7 +81,7 @@ function Main({ history }) {
           </div>
         </div>
         <div class="F">
-          <Footer />
+          <Footer cargo="Profesor" />
         </div>
         l
       </div>

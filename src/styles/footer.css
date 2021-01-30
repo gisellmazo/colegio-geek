@@ -5,3 +5,9 @@
   background-color: #2C1C4C !important;
   border-color: #2C1C4C !important;
 }
+
+.foot-down{
+  
+  bottom: 0%;
+  width: 100%;
+}

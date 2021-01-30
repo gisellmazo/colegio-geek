@@ -7,12 +7,16 @@
     border-radius: 10% !important;  
 }
 
+body{
+  overflow: hidden;
+}
+
 .btn-p{
     width: 100%
   }
-  body{
+  /* body{
     overflow: hidden;
-  }
+  } */
   .grid-container {
       display: grid;
       grid-template-columns: 0.9fr 1.2fr 1fr 1fr;
@@ -22,7 +26,7 @@
       grid-template-areas:
         "s P P P"
         "s P P P"
-        "F F F F";
+         "F F F F" ;
     }
     .s { grid-area: s;
      }
@@ -32,7 +36,7 @@
       overflow: hidden;
       background-color: #2C1C4C !important;
     }
-    .F { grid-area: F; }
+    .F { grid-area: F; } 
   
   
   

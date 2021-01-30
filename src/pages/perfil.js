@@ -49,7 +49,7 @@ function Perfil() {
           </div>
         </div>
         <div class="F">
-          <Footer />
+          <Footer cargo="Profesor"/>
         </div>
       </div>
     </>

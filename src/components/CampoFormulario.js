@@ -1,19 +1,22 @@
 import React from 'react';
 import { ErrorMessage, useField } from 'formik';
 
-function CampoFormulario({label, ...props}) {
+function CampoFormulario({ label, estilo, ...props }) {
     const [field, meta] = useField(props);
-        
+
     return (
         <div>
-            <label htmlFor={field.name}>
+            <label htmlFor={field.name} className={estilo}>
                 {label}
             </label>
-            <input 
-            {...field} {...props}
-            autoComplete="off">
+            <input
+                {...field} {...props}
+                autoComplete="off">
             </input>
-            <ErrorMessage name={field.name}/>
+            <label className={estilo}>
+                <ErrorMessage name={field.name}  />
+            </label>
+
         </div>
     );
 }

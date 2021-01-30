@@ -20,7 +20,7 @@ const Administrador = () => {
                                     <Card name="Registrar estudiante" ruta="/registrarestudiante"/>
                                 </div>
                                 <div class="col-sm-6 ">
-                                    <Card name="Registrar profesor"/>
+                                    <Card name="Registrar profesor" ruta="/registrarprofesor"/>
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
                                     <Card name="Registrar grupo"/>
@@ -37,7 +37,7 @@ const Administrador = () => {
                 
             </div>
 
-        <Footer />
+        <Footer cargo="Administrador"/>
         </div>
     );
 };

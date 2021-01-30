@@ -27,7 +27,7 @@ const login = () => {
                 <div>
                     <Formik
                         initialValues={{
-                            tipo_usuario: undefined,
+                            tipo_usuario: '',
                             usuario: '',
                             contraseña: ''
                         }}
@@ -49,7 +49,7 @@ const login = () => {
                                             <option value="3">Estudiante</option>
                                         </select>
 
-                                        <CampoFormulario label="Usuario:" type="number" name="usuario" className="form-control diseno-imputs"/>
+                                        <CampoFormulario label="Usuario:" type="number" name="usuario" className="form-control diseno-imputs color-letra"/>
                                         <CampoFormulario label="Contraseña:" type="password"  name="contraseña" className="form-control diseno-imputs" />
                                         <br />
                                         <button type="submit" className="diseno-imputs">Ingresar</button>
