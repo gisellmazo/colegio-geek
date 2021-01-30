@@ -7,7 +7,7 @@ function Footer() {
       
       <div class="d-flex mr-5">
         <div class="mr-auto p-2 ml-4">
-        <img src="/logo-colegio-geek.png" width="135px" className="mt-2" alt="colegio geek logo" />
+        <img src="/images/logo-colegio-geek.png" width="135px" className="mt-2" alt="colegio geek logo" />
         </div>
         <div class="p-2 mr-5">
          <button type="button" class="btn btn-primary btn-lg">Profesor</button>
