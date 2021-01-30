@@ -18,7 +18,7 @@ const login = () => {
 
     })
     return (
-        <body>
+        <body id="body-container">
             <div id="main-container">
                 <div className="imagen">
                     <img src="../images/logo-colegio-geek.png" alt="logo colegio" width="50%" />

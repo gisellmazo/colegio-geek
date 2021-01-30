@@ -13,7 +13,7 @@ function Perfil() {
     <>
       <div class="grid-container ">
         <div class="s">
-          <Sidebar />
+        <Sidebar name1="Mi espacio" name2="Ingresar notas" ruta1="/profesor" ruta2=""/>
         </div>
         <div class="P">
           <div className="mt-3 profile-photo ">

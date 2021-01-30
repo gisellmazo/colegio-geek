@@ -2,7 +2,7 @@ import React from "react";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import { withRouter } from "react-router-dom";
-import "../styles/main-profesor.css";
+import "../styles/pantallasPrincipales.css";
 
 
 function Main({ history }) {
@@ -10,7 +10,7 @@ function Main({ history }) {
     <>
       <div class="grid-container">
         <div class="s">
-          <Sidebar />
+          <Sidebar name1="Mi espacio" name2="Ingresar notas" ruta1="/profesor" ruta2=""/>
         </div>
         <div class="PM">
           <div className="mt-4">
