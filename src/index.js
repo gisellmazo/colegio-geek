@@ -4,10 +4,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from "react-router-dom";
 import login from "./pages/login"
 
+
 const App = () => {
   return(
     <BrowserRouter>
       <Route path="/" component={login} />
+      <Route path="/paginaPrueba" component={paginaPrueba} />
     </BrowserRouter>
   ) 
 }
