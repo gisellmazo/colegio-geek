@@ -23,10 +23,10 @@ const Administrador = () => {
                                     <Card name="Registrar profesor" ruta="/registrarprofesor"/>
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Registrar grupo"/>
+                                    <Card name="Registrar grupo" ruta="/registrargrupo"/>
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Registrar materia"/>
+                                    <Card name="Registrar materia" ruta="/registrarmateria"/>
                                 </div>
 
                             </div>

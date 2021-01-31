@@ -4,22 +4,23 @@ import React from 'react';
 function Card(props) {
     const { name, ruta } = props;
     return (
-
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{name}</h5>
-                <p class="card-text">
-                    With supporting text below as a natural lead-in to
-                    additional content.
+        
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{name}</h5>
+                    <p class="card-text">
+                        With supporting text below as a natural lead-in to
+                        additional content.
                       </p>
-                <a href={ruta}>
-                    <button type="button" class="btn-p btn-primary">
-                        Ir
+                    <a href={ruta}>
+                        <button type="button" class="btn-p btn-primary">
+                            Ir
                         </button>
-                </a>
+                    </a>
 
+                </div>
             </div>
-        </div>
+        
 
     );
 }

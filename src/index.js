@@ -14,6 +14,9 @@ import RegistrarGrupo from "./pages/registrarGrupo";
 import VerEstudiantesProfesor from "./pages/verEstudiantesProfesor";
 import verGruposProfesor from "./pages/verGruposProfesor"
 import verMateriasProfesor from "./pages/verMateriasProfesor"
+import Main_estudiante from './pages/main-estudiante'
+import RegistrarMateria from "./pages/registrarMateria";
+import MisNotas from './pages/misNotas'
 
 
 
@@ -29,9 +32,12 @@ const App = () => {
       <Route path="/registrarestudiante" component={RegistrarEstudiante}/>
       <Route path="/registrarprofesor" component={RegistrarProfesor}/>
       <Route path="/registrargrupo" component={RegistrarGrupo}/>
-      <Route path="/estudiantes" component={VerEstudiantesProfesor} />
+      <Route path="/vermisestudiantes" component={VerEstudiantesProfesor} />
       <Route path="/grupos" component={verGruposProfesor}/>
       <Route path="/materias" component={verMateriasProfesor}/>
+      <Route path="/estudiante" component={Main_estudiante}/>
+      <Route path="/registrarmateria" component={RegistrarMateria}/>
+      <Route path="/vermisnotas" component={MisNotas}/>
     </BrowserRouter>
   ) 
 }

@@ -20,7 +20,7 @@ function RegistrarEstudiante() {
             .required('Campo requerido'),
         apellidos: Yup.string()
             .required('Campo requerido'),
-        sexo : Yup.string()
+        sexo: Yup.string()
             .required('Campo requerido'),
         fecha_nacimiento: Yup.date()
             .required('Campo requerido'),
@@ -38,7 +38,7 @@ function RegistrarEstudiante() {
             .required('campo requerido')
     })
 
-    
+
     return (
         <div>
             <div class="grid-container">
@@ -74,7 +74,7 @@ function RegistrarEstudiante() {
                         >
                             {formik => (
                                 <Form>
-                                    
+                                    <div className="PEP">
                                         <div className="main align-middle d-flex pl-4 pr-4">
                                             <div class="container-row">
                                                 <label className="texto-blanco">tipo de documento:</label>
@@ -105,9 +105,12 @@ function RegistrarEstudiante() {
 
                                         </div>
                                         <br />
-                                    <center>
-                                        <button type="submit">Registrar</button>
-                                    </center>
+                                        <center>
+                                            <button type="submit">Registrar</button>
+                                        </center>
+                                        <br/><br/><br/>
+                                    </div>
+                                    
 
                                 </Form>
 
