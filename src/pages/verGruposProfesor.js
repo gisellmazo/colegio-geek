@@ -16,7 +16,126 @@ function verGruposProfesor() {
             ruta2=""
           />
         </div>
-        <div className="PGP"></div>
+        <div className="PGP">
+          <div className="mt-4">
+            <div className=" pl-5 pr-4">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body align-self-center">
+                      <h4 class="card-title">{}</h4>
+
+                      <p class="h5 card-text m-1 p-1">
+                        Grupo: {} <br />
+                        Código del grupo: <br />
+                        Materia: <br />
+                        Número de estudiantes:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 ">
+                  <div class="card">
+                    <div class="card-body align-self-center">
+                      <h4 class="card-title">{}</h4>
+                      <div class=""></div>
+                      <p class="h5 card-text m-1 p-1">
+                        Grupo: {} <br />
+                        Código del grupo: <br />
+                        Materia: <br />
+                        Número de estudiantes:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 mt-5 bottom-pa">
+                  <div class="card">
+                    <div class="card-body align-self-center">
+                      <h4 class="card-title">{}</h4>
+
+                      <p class="h5 card-text m-1 p-1">
+                        Grupo: {} <br />
+                        Código del grupo: <br />
+                        Materia: <br />
+                        Número de estudiantes:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 mt-5 bottom-pa">
+                  <div class="card">
+                    <div class="card-body align-self-center">
+                      <h4 class="card-title">{}</h4>
+
+                      <p class="h5 card-text m-1 p-1">
+                        Grupo: {} <br />
+                        Código del grupo: <br />
+                        Materia: <br />
+                        Número de estudiantes:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 mt-5 bottom-pa">
+                  <div class="card">
+                    <div class="card-body align-self-center">
+                      <h4 class="card-title">{}</h4>
+
+                      <p class="h5 card-text m-1 p-1">
+                        Grupo: {} <br />
+                        Código del grupo: <br />
+                        Materia: <br />
+                        Número de estudiantes:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 mt-5 bottom-pa">
+                  <div class="card">
+                    <div class="card-body align-self-center">
+                      <h4 class="card-title">{}</h4>
+
+                      <p class="h5 card-text m-1 p-1">
+                        Grupo: {} <br />
+                        Código del grupo: <br />
+                        Materia: <br />
+                        Número de estudiantes:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 mt-5 bottom-pa">
+                  <div class="card">
+                    <div class="card-body align-self-center">
+                      <h4 class="card-title">{}</h4>
+
+                      <p class="h5 card-text m-1 p-1">
+                        Grupo: {} <br />
+                        Código del grupo: <br />
+                        Materia: <br />
+                        Número de estudiantes:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 mt-5 bottom-pa pb-2">
+                  <div class="card">
+                    <div class="card-body align-self-center">
+                      <h4 class="card-title">{}</h4>
+
+                      <p class="h5 card-text m-1 p-1">
+                        Grupo: {} <br />
+                        Código del grupo: <br />
+                        Materia: <br />
+                        Número de estudiantes:
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="F">
           <Footer cargo="Profesor" />
         </div>

@@ -17,7 +17,7 @@
 
 
 .PGP {
-    overflow-y:  hidden !important;
+    overflow: auto;
     grid-area: P;
     background-color: #2C1C4C !important;
     width: 74.9em;
