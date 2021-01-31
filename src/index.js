@@ -13,7 +13,6 @@ import RegistrarProfesor from "./pages/registrarProfesor"
 import RegistrarGrupo from "./pages/registrarGrupo";
 import VerEstudiantesProfesor from "./pages/verEstudiantesProfesor";
 import verGruposProfesor from "./pages/verGruposProfesor"
-import verMateriasProfesor from "./pages/verMateriasProfesor"
 import Main_estudiante from './pages/main-estudiante'
 import RegistrarMateria from "./pages/registrarMateria";
 import MisNotas from './pages/misNotas'
@@ -27,17 +26,16 @@ const App = () => {
     <BrowserRouter>
       <Route exact path="/" component={login} />
       <Route path="/profesor" component={Main_P} />
-      <Route path="/perfil" component={Perfil} />
+      <Route path="/perfil_profesor" component={Perfil} />
       <Route path="/administrador" component={Administrador}/>
-      <Route path="/registrarestudiante" component={RegistrarEstudiante}/>
-      <Route path="/registrarprofesor" component={RegistrarProfesor}/>
-      <Route path="/registrargrupo" component={RegistrarGrupo}/>
-      <Route path="/vermisestudiantes" component={VerEstudiantesProfesor} />
-      <Route path="/grupos" component={verGruposProfesor}/>
-      <Route path="/materias" component={verMateriasProfesor}/>
+      <Route path="/registrar_estudiante" component={RegistrarEstudiante}/>
+      <Route path="/registrar_profesor" component={RegistrarProfesor}/>
+      <Route path="/registrar_grupo" component={RegistrarGrupo}/>
+      <Route path="/ver_estudiantes_profesor" component={VerEstudiantesProfesor} />
+      <Route path="/ver_grupos_profesor" component={verGruposProfesor}/>
       <Route path="/estudiante" component={Main_estudiante}/>
-      <Route path="/registrarmateria" component={RegistrarMateria}/>
-      <Route path="/vermisnotas" component={MisNotas}/>
+      <Route path="/registrar_materia" component={RegistrarMateria}/>
+      <Route path="/ver_mis_notas" component={MisNotas}/>
     </BrowserRouter>
   ) 
 }

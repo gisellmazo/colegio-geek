@@ -30,7 +30,7 @@ function Main({ history }) {
                       </p>
                       <button
                         type="button"
-                        onClick={() => history.push("/perfil")}
+                        onClick={() => history.push("/perfil_profesor")}
                         class="btn-p btn-primary"
                       >
                         Ir
@@ -48,7 +48,7 @@ function Main({ history }) {
                       </p>
                       <button
                         type="button"
-                        onClick={() => history.push("/estudiantes")}
+                        onClick={() => history.push("/ver_estudiantes_profesor")}
                         class="btn-p btn-primary"
                       >
                         Ir
@@ -66,23 +66,9 @@ function Main({ history }) {
                       </p>
                       <button
                         type="button"
-                        onClick={() => history.push("/grupos")}
+                        onClick={() => history.push("/ver_grupos_profesor")}
                         class="btn-p btn-primary"
                       >
-                        Ir
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6 mt-5 bottom-pa">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Ver tus materias</h5>
-                      <p class="card-text">
-                        With supporting text below as a natural lead-in to
-                        additional content.
-                      </p>
-                      <button type="button" onClick={() => history.push("/materias")} class="btn-p btn-primary">
                         Ir
                       </button>
                     </div>
