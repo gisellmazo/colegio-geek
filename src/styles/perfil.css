@@ -30,9 +30,10 @@ body{
     }
     .s { grid-area: s;
      }
-    .P { 
+    .PP { 
       grid-area: P; 
       padding-bottom: 29% ;
+      
       overflow: hidden;
       background-color: #2C1C4C !important;
     }

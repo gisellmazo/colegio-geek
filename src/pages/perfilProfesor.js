@@ -15,7 +15,7 @@ function Perfil() {
         <div class="s">
         <Sidebar name1="Mi espacio" name2="Ingresar notas" ruta1="/profesor" ruta2=""/>
         </div>
-        <div class="P">
+        <div class="PP">
           <div className="mt-3 profile-photo ">
             <div class="row">
               <div class="col-md-6 offset-md-3 img-photo">

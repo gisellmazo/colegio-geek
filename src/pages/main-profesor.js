@@ -4,13 +4,17 @@ import Sidebar from "../components/sidebar";
 import { withRouter } from "react-router-dom";
 import "../styles/pantallasPrincipales.css";
 
-
 function Main({ history }) {
   return (
     <>
       <div className="grid-container">
         <div class="s">
-          <Sidebar name1="Mi espacio" name2="Ingresar notas" ruta1="/profesor" ruta2=""/>
+          <Sidebar
+            name1="Mi espacio"
+            name2="Ingresar notas"
+            ruta1="/profesor"
+            ruta2=""
+          />
         </div>
         <div class="PM">
           <div className="mt-4">
@@ -26,7 +30,7 @@ function Main({ history }) {
                       </p>
                       <button
                         type="button"
-                        onClick={() => history.push("/Perfil")}
+                        onClick={() => history.push("/perfil")}
                         class="btn-p btn-primary"
                       >
                         Ir
@@ -42,7 +46,11 @@ function Main({ history }) {
                         With supporting text below as a natural lead-in to
                         additional content.
                       </p>
-                      <button type="button" class="btn-p btn-primary">
+                      <button
+                        type="button"
+                        onClick={() => history.push("/estudiantes")}
+                        class="btn-p btn-primary"
+                      >
                         Ir
                       </button>
                     </div>

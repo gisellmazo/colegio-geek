@@ -2,9 +2,7 @@
   width: 100%;
   
 }
-body{
-  overflow: hidden;
-}
+
 .grid-container {
     display: grid;
     grid-template-columns: 0.9fr 1.2fr 1fr 1fr;
@@ -21,7 +19,7 @@ body{
   .PM { 
     height: 100% !;
     grid-area: P; 
-    padding-bottom: 32% ;
+    padding-bottom: 28% ;
     overflow: hidden;
     background-color: #2C1C4C !important;
 
