@@ -19,7 +19,7 @@ function verEstudiantesProfesor(props) {
             ruta2=""
           />
         </div>
-        <div className="PEP">
+        <div className="PEP ">
           <div className="mt-4">
             <div className="main align-middle d-flex pl-5 pr-4">
               <div class="row">

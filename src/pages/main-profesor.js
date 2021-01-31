@@ -64,7 +64,11 @@ function Main({ history }) {
                         With supporting text below as a natural lead-in to
                         additional content.
                       </p>
-                      <button type="button" class="btn-p btn-primary">
+                      <button
+                        type="button"
+                        onClick={() => history.push("/grupos")}
+                        class="btn-p btn-primary"
+                      >
                         Ir
                       </button>
                     </div>
@@ -78,7 +82,7 @@ function Main({ history }) {
                         With supporting text below as a natural lead-in to
                         additional content.
                       </p>
-                      <button type="button" class="btn-p btn-primary">
+                      <button type="button" onClick={() => history.push("/materias")} class="btn-p btn-primary">
                         Ir
                       </button>
                     </div>

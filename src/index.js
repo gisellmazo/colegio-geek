@@ -12,6 +12,10 @@ import RegistrarEstudiante from "./pages/registrarEstudiante";
 import RegistrarProfesor from "./pages/registrarProfesor"
 import RegistrarGrupo from "./pages/registrarGrupo";
 import VerEstudiantesProfesor from "./pages/verEstudiantesProfesor";
+import verGruposProfesor from "./pages/verGruposProfesor"
+import verMateriasProfesor from "./pages/verMateriasProfesor"
+
+
 
 
 
@@ -25,7 +29,9 @@ const App = () => {
       <Route path="/registrarestudiante" component={RegistrarEstudiante}/>
       <Route path="/registrarprofesor" component={RegistrarProfesor}/>
       <Route path="/registrargrupo" component={RegistrarGrupo}/>
-      <Route path="/estudiantes" component={VerEstudiantesProfesor} estudianteId="perfil" nombreEstudiante="Pedro"/>
+      <Route path="/estudiantes" component={VerEstudiantesProfesor} />
+      <Route path="/grupos" component={verGruposProfesor}/>
+      <Route path="/materias" component={verMateriasProfesor}/>
     </BrowserRouter>
   ) 
 }

@@ -16,12 +16,12 @@
 
 
 
-.PEP {
-    overflow:  auto !important;
+.PGP {
+    overflow-y:  hidden !important;
     grid-area: P;
     background-color: #2C1C4C !important;
     width: 74.9em;
-    height: 39.4em;
+    height: 45.5em;
 }
 
 .F {
@@ -30,8 +30,4 @@
 
 .btn-p {
     width: 100%
-}
-
-.card {
-    width: 30em;
 }
