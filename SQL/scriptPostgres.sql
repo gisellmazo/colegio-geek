@@ -1,5 +1,6 @@
 CREATE DATABASE colegio_geek;
 
+DROP TABLE IF EXISTS administrador
 DROP TABLE IF EXISTS materias;
 DROP TABLE IF EXISTS estudiantes;
 DROP TABLE IF EXISTS profesores;
@@ -8,17 +9,19 @@ DROP TABLE IF EXISTS grupos;
 DROP TABLE IF EXISTS grados;
 DROP TABLE IF EXISTS notas;
 
+CREATE TABLE administrador(
+  id_admin SERIAL PRIMARY KEY,
+  numero_documento VARCHAR(50) UNIQUE NOT NULL,
+  contrasena VARCHAR(50) UNIQUE NOT NULL,
+  tipo_usuario INTEGER DEFAULT 1 NOT NULL
+);
+
 CREATE TABLE materias(
     id_materia SERIAL PRIMARY KEY,
     codigo_materia VARCHAR(10) UNIQUE NOT NULL,
     nombre VARCHAR(50) NOT NULL,
     id_profesor INTEGER UNIQUE NOT NULL,
-    sexto BOOLEAN NOT NULL,
-    septimo BOOLEAN  NOT NULL,
-    octavo BOOLEAN NOT NULL,
-    noveno BOOLEAN NOT NULL,
-    decimo BOOLEAN NOT NULL,
-    once BOOLEAN NOT NULL
+    id_grados INTEGER NOT NULL
 );
 
 CREATE TYPE documento AS ENUM('TI''CC','NUIP');
@@ -37,8 +40,8 @@ CREATE TABLE estudiantes(
     direccion VARCHAR(70) NOT NULL,
     ciudad VARCHAR(50) NOT NULL,
     telefono_fijo VARCHAR(20) NOT NULL,
-    celular VARCHAR(20)
-    
+    celular VARCHAR(20),
+    tipo_usuario INTEGER DEFAULT 3 NOT NULL
 );
 
 CREATE TYPE tipo_documento AS ENUM('CC','CE');
@@ -49,7 +52,8 @@ CREATE TABLE profesores(
     numero_documento VARCHAR(50) UNIQUE NOT NULL,
     nombres_apellidos VARCHAR(50) NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
-    contrasena VARCHAR(50) UNIQUE NOT NULL
+    contrasena VARCHAR(50) UNIQUE NOT NULL,
+    tipo_usuario INTEGER DEFAULT 2 NOT NULL
 );
 
 CREATE TYPE grado AS ENUM('6','7', '8', '9', '10', '11');
@@ -69,6 +73,7 @@ CREATE TABLE grupos(
     id_grupo SERIAL PRIMARY key,
     codigo_grupo VARCHAR(10) UNIQUE NOT NULL,
     id_profesor INTEGER UNIQUE NOT NULL,
+    id_grado INTEGER UNIQUE NOT NULL,
     jornada jornada NOT NULL
 );
 
@@ -76,17 +81,7 @@ CREATE TYPE grado AS ENUM('6','7', '8', '9', '10', '11');
 CREATE TABLE grados(
     id_grado SERIAL PRIMARY KEY,
     grado grado NOT NULL,
-    id_grupo INTEGER UNIQUE NOT NULL,
-    geografia BOOLEAN NOT NULL,
-    historia BOOLEAN NOT NULL,
-    filosofia BOOLEAN NOT NULL,
-    espanol BOOLEAN NOT NULL,
-    ingles BOOLEAN NOT NULL,
-    matematicas BOOLEAN NOT NULL,
-    geometria BOOLEAN NOT NULL,
-    trigometria BOOLEAN NOT NULL,
-    fisica BOOLEAN NOT NULL,
-    ed_ficica BOOLEAN NOT NULL
+    id_materias INTEGER NOT NULL
 ); 
 
 CREATE TYPE tipo_nota AS ENUM('nota 1','nota 2', 'nota 3', 'parsial', 'fina');
@@ -101,8 +96,9 @@ CREATE TABLE notas(
 
 ALTER TABLE materias
   ADD CONSTRAINT materias_profesores 
-  FOREIGN KEY(id_profesor)
-  REFERENCES profesores(id_profesor);
+  FOREIGN KEY(id_profesor) REFERENCES profesores(id_profesor);
+  ADD CONSTRAINT materias_grados 
+  FOREIGN KEY(id_grados) REFERENCES grados(id_grado);
 
 ALTER TABLE estudiantes
   ADD CONSTRAINT estudiantes_grupos 
@@ -121,13 +117,13 @@ ALTER TABLE grados_cursados
 
 ALTER TABLE grupos
   ADD CONSTRAINT grupos_profesores 
-  FOREIGN KEY(id_profesor)
-  REFERENCES profesores(id_profesor);
+  FOREIGN KEY(id_profesor) REFERENCES profesores(id_profesor);
+  ADD CONSTRAINT grupos_grados 
+  FOREIGN KEY(id_grado) REFERENCES grado(id_grado);
 
 ALTER TABLE grados
-  ADD CONSTRAINT grados_grupos 
-  FOREIGN KEY(id_grupo)
-  REFERENCES grupos(id_grupo);
+  ADD CONSTRAINT grados_materias 
+  FOREIGN KEY(id_materias) REFERENCES materias(id_materia);
 
 ALTER TABLE notas
   ADD CONSTRAINT notas_estudiante 
