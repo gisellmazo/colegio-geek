@@ -17,6 +17,8 @@ import verMateriasProfesor from "./pages/verMateriasProfesor"
 import Main_estudiante from './pages/main-estudiante'
 import RegistrarMateria from "./pages/registrarMateria";
 import MisNotas from './pages/misNotas'
+import verGruposAdministrador from "./pages/verGruposAdministrador";
+import verMateriasAdministrador from "./pages/verMateriasAdministrador";
 
 
 
@@ -38,6 +40,8 @@ const App = () => {
       <Route path="/estudiante" component={Main_estudiante}/>
       <Route path="/registrarmateria" component={RegistrarMateria}/>
       <Route path="/vermisnotas" component={MisNotas}/>
+      <Route path="/ver_grupos_administrador" component={verGruposAdministrador}/>
+      <Route path="/ver_materias_administrador" component={verMateriasAdministrador}/>
     </BrowserRouter>
   ) 
 }
