@@ -5,9 +5,8 @@ import "../styles/perfil.css";
 
 let nombre = "Juan Esteban Cifuentes Castañeda";
 let numGrupos = 23;
-let telefono= 25330505;
+let materia= 'matematicas';
 let numEstudiantes = 230;
-
 function Perfil() {
   return (
     <>
@@ -38,7 +37,7 @@ function Perfil() {
                   Número de grupos a cargo: &nbsp; {numGrupos}
                 </li>
                 <li class="list-group-item text-center">
-                  Teléfono: &nbsp; {telefono}
+                  materia: &nbsp; {materia}
                 </li>
                 <li class="list-group-item text-center">
                   Número de estudiantes a cargo: &nbsp; {numEstudiantes}

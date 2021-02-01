@@ -17,16 +17,16 @@ const Administrador = () => {
                         <div className="main align-middle d-flex pl-4 pr-4">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <Card name="Registrar estudiante" ruta="/registrarestudiante"/>
+                                    <Card name="Registrar estudiante" ruta="/registrar_estudiante"/>
                                 </div>
                                 <div class="col-sm-6 ">
-                                    <Card name="Registrar profesor" ruta="/registrarprofesor"/>
+                                    <Card name="Registrar profesor" ruta="/registrar_profesor"/>
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Registrar grupo" ruta="/registrargrupo"/>
+                                    <Card name="Registrar grupo" ruta="/registrar_grupo"/>
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Registrar materia" ruta="/registrarmateria"/>
+                                    <Card name="Registrar materia" ruta="/registrar_materia"/>
                                 </div>
 
                             </div>

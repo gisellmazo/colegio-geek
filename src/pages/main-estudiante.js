@@ -8,7 +8,7 @@ function Main_estudiante() {
     return (
         <div class="grid-container ">
             <div class="s">
-                <Sidebar name1="Mi perfil" name2="Mis notas" ruta1="/estudiante" ruta2="/vermisnotas" />
+            <Sidebar name1="Mi perfil" name2="Mis notas" ruta1="/estudiante" ruta2="/ver_mis_notas" />
             </div>
             <div class="PP">
                 <div className="mt-3 profile-photo ">
@@ -36,7 +36,7 @@ function Main_estudiante() {
                                 Grado: 
                             </li>
                             <li class="list-group-item text-center">
-                                telefono: 
+                                Director de grupo: 
                             </li>
 
                         </ul>
