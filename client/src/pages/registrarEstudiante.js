@@ -16,8 +16,25 @@ function RegistrarEstudiante() {
 
     function registrar(datos){
         fetch('/registrar_estudiante',{
-            method: 'POST',
-            body: JSON.stringify(datos[0])
+             method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                 
+                codigo_estudiante:'2021012',
+                tipo_documento: datos.tipo_documento,
+                correo: datos.correo,    
+                contrasena: datos.contrasena,
+                nombres_apellidos: datos.nombres_apellidos,
+                sexo: datos.sexo,
+                fecha_nacimiento: datos.fecha_nacimiento, 
+                direccion: datos.direccion_residencia,
+                ciudad: datos.ciudad,
+                telefono_fijo: datos.telefono,
+                celular: datos.celular,
+                id_grupo:datos.id_grupo,
+                numero_documento:datos.numero_documento     })
         })
         
     }
@@ -65,7 +82,7 @@ function RegistrarEstudiante() {
                                 nombres_apellidos: '',
                                 sexo: '',
                                 fecha_nacimiento: '',
-                                ciudad_nacimineto: '',
+                                ciudad: '',
                                 direccion_residencia: '',
                                 telefono: '',
                                 celular: '',
@@ -94,14 +111,14 @@ function RegistrarEstudiante() {
                                                     setdocumento(selecteddocumento);
 
                                                 }}>
-                                                    <option value="CC">Cedula de cuidadanía</option>
+                                                    <option value="CC">Cedula de ciudadanía</option>
                                                     <option value="TI">Tarjeta de identidad</option>
                                                     <option value="PP">Permiso especial de permanencia</option>
                                                 </select>
                                                 <br /> <br />
                                                 <CampoFormulario label="Nombre completo:" type="text" name="nombres_apellidos" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Sexo:" type="text" name="sexo" estilo="texto-blanco" className="form-control diseno-imputs" placeholder="F o M" />
-                                                <CampoFormulario label="Ciudad de nacimiento:" type="text" name="ciudad_nacimineto" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="Ciudad de nacimiento:" type="text" name="ciudad" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Telefono:" type="text" name="telefono" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Correo:" type="email" name="correo" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Id grupo:" type="number" name="id_grupo" estilo="texto-blanco" className="form-control diseno-imputs" />
