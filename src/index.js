@@ -15,8 +15,8 @@ import VerEstudiantesProfesor from "./pages/verEstudiantesProfesor";
 import verGruposProfesor from "./pages/verGruposProfesor"
 import Main_estudiante from './pages/main-estudiante'
 import RegistrarMateria from "./pages/registrarMateria";
-import MisNotas from './pages/misNotas'
-
+import MisNotas from './pages/misNotas';
+import IngresarNotas from './pages/ingresarNotas';
 
 
 
@@ -36,6 +36,7 @@ const App = () => {
       <Route path="/estudiante" component={Main_estudiante}/>
       <Route path="/registrar_materia" component={RegistrarMateria}/>
       <Route path="/ver_mis_notas" component={MisNotas}/>
+      <Route path="/ingresar_notas" component={IngresarNotas}/>
     </BrowserRouter>
   ) 
 }
