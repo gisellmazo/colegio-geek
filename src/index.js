@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from "react-router-dom";
 
-
 //Importación de páginas
 import login from "./pages/login"
 import Main_P from "./pages/main-profesor";
@@ -17,6 +16,10 @@ import Main_estudiante from './pages/main-estudiante'
 import RegistrarMateria from "./pages/registrarMateria";
 import MisNotas from './pages/misNotas';
 import IngresarNotas from './pages/ingresarNotas';
+import verGruposAdministrador from "./pages/verGruposAdministrador";
+import verMateriasAdministrador from "./pages/verMateriasAdministrador";
+
+
 
 
 
@@ -34,6 +37,10 @@ const App = () => {
       <Route path="/ver_estudiantes_profesor" component={VerEstudiantesProfesor} />
       <Route path="/ver_grupos_profesor" component={verGruposProfesor}/>
       <Route path="/estudiante" component={Main_estudiante}/>
+      <Route path="/registrarmateria" component={RegistrarMateria}/>
+      <Route path="/vermisnotas" component={MisNotas}/>
+      <Route path="/ver_grupos_administrador" component={verGruposAdministrador}/>
+      <Route path="/ver_materias_administrador" component={verMateriasAdministrador}/>
       <Route path="/registrar_materia" component={RegistrarMateria}/>
       <Route path="/ver_mis_notas" component={MisNotas}/>
       <Route path="/ingresar_notas" component={IngresarNotas}/>

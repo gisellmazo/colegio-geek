@@ -25,7 +25,7 @@ function RegistrarProfesor() {
         <div>
             <div class="grid-container">
                 <div class="s">
-                    <Sidebar name1="Nuevo registro" name2="profesores" name3="estudiantes" ruta1="/administrador" ruta2="/" />
+                    <Sidebar name1="Nuevo registro" name2="profesores" name3="estudiantes" name4="grupos" name5="materias" ruta1="/administrador" ruta2="/" ruta4="/ver_grupos_administrador" ruta5="/ver_materias_administrador"/>
                 </div>
                 <div class="PM">
                     <div className="mt-4">

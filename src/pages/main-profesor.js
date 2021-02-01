@@ -31,6 +31,7 @@ function Main({ history }) {
                       <button
                         type="button"
                         onClick={() => history.push("/perfil_profesor")}
+
                         class="btn-p btn-primary"
                       >
                         Ir

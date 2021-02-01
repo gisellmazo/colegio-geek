@@ -7,7 +7,6 @@ let nombre = "Juan Esteban Cifuentes Castañeda";
 let numGrupos = 23;
 let materia= 'matematicas';
 let numEstudiantes = 230;
-
 function Perfil() {
   return (
     <>
