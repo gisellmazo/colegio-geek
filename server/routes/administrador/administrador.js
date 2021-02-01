@@ -264,9 +264,9 @@ router.get('/ver_materias', async (req, res) => {
 });
 
 
-router.get('/ver_grupos', async (req, res) => {
+router.get('/ver_grupos_administrador', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT * FROM  grupos`, (error, resulset) => {
+  client.query(`SELECT grupos.id_grupo, grupos.codigo_grupo, grupos.id_grado, grupos.jornada, profesores.nombres_apellidos FROM  grupos INNER JOIN profesores ON grupos.id_profesor= profesores.id_profesor`, (error, resulset) => {
     client.release(true);
     if (error) {
       return res.status(500).send('Se presento un error en la base de datos.');

@@ -7,7 +7,7 @@ router.get('/perfil_profesor', async (req, res) => {
   try {
     const { id_profesor } = req.query;
     const response = await pool.query(
-      `SELECT nombres_apellidos,id_materia,nombre FROM profesores  JOIN materias ON profesores.id_profesor = materias.id_profesor WHERE profesores.id_profesor = $1`,
+      `SELECT profesores.nombres_apellidos, materias.nombre FROM profesores  JOIN materias ON profesores.id_profesor = materias.id_profesor WHERE profesores.id_profesor = $1`,
       [id_profesor]
     );
     return res.json(response.rows);

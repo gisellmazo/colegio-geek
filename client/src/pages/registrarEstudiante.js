@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -13,31 +13,40 @@ import "../styles/registros.css"
 
 
 function RegistrarEstudiante() {
+
+    function registrar(datos){
+        fetch('/registrar_estudiante',{
+            method: 'POST',
+            body: JSON.stringify(datos[0])
+        })
+        
+    }
+     
+ 
     const validate = Yup.object({
-        numero_documento: Yup.number('el documento no debe contener letras o simbolos')
+        numero_documento: Yup.string('')
             .required('campo requerido'),
-        nombres: Yup.string()
-            .required('Campo requerido'),
-        apellidos: Yup.string()
+        nombres_apellidos: Yup.string()
             .required('Campo requerido'),
         sexo: Yup.string()
             .required('Campo requerido'),
         fecha_nacimiento: Yup.date()
             .required('Campo requerido'),
-        ciudad_nacimineto: Yup.string()
-            .required('Campo requerido'),
         direccion_residencia: Yup.string()
             .required('Campo requerido'),
-        telefono: Yup.number()
+        telefono: Yup.string()
             .required('Campo requerido'),
-        celular: Yup.number()
+        celular: Yup.string()
             .required('Campo requerido'),
         correo: Yup.string()
             .required('Campo requerido'),
         contrasena: Yup.string()
-            .required('campo requerido')
+            .required('campo requerido'),
+        tipo_documento: Yup.string('')
+            .required('Campo requerido')
     })
 
+    const [documento, setdocumento] = useState("")
 
     return (
         <div>
@@ -53,8 +62,7 @@ function RegistrarEstudiante() {
                             initialValues={{
                                 tipo_documento: '',
                                 numero_documento: '',
-                                nombres: '',
-                                apellidos: '',
+                                nombres_apellidos: '',
                                 sexo: '',
                                 fecha_nacimiento: '',
                                 ciudad_nacimineto: '',
@@ -62,14 +70,16 @@ function RegistrarEstudiante() {
                                 telefono: '',
                                 celular: '',
                                 correo: '',
-                                foto: '',
-                                pdf_documento: '',
-                                contrasena: ''
+                                //foto: '',
+                                //pdf_documento: '',
+                                contrasena: '',
+                                id_grupo: ''
 
                             }}
                             validationSchema={validate}
                             onSubmit={values => {
-                                console.log(values)
+                                console.log(values);
+                                registrar(values);
                             }}
                         >
                             {formik => (
@@ -79,26 +89,31 @@ function RegistrarEstudiante() {
                                             <div class="container-row">
                                                 <label className="texto-blanco">tipo de documento:</label>
                                                 <br />
-                                                <select name="tipo_documento">
-                                                    <option value="cc">Cedula de cuidadanía</option>
-                                                    <option value="ti">Tarjeta de identidad</option>
-                                                    <option value="pp">Permiso especial de permanencia</option>
+                                                <select onChange={(e) => {
+                                                    const selecteddocumento = e.target.value;
+                                                    setdocumento(selecteddocumento);
+
+                                                }}>
+                                                    <option value="CC">Cedula de cuidadanía</option>
+                                                    <option value="TI">Tarjeta de identidad</option>
+                                                    <option value="PP">Permiso especial de permanencia</option>
                                                 </select>
                                                 <br /> <br />
-                                                <CampoFormulario label="Nombres:" type="text" name="nombres" estilo="texto-blanco" className="form-control diseno-imputs" />
-                                                <CampoFormulario label="Sexo:" type="text" name="sexo" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="Nombre completo:" type="text" name="nombres_apellidos" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="Sexo:" type="text" name="sexo" estilo="texto-blanco" className="form-control diseno-imputs" placeholder="F o M" />
                                                 <CampoFormulario label="Ciudad de nacimiento:" type="text" name="ciudad_nacimineto" estilo="texto-blanco" className="form-control diseno-imputs" />
-                                                <CampoFormulario label="Telefono:" type="number" name="telefono" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="Telefono:" type="text" name="telefono" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Correo:" type="email" name="correo" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="Id grupo:" type="number" name="id_grupo" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Foto:" type="file" name="foto" estilo="texto-blanco" className="form-control diseno-imputs" />
                                             </div>
                                             <div class="container-row-middle"></div>
                                             <div class="container-row">
-                                                <CampoFormulario label="Numero documento:" type="number" name="numero_documento" estilo="texto-blanco" className="form-control diseno-imputs" />
-                                                <CampoFormulario label="Apellidos:" type="text" name="apellidos" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="tipo documento:" type="string" name="tipo_documento" estilo="texto-blanco" className="form-control diseno-imputs" placeholder={documento}/>
+                                                <CampoFormulario label="Numero documento:" type="string" name="numero_documento" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Fecha nacimiento:" type="date" name="fecha_nacimiento" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Direccion de residencia:" type="text" name="direccion_residencia" estilo="texto-blanco" className="form-control diseno-imputs" />
-                                                <CampoFormulario label="Celular:" type="number" name="celular" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="Celular:" type="text" name="celular" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Contraseña:" type="password" name="contrasena" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Documento en pdf:" type="file" name="pdf_documento" estilo="texto-blanco" className="form-control diseno-imputs" />
                                             </div>
@@ -108,7 +123,7 @@ function RegistrarEstudiante() {
                                         <center>
                                             <button type="submit">Registrar</button>
                                         </center>
-                                        <br/><br/><br/>
+                                        <br/><br/><br/><br/><br/>
                                     </div>
                                     
 

@@ -4,7 +4,7 @@ import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import "../styles/materiasAdministrador.css";
 
-function VerMateriasAdministrador(props) {
+function VerMateriasAdministrador() {
 
   const [datos, setdatos] = useState([{}])
 
@@ -15,8 +15,7 @@ function VerMateriasAdministrador(props) {
   }, [])
 
   return (
-    <>
-      {console.log(datos)}
+    <div>
       <div className="grid-container">
         <div className="s">
           <Sidebar
@@ -37,24 +36,34 @@ function VerMateriasAdministrador(props) {
             <div className="main align-middle d-flex pl-5 pr-4">
               <div class="row">
                 {
-                ()=>{
-                  datos.map(function(item,index,array){
-                  
+                  datos.map(function (dato, index, array) {
+                    return <div class="col-sm-6 mt-5 bottom-pa">
+                            <div className="card">
+                              <div className="card-body">
+                                <h5 className="card-title">
+                                  {dato.nombre}
+                                </h5>
+                                <p className="card-text">
+                                  Profesor encargado del area: <br/>
+                                  <b>{dato.nombres_apellidos}</b>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
 
-                  })}
-                }                
-                
-
+                  })
+                }
               </div>
             </div>
           </div>
+
         </div>
       </div>
       <div className="F">
         <Footer cargo="Administrador" />
       </div>
-      {/* </div> */}
-    </>
+
+    </div>
   );
 }
 

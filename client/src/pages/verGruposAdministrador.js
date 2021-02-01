@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import "../styles/gruposAdministrador.css";
 
-function verGruposAdministrador(props) {
- 
+function VerGruposAdministrador() {
+  const [datos, setdatos] = useState([{}])
+  useEffect(() => {
+    fetch('/ver_grupos_administrador')
+      .then(response => response.json())
+      .then(data => setdatos(data));
+  }, [])
+
   return (
     <>
       <div className="grid-container">
         <div className="s">
+        {console.log(datos)}
           <Sidebar
             name1="Nuevo registro"
             name2="profesores"
@@ -26,59 +33,30 @@ function verGruposAdministrador(props) {
         <div className="PEP ">
           <div className="mt-4">
             <div className="main align-middle d-flex pl-5 pr-4">
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="card">
-                    <div class="card-body align-self-center">
-                      <h4 class="card-title">Grupo 1</h4>
-                      <div class="m-1 p-1">
-                          <ol>
-                              <li>María Gomez</li>
-                              <li>Juan Luís Londoño Aria</li>
-                              <li>Juan Pablo Villamil</li>
-                              <li>Mariana Esposito</li>
-                              <li>Martina García</li>
-                              <li>Julián Gonzalez</li>
-                          </ol>
-                      </div>
-                      
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4 ">
-                  <div class="card">
-                    <div class="card-body align-self-center">
-                      <h4 class="card-title">Grupo 2</h4>
-                      <div class="m-1 p-1">
-                      <ol>
-                              <li>María Gomez</li>
-                              <li>Juan Luís Londoño Aria</li>
-                              <li>Juan Pablo Villamil</li>
-                              <li>Mariana Esposito</li>
-                              <li>Martina García</li>
-                              <li>Julián Gonzalez</li>
-                          </ol>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4 ">
-                  <div class="card">
-                    <div class="card-body align-self-center">
-                      <h4 class="card-title">Grupo 3</h4>
-                      <div class="m-1 p-1">
-                      <ol>
-                              <li>María Gomez</li>
-                              <li>Juan Luís Londoño Aria</li>
-                              <li>Juan Pablo Villamil</li>
-                              <li>Mariana Esposito</li>
-                              <li>Martina García</li>
-                              <li>Julián Gonzalez</li>
-                          </ol>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="row">
+                {
+                  datos.map(function (dato, index) {
+                    return  <div class="col-sm-6 mt-5 bottom-pa">
+                              <div className="card">
+                                <div className="card-body">
+                                  <h5 className="card-title">
+                                    Grupo {dato.id_grupo}
+                                  </h5>
+                                  <p className="card-text">
+                                    código de grupo: 
+                                    <b>{dato.codigo_grupo}</b> <br/>
+                                    este grupo pertenece al grado:  
+                                    <b>{dato.id_grado}</b><br/>
+                                    Jornada: 
+                                    <b>{dato.jornada}</b><br/>
+                                    Profesor encargado: 
+                                    <b>{dato.nombres_apellidos}</b><br/>
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                  })
+                }
               </div>
             </div>
           </div>
@@ -92,4 +70,4 @@ function verGruposAdministrador(props) {
   );
 }
 
-export default withRouter(verGruposAdministrador);
+export default withRouter(VerGruposAdministrador);

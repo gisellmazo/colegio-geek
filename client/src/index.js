@@ -16,7 +16,7 @@ import Main_estudiante from './pages/main-estudiante';
 import RegistrarMateria from './pages/registrarMateria';
 import MisNotas from './pages/misNotas';
 import IngresarNotas from './pages/ingresarNotas';
-import verGruposAdministrador from './pages/verGruposAdministrador';
+import VerGruposAdministrador from './pages/verGruposAdministrador';
 import VerMateriasAdministrador from './pages/verMateriasAdministrador';
 
 const App = () => {
@@ -29,22 +29,13 @@ const App = () => {
       <Route path='/registrar_estudiante' component={RegistrarEstudiante} />
       <Route path='/registrar_profesor' component={RegistrarProfesor} />
       <Route path='/registrar_grupo' component={RegistrarGrupo} />
-      <Route
-        path='/ver_estudiantes_profesor'
-        component={VerEstudiantesProfesor}
-      />
+      <Route path='/ver_estudiantes_profesor' component={VerEstudiantesProfesor}/>
       <Route path='/ver_grupos_profesor' component={VerGruposProfesor} />
       <Route path='/estudiante' component={Main_estudiante} />
       <Route path='/registrarmateria' component={RegistrarMateria} />
       <Route path='/vermisnotas' component={MisNotas} />
-      <Route
-        path='/ver_grupos_administrador'
-        component={verGruposAdministrador}
-      />
-      <Route
-        path='/ver_materias_administrador'
-        component={VerMateriasAdministrador}
-      />
+      <Route path='/ver_grupos_administrador' component={VerGruposAdministrador}/>
+      <Route path='/ver_materias_administrador' component={VerMateriasAdministrador}/>
       <Route path='/registrar_materia' component={RegistrarMateria} />
       <Route path='/ver_mis_notas' component={MisNotas} />
       <Route path='/ingresar_notas' component={IngresarNotas} />
