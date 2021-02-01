@@ -18,6 +18,7 @@ import MisNotas from './pages/misNotas';
 import IngresarNotas from './pages/ingresarNotas';
 import VerGruposAdministrador from './pages/verGruposAdministrador';
 import VerMateriasAdministrador from './pages/verMateriasAdministrador';
+import VerEstudiantesAdministrador from './pages/ver_estudiantes_administrador'
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
       <Route path='/registrar_materia' component={RegistrarMateria} />
       <Route path='/ver_mis_notas' component={MisNotas} />
       <Route path='/ingresar_notas' component={IngresarNotas} />
+      <Route path='/ver_estudiantes_administrador' component={VerEstudiantesAdministrador}/>
     </BrowserRouter>
   );
 };
