@@ -143,7 +143,7 @@ router.post('/registrar_profesor', async (req, res) => {
             direccion,
             ciudad,
             telefono_fijo,
-            celular) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id`, [
+            celular) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id_estudiante`, [
                 id_grupo,
                 codigo_estudiante,
                 tipo_documento,
