@@ -49,13 +49,13 @@ function Perfil() {
                 </li>
 
                 <li class="list-group-item text-center">
-                Número de grupos a cargo: { datos[0].id_grupos}
+                Esta a cargo del grupo: { datos[0].id_grupos}
                 </li>
                 <li class="list-group-item text-center">
-                  materia: { datos[0].id_materia}
+                  Materia: { datos[0].id_materia}
                 </li>
                 <li class="list-group-item text-center">
-                  Número de estudiantes a cargo: { datos[0].id_grupo}
+                 El código de su grupo a cargo: { datos[0].codigo_grupo}
                 </li>
                 
               </ul>
