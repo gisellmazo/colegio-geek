@@ -3,21 +3,33 @@ const router = Router();
 
 const { pool } = require('../../database/database');
 
-router.get('/perfil_profesor', async (req, res) => {
-  let client = await pool.connect();
-  const id_profesor = req.params.id_profesor;
 
+// Ver Perfil Profesor
+router.get('/perfil_profesor', async (req, res) => {
   try {
-    let result = await client.query(
-      `SELECT * FROM profesores WHERE id_profesor = $1`,
+    const { id_profesor } = req.query;
+    const response = await pool.query(
+      `SELECT nombres_apellidos,numero_documento,correo FROM profesores WHERE id_profesor = $1`,
       [id_profesor]
     );
-    return res.json(result.rows);
+    return res.json(response.rows);
   } catch (error) {
     console.log(error);
-  } finally {
-    client.release(true);
   }
 });
 
 module.exports = router;
+
+// Ver Estudiantes Profesor 
+router.get('/ver_estudiantes_profesor', async (req,res) =>{
+  try{
+    const { id_profesor } = req.query;
+    const response = await pool.query(
+      `SELECT nombres_apellidos,numero_documento,correo FROM profesores WHERE id_profesor = $1`,
+      [id_profesor]
+    );
+    return res.json(response.rows);
+  }catch(error){
+    console.log(error);
+  }
+})
