@@ -84,16 +84,11 @@ router.post('/registrar_estudiante', async (req, res) => {
                 ciudad,
                 telefono_fijo,
                 celular
-            ], (error,results) => {
-                if (error) {
-                    return res.json(error);
-                }
-                return res.json({mensage: 'estudiante creado'})
-            })
+            ])
 
-        /*if (response.rowsCount > 0) {
+        if (response.rowsCount > 0) {
             res.json({
-                id_estudiante: response.rows[0].id,
+                id_estudiante: response.rows[0].id_estudiante,
                 id_grupo,
                 codigo_estudiante,
                 tipo_documento,
@@ -109,12 +104,83 @@ router.post('/registrar_estudiante', async (req, res) => {
                 celular
             })
         } else {
-            res.json({})
-        }*/
+            res.json('estudiante registrado')
+        }
     } catch (e) {
-        //res.status(500).json({ errorCode: e.errno, message: "Error en el servidor" })
-        res.send(e)
+        res.status(500).json({ errorCode: e.errno, message: "Error en el servidor" })
     }
 })
 
+
+router.post('/registrar_profesor', async (req, res) => {
+    try {
+        const {
+            id_grupo,
+            codigo_estudiante,
+            tipo_documento,
+            numero_documento,
+            correo,
+            contrasena,
+            nombres_apellidos,
+            sexo,
+            fecha_nacimiento,
+            direccion,
+            ciudad,
+            telefono_fijo,
+            celular
+        } = req.body
+        const client = await pool.connect()
+        const response = await client.query(`INSERT INTO (
+            id_grupo,
+            codigo_estudiante,
+            tipo_documento,
+            numero_documento,
+            correo,
+            contrasena,
+            nombres_apellidos,
+            sexo,
+            fecha_nacimiento,
+            direccion,
+            ciudad,
+            telefono_fijo,
+            celular) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id`, [
+                id_grupo,
+                codigo_estudiante,
+                tipo_documento,
+                numero_documento,
+                correo,
+                contrasena,
+                nombres_apellidos,
+                sexo,
+                fecha_nacimiento,
+                direccion,
+                ciudad,
+                telefono_fijo,
+                celular
+            ])
+
+        if (response.rowsCount > 0) {
+            res.json({
+                id_estudiante: response.rows[0].id_estudiante,
+                id_grupo,
+                codigo_estudiante,
+                tipo_documento,
+                numero_documento,
+                correo,
+                contrasena,
+                nombres_apellidos,
+                sexo,
+                fecha_nacimiento,
+                direccion,
+                ciudad,
+                telefono_fijo,
+                celular
+            })
+        } else {
+            res.json('estudiante registrado')
+        }
+    } catch (e) {
+        res.status(500).json({ errorCode: e.errno, message: "Error en el servidor" })
+    }
+})
 module.exports=router;
