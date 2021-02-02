@@ -17,6 +17,4 @@ const pool = new Pool({
   //   console.log("===========");
   });
   
-  
-  
   module.exports = { pool };
