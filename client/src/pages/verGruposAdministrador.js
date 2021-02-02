@@ -24,7 +24,8 @@ function VerGruposAdministrador() {
             name4="grupos"
             name5="materias"
             ruta1="/administrador"
-            ruta2="/"
+            ruta2="/ver_profesores_administrador"
+            ruta3="/ver_estudiantes_administrador"
             ruta4="/ver_grupos_administrador"
             ruta5="/ver_materias_administrador"
 

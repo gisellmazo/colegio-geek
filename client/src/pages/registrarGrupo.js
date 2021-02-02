@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -41,11 +41,18 @@ function RegistrarGrupo() {
 
     })
 
-
-
-
     const [stateProfesor, setstateProfesor] = useState("");
     const [stateJornada, setstateJornada] = useState("");
+
+    const [datosProfesores, setdatosProfesores] = useState([{}])
+
+    useEffect(()=>{
+        fetch('/ver_profesores_administrador')
+        .then(response => response.json())
+        .then(data => setdatosProfesores(data));
+       
+    },[])
+    console.log(datosProfesores)
 
     return (
         <div>
@@ -83,17 +90,12 @@ function RegistrarGrupo() {
                                                 setstateProfesor(selectedProfesor);
 
                                             }}>
-
-                                                <option value="1">FABIO LEON RESTREPO</option>
-                                                <option value="2">JAIME ALBERTO GIRALDO</option>
-                                                <option value="3">ADRIANA MARIA ZULUAGA</option>
-                                                <option value="4">FABIOLA RAMIREZ</option>
-                                                <option value="5">MARIA DOLORES SMITH</option>
-                                                <option value="6">ALBERTO CAÑAS</option>
-                                                <option value="7">ALEXANDER RESTREPO</option>
-                                                <option value="8">AURORA MARTINEZ</option>
-                                                <option value="9">GUILLERMO ALBERTO MARÍN</option>
-                                                <option value="10">FABIO RAMIREZ CASTAÑO</option>
+                                            {
+                                                datosProfesores.map((dato) =>
+                                                    <option value={dato.id_profesor}>{dato.nombres_apellidos}</option>
+                                                )
+                                            }
+                                                
                                             </select>
                                             <label>-</label><br />
 

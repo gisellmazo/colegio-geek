@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { withRouter } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import CampoFormulario from "../components/CampoFormulario"
+
 
 function RegistrarProfesor() {
 
@@ -29,7 +30,7 @@ function RegistrarProfesor() {
     }
 
 
-
+    
 
 
 

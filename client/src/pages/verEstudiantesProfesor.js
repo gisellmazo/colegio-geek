@@ -6,9 +6,7 @@ import Sidebar from "../components/sidebar";
 import "../styles/estudiantes.css";
 
 function VerEstudiantesProfesor(props) {
-  const nombreEstudiante = "Pedro García Fernandéz ";
-  const gradoEstudiante = "10-1";
-  const fotoEstudiante = props;
+
 
   const [datos, setdatos] = useState([{}])
 

@@ -19,6 +19,7 @@ import IngresarNotas from './pages/ingresarNotas';
 import VerGruposAdministrador from './pages/verGruposAdministrador';
 import VerMateriasAdministrador from './pages/verMateriasAdministrador';
 import VerEstudiantesAdministrador from './pages/ver_estudiantes_administrador';
+import VerProfesoresAdministrador from './pages/ver_profesores_administrador'
 
 const App = () => {
   return (
@@ -52,6 +53,7 @@ const App = () => {
         path='/ver_estudiantes_administrador'
         component={VerEstudiantesAdministrador}
       />
+      <Route path='/ver_profesores_administrador' component={VerProfesoresAdministrador} />
     </BrowserRouter>
   );
 };

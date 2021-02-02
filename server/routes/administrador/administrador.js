@@ -295,7 +295,23 @@ router.get('/ver_estudiantes_administrador', async (req, res) => {
   client.query(`SELECT estudiantes.nombres_apellidos, grupos.id_grado, estudiantes.id_grupo, grupos.codigo_grupo
   FROM estudiantes 
   INNER JOIN grupos ON estudiantes.id_grupo=grupos.id_grupo
-  ORDER BY estudiantes.id_grado`, (error, resulset) => {
+  ORDER BY grupos.id_grado`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
+
+router.get('/ver_profesores_administrador', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT profesores.nombres_apellidos, profesores.id_profesor, materias.nombre 
+  FROM profesores
+  INNER JOIN materias ON profesores.id_profesor = materias.id_profesor
+  `, (error, resulset) => {
     client.release(true);
     if (error) {
       console.log(error)

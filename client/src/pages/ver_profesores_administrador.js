@@ -4,12 +4,12 @@ import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import "../styles/materiasAdministrador.css";
 
-function VerMateriasAdministrador() {
+function VerProfesoresAdministrador() {
 
   const [datos, setdatos] = useState([{}])
 
   useEffect(() => {
-    fetch('/ver_materias_administrador')
+    fetch('/ver_profesores_administrador')
       .then(response => response.json())
       .then(data => setdatos(data));
   }, [])
@@ -26,7 +26,6 @@ function VerMateriasAdministrador() {
             name5="materias"
             ruta1="/administrador"
             ruta2="/ver_profesores_administrador"
-            ruta3="/ver_estudiantes_administrador"
             ruta4="/ver_grupos_administrador"
             ruta5="/ver_materias_administrador"
 
@@ -42,11 +41,13 @@ function VerMateriasAdministrador() {
                             <div className="card">
                               <div className="card-body">
                                 <h5 className="card-title">
-                                  {dato.nombre}
+                                  {dato.nombres_apellidos}
                                 </h5>
                                 <p className="card-text">
-                                  Profesor encargado del area: <br/>
-                                  <b>{dato.nombres_apellidos}</b>
+                                  Asignatura encargada: <br/>
+                                  <b>{dato.nombre}</b>
+                                  Id del profesor: <br/>
+                                  <b>{dato.id_profesor}</b>
                                 </p>
                               </div>
                             </div>
@@ -55,6 +56,7 @@ function VerMateriasAdministrador() {
                   })
                 }
               </div>
+              <br/><br/><br/>
             </div>
           </div>
 
@@ -68,4 +70,4 @@ function VerMateriasAdministrador() {
   );
 }
 
-export default withRouter(VerMateriasAdministrador);
+export default withRouter(VerProfesoresAdministrador);
