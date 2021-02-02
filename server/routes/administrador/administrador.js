@@ -293,7 +293,8 @@ router.get('/ver_estudiantes_administrador', async (req, res) => {
   const client = await pool.connect();
   client.query(`SELECT estudiantes.nombres_apellidos, grupos.id_grado, estudiantes.id_grupo, grupos.codigo_grupo
   FROM estudiantes 
-  INNER JOIN grupos ON estudiantes.id_grupo=grupos.id_grupo`, (error, resulset) => {
+  INNER JOIN grupos ON estudiantes.id_grupo=grupos.id_grupo
+  ORDER BY estudiantes.id_grado`, (error, resulset) => {
     client.release(true);
     if (error) {
       console.log(error)
