@@ -24,20 +24,19 @@ DROP TABLE IF EXISTS grados;
 DROP TABLE IF EXISTS notas;
 
 -- Crear campos enum
-CREATE TYPE documento AS ENUM('TI','CC','NUIP');
+CREATE TYPE tipo_documento AS ENUM('TI','CC','NUIP', 'CE');
 CREATE TYPE sexo AS ENUM('F','M');
-CREATE TYPE tipo_documento AS ENUM('CC','CE');
 CREATE TYPE grado_cursado AS ENUM('6','7', '8', '9', '10', '11');
 CREATE TYPE estado AS ENUM('1','2', '3');
 CREATE TYPE jornada AS ENUM('1','2', '3');
 CREATE TYPE grado AS ENUM('6','7', '8', '9', '10', '11');
-CREATE TYPE tipo_nota AS ENUM('nota 1','nota 2', 'nota 3', 'parsial', 'fina');
+CREATE TYPE tipo_nota AS ENUM('seguimiento','parcial', 'final');
 
 -- Crear tablas
 CREATE TABLE administrador(
   id_admin SERIAL PRIMARY KEY,
   numero_documento VARCHAR(50) UNIQUE NOT NULL,
-  contrasena VARCHAR(50) UNIQUE NOT NULL,
+  contrasena VARCHAR(50) NOT NULL,
   tipo_usuario INTEGER DEFAULT 1 NOT NULL
 );
 
@@ -51,12 +50,12 @@ CREATE TABLE materias(
 
 CREATE TABLE estudiantes(
     id_estudiante SERIAL PRIMARY KEY,
-    id_grupo INTEGER UNIQUE NOT NULL,
-    codigo_estudiante VARCHAR(10) UNIQUE NOT NULL,
-    tipo_documento documento NOT NULL,
+    id_grupo INTEGER NOT NULL,
+    codigo_estudiante VARCHAR(50) UNIQUE NOT NULL,
+    tipo_documento tipo_documento NOT NULL,
     numero_documento VARCHAR(50) UNIQUE NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
-    contrasena VARCHAR(50) UNIQUE NOT NULL,
+    contrasena VARCHAR(50) NOT NULL,
     nombres_apellidos VARCHAR(100) NOT NULL,
     sexo sexo NOT NULL,
     fecha_nacimiento DATE NOT NULL,
@@ -69,18 +68,17 @@ CREATE TABLE estudiantes(
 
 CREATE TABLE profesores(
     id_profesor SERIAL PRIMARY KEY,
-    id_materia INTEGER UNIQUE NOT NULL,
     tipo_documento tipo_documento NOT NULL,
     numero_documento VARCHAR(50) UNIQUE NOT NULL,
     nombres_apellidos VARCHAR(50) NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
-    contrasena VARCHAR(50) UNIQUE NOT NULL,
+    contrasena VARCHAR(50) NOT NULL,
     tipo_usuario INTEGER DEFAULT 2 NOT NULL
 );
 
 CREATE TABLE grados_cursados(
     id_grado_cursado SERIAL PRIMARY KEY,
-    id_estudiante integer UNIQUE NOT NULL,
+    id_estudiante integer NOT NULL,
     ano VARCHAR(10) NOT NULL,
     grado_cursado grado_cursado NOT NULL,
     estado estado NOT NULL,
@@ -91,21 +89,20 @@ CREATE TABLE grupos(
     id_grupo SERIAL PRIMARY key,
     codigo_grupo VARCHAR(10) UNIQUE NOT NULL,
     id_profesor INTEGER UNIQUE NOT NULL,
-    id_grado INTEGER UNIQUE NOT NULL,
+    id_grado INTEGER NOT NULL,
     jornada jornada NOT NULL
 );
 
 CREATE TABLE grados(
     id_grado SERIAL PRIMARY KEY,
-    grado grado NOT NULL,
-    id_materias INTEGER NOT NULL
+    grado grado NOT NULL
 ); 
 
 CREATE TABLE notas(
     id_notas SERIAL PRIMARY KEY,
-    id_estudiante INTEGER UNIQUE NOT NULL,
-    id_grupo INTEGER UNIQUE NOT NULL,
-    id_materia INTEGER UNIQUE NOT NULL,
+    id_estudiante INTEGER NOT NULL,
+    id_grupo INTEGER NOT NULL,
+    id_materia INTEGER NOT NULL,
     tipo_nota tipo_nota NOT NULL,
     nota FLOAT NOT NULL
 );
@@ -122,10 +119,6 @@ ALTER TABLE estudiantes
   FOREIGN KEY(id_grupo)
   REFERENCES grupos(id_grupo);
 
-ALTER TABLE profesores
-  ADD CONSTRAINT fk_profesores_materias 
-  FOREIGN KEY(id_materia)
-  REFERENCES materias(id_materia);
 
 ALTER TABLE grados_cursados
   ADD CONSTRAINT fk_grados_cursados_estudiantes 
@@ -138,9 +131,6 @@ ALTER TABLE grupos
   ADD CONSTRAINT fk_grupos_grados 
   FOREIGN KEY(id_grado) REFERENCES grados(id_grado);
 
-ALTER TABLE grados
-  ADD CONSTRAINT fk_grados_materias 
-  FOREIGN KEY(id_materias) REFERENCES materias(id_materia);
 
 ALTER TABLE notas
   ADD CONSTRAINT fk_notas_estudiante 
