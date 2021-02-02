@@ -39,6 +39,7 @@ router.get('/inicio_sesion', async(req, res) => {
     }
 })
 
+
 router.post('/registrar_estudiante', async (req, res) => {
     try {
         const {
@@ -107,9 +108,92 @@ router.post('/registrar_estudiante', async (req, res) => {
             res.json('estudiante registrado')
         }
     } catch (e) {
+        console.log(e);
         res.status(500).json({ errorCode: e.errno, message: "Error en el servidor" })
     }
 })
+
+
+
+router.post('/registrar_profesor', async (req, res) => {
+    try {
+        const {
+            tipo_documento,
+            numero_documento,
+            nombres_apellidos,
+            correo,
+            contrasena
+        } = req.body
+        const client = await pool.connect()
+        const response = await client.query(`INSERT INTO profesores(
+            tipo_documento,
+            numero_documento,
+            nombres_apellidos,
+            correo,
+            contrasena) VALUES ($1, $2, $3, $4, $5)RETURNING id_profesor`, [
+                tipo_documento,
+                numero_documento,
+                nombres_apellidos,
+                correo,
+                contrasena
+            ])
+
+        if (response.rowsCount > 0) {
+            res.json({
+                id_profesor: response.rows[0].id_profesor,
+                tipo_documento,
+                numero_documento,
+                nombres_apellidos,
+                correo,
+                contrasena,
+                tipo_usuario
+            })
+        } else {
+            res.json('profesor registrado')
+        }
+    } catch (e) {
+        
+        res.status(500).json({ errorCode: e.errno, message: "Error en el servidor" })
+    }
+})
+
+router.post('/registrar_materia', async (req, res) => {
+    try {
+        const {
+            codigo_materia,
+            nombre,
+            id_profesor,
+            id_grados
+        } = req.body
+        const client = await pool.connect()
+        const response = await client.query(`INSERT INTO materias(
+            codigo_materia,
+            nombre,
+            id_profesor,
+            id_grados) VALUES ($1, $2, $3, $4)`, [
+                codigo_materia,
+                nombre,
+                id_profesor,
+                id_grados
+            ])
+
+        if (response.rowsCount > 0) {
+            res.json({
+                id_materia: response.rows[0].id_materia,
+                codigo_materia,
+                nombre,
+                id_profesor,
+                id_grados
+            })
+        } else {
+            res.json('Materia registrada')
+        }
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({ errorCode: e.errno, message: "Error en el servidor" })
+    }
+})
+
 
 router.post('/registrar_grupo', async (req, res) => {
     try {
@@ -124,7 +208,7 @@ router.post('/registrar_grupo', async (req, res) => {
             codigo_grupo,
             id_profesor,
             id_grado,
-            jornada) VALUES ($1, $2, $3, $4) RETURNING id_grupo`, [
+            jornada) VALUES ($1, $2, $3, $4)`, [
                 codigo_grupo,
                 id_profesor,
                 id_grado,
@@ -143,8 +227,7 @@ router.post('/registrar_grupo', async (req, res) => {
             res.json('Grupo registrado')
         }
     } catch (e) {
-        //res.status(500).json({ errorCode: e.errno, message: "Error en el servidor" })
-        res.json(e)
+        res.status(500).json({ errorCode: e.errno, message: "Error en el servidor" })
     }
 })
 
@@ -159,6 +242,5 @@ router.get('/ver_grupos', async(req, res) => {
         }
     })
 })
-
 
 module.exports=router;

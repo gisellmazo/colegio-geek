@@ -7,6 +7,7 @@ const administrador = require('./routes/administrador/administrador');
 const estudiante = require('./routes/estudiante/estudiante');
 const profesor = require('./routes/profesor/profesor');
 
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
