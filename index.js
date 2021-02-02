@@ -3,9 +3,9 @@ const express = require('express');
 const morgan = require('morgan');
 const app = express();
 
-const administrador=require('./routes/administrador');
-const estudiante=require('./routes/estudiante');
-const profesor=require('./routes/profesor');
+const administrador=require('./routes/administrador/administrador');
+const estudiante=require('./routes/estudiante/estudiante');
+const profesor=require('./routes/profesor/profesor');
 
 app.use(morgan('dev'));
 app.use(express.json());
