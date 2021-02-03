@@ -143,15 +143,14 @@ router.post('/registrar_grupo', async (req, res) => {
             res.json('Grupo registrado')
         }
     } catch (e) {
-        //res.status(500).json({ errorCode: e.errno, message: "Error en el servidor" })
-        res.json(e)
+        res.status(500).json({ errorCode: e.errno, message: "Error en el servidor" })
     }
 })
 
 router.get('/ver_grupos', async(req, res) => {
     const client = await pool.connect()
     client.query(`SELECT * FROM  grupos`, (error, resulset) => {
-        //client.release(true);
+        client.release(true);
         if (error) {
             return res.status(500).send('Se presento un error en la base de datos.')
         } else {
