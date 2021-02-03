@@ -18,6 +18,7 @@ const validacion_registrarEstudiante = Joi.object(
     } 
 )
 
+// Validation profesor
 const validacion_Profesor = Joi.object({
     tipo_documento: Joi.string().required(),
     numero_documento: Joi.string().required(),
