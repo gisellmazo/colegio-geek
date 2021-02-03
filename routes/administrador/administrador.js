@@ -1,8 +1,13 @@
 const { Router } = require('express');
-const router=Router();
-const { validacion_registrarEstudiante, validacion_grupos, validacion_Profesor, validacion_registro_materia } = require('../../validaciones/validaciones')
+const router = Router();
+const {
+  validacion_registrarEstudiante,
+  validacion_grupos,
+  validacion_Profesor,
+  validacion_registro_materia,
+} = require('../../validaciones/validaciones');
 
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const { pool } = require('../../database/database');
 
@@ -10,9 +15,9 @@ router.get('/inicio_sesion', async (req, res) => {
   let client = await pool.connect();
   const { numero_documento, contrasena, tipo_usuario } = req.query;
 
-  const token = jwt.sign(contrasena, 'token_contrasena')
-    console.log(token);
-    console.log(token2);
+  const token = jwt.sign(contrasena, 'token_contrasena');
+  console.log(token);
+  console.log(token2);
   try {
     if (tipo_usuario == 1) {
       let result = await client.query(
@@ -73,8 +78,8 @@ router.post('/registrar_estudiante', async (req, res) => {
       req.body
     );
 
-    const token = jwt.sign(contrasena, 'token_contrasena')
-    
+    const token = jwt.sign(contrasena, 'token_contrasena');
+
     const client = await pool.connect();
     const response = await client.query(
       `INSERT INTO estudiantes(
@@ -138,7 +143,6 @@ router.post('/registrar_estudiante', async (req, res) => {
 
 router.post('/registrar_profesor', async (req, res) => {
   try {
-    const validaciones = await validacion_Profesor.validateAsync(req.body);
     const {
       tipo_documento,
       numero_documento,
@@ -146,6 +150,8 @@ router.post('/registrar_profesor', async (req, res) => {
       correo,
       contrasena,
     } = req.body;
+    const validaciones = await validacion_Profesor.validateAsync(req.body);
+    const token = jwt.sign(contrasena, 'token_contrasena');
     const client = await pool.connect();
     const response = await client.query(
       `INSERT INTO profesores(
@@ -154,7 +160,7 @@ router.post('/registrar_profesor', async (req, res) => {
             nombres_apellidos,
             correo,
             contrasena) VALUES ($1, $2, $3, $4, $5)RETURNING id_profesor`,
-      [tipo_documento, numero_documento, nombres_apellidos, correo, contrasena]
+      [tipo_documento, numero_documento, nombres_apellidos, correo, token]
     );
 
     if (response.rowsCount > 0) {
@@ -179,25 +185,22 @@ router.post('/registrar_profesor', async (req, res) => {
 });
 
 router.post('/registrar_materia', async (req, res) => {
-    try {
+  try {
+    const validacion = await validacion_registro_materia.validateAsync(
+      req.body
+    );
 
-        const validacion = await validacion_registro_materia.validateAsync(req.body);
-
-        const {
-            codigo_materia,
-            nombre,
-            id_profesor,
-            id_grados
-        } = req.body
-        const client = await pool.connect()
-        const response = await client.query(`INSERT INTO materias(
+    const { codigo_materia, nombre, id_profesor, id_grados } = req.body;
+    const client = await pool.connect();
+    const response = await client.query(
+      `INSERT INTO materias(
             codigo_materia,
             nombre,
             id_profesor,
             id_grados) VALUES ($1, $2, $3, $4)`,
       [codigo_materia, nombre, id_profesor, id_grados]
     );
-    
+
     if (response.rowsCount > 0) {
       res.json({
         id_materia: response.rows[0].id_materia,
@@ -219,7 +222,7 @@ router.post('/registrar_materia', async (req, res) => {
 
 router.post('/registrar_grupo', async (req, res) => {
   try {
-    const validacion= await validacion_grupos.validateAsync(req.body);
+    const validacion = await validacion_grupos.validateAsync(req.body);
     const { codigo_grupo, id_profesor, id_grado, jornada } = req.body;
     const client = await pool.connect();
     const response = await client.query(
