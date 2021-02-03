@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "cfda2475-179e-41e0-b442-197bce3082d2",
+		"name": "peticiones_colegio_geek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5003/inicio_sesion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5003/inicio_sesion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5003",
+					"path": [
+						"inicio_sesion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/ver_profesores?id_estudiante=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5004/ver_profesores?id_estudiante=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"ver_profesores"
+					],
+					"query": [
+						{
+							"key": "id_estudiante",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/perfil_estudiante?id_estudiante=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5004/perfil_estudiante?id_estudiante=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"perfil_estudiante"
+					],
+					"query": [
+						{
+							"key": "id_estudiante",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/ver_mis_notas?id_estudiante=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5004/ver_mis_notas?id_estudiante=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"ver_mis_notas"
+					],
+					"query": [
+						{
+							"key": "id_estudiante",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/perfil_profesor?id_profesor=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5004/perfil_profesor?id_profesor=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"perfil_profesor"
+					],
+					"query": [
+						{
+							"key": "id_profesor",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/ver_estudiantes_profesor?id_profesor=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5004/ver_estudiantes_profesor?id_profesor=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"ver_estudiantes_profesor"
+					],
+					"query": [
+						{
+							"key": "id_profesor",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/ver_grupos_profesor?id_profesor=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5004/ver_grupos_profesor?id_profesor=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"ver_grupos_profesor"
+					],
+					"query": [
+						{
+							"key": "id_profesor",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/ver_grupos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5004/ver_grupos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"ver_grupos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/registrar_grupo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\"codigo_grupo\":5639,\r\n\"id_profesor\":3,\r\n\"id_grado\":2,\r\n\"jornada\":2",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5004/registrar_grupo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"registrar_grupo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/registrar_estudiante",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"codigo_materia\":\"MAT003\",\r\n\"nombre\":\"Matematicas\",\r\n\"id_profesor\":5,\r\n\"id_grados\":2\r\n}\r\n    \r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5004/registrar_materia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"registrar_materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/registrar_materia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"codigo_materia\":\"MAT003\",\r\n\"nombre\":\"Matematicas\",\r\n\"id_profesor\":5,\r\n\"id_grados\":2\r\n}\r\n    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5004/registrar_materia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"registrar_materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5004/registrar_profesor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"tipo_documento\":\"CC\",\r\n\"numero_documento\": 1214756988,\r\n\"nombres_apellidos\":\"Fabiola Ramirez\",\r\n\"correo\":\"fabiolar@gmail.com\",\r\n\"contrasena\": \"12698fr\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5004/registrar_profesor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"registrar_profesor"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
