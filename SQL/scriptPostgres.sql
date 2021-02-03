@@ -35,7 +35,7 @@ CREATE TYPE tipo_nota AS ENUM('seguimiento','parcial', 'final');
 CREATE TABLE administrador(
   id_admin SERIAL PRIMARY KEY,
   numero_documento VARCHAR(50) UNIQUE NOT NULL,
-  contrasena VARCHAR(50) NOT NULL,
+  contrasena VARCHAR(255) NOT NULL,
   tipo_usuario INTEGER DEFAULT 1 NOT NULL
 );
 
@@ -54,7 +54,7 @@ CREATE TABLE estudiantes(
     tipo_documento tipo_documento NOT NULL,
     numero_documento VARCHAR(50) UNIQUE NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
-    contrasena VARCHAR(50) NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
     nombres_apellidos VARCHAR(100) NOT NULL,
     sexo sexo NOT NULL,
     fecha_nacimiento DATE NOT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE profesores(
     numero_documento VARCHAR(50) UNIQUE NOT NULL,
     nombres_apellidos VARCHAR(50) NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
-    contrasena VARCHAR(50) NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
     tipo_usuario INTEGER DEFAULT 2 NOT NULL
 );
 

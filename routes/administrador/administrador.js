@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router=Router();
-const { validacion_registrarEstudiante, validacion_grupos, validacion_Profesor } = require('../../validaciones/validaciones')
+const { validacion_registrarEstudiante, validacion_grupos, validacion_Profesor, validacion_registro_materia } = require('../../validaciones/validaciones')
 
 const jwt = require('jsonwebtoken')
 

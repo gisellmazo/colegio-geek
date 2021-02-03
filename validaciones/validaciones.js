@@ -52,5 +52,6 @@ const validacion_registro_materia = Joi.object(
 module.exports ={
     validacion_registrarEstudiante: validacion_registrarEstudiante,
     validacion_Profesor,
-    validacion_grupos
+    validacion_grupos,
+    validacion_registro_materia
 }
