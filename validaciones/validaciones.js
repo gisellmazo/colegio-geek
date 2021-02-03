@@ -18,9 +18,18 @@ const validacion_registrarEstudiante = Joi.object(
     } 
 )
 
-
+const validacion_Profesor = Joi.object({
+    tipo_documento: Joi.string().required(),
+    numero_documento: Joi.string().required(),
+    nombres_apellidos: Joi.string().required(),
+    correo: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+      .required(),
+    contrasena: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+  });
 
 
 module.exports ={
-    validacion_registrarEstudiante: validacion_registrarEstudiante
+    validacion_registrarEstudiante: validacion_registrarEstudiante,
+    validacion_Profesor
 }
