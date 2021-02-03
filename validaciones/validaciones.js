@@ -1,13 +1,15 @@
 const Joi = require('@hapi/joi')
 
-const validacion_InicioSesion = Joi.object(
+const validacion_grupos = Joi.object(
     {
-        numero_documento: Joi.string().required(),
-        contrasena: Joi.string().required(), 
-        tipo_usuario: Joi.string().required()
+        codigo_grupo: Joi.string().required(),
+        id_profesor: Joi.number().required(), 
+        id_grado: Joi.number().required(),
+        jornada: Joi.string().required()
     }
 )
 
 module.exports ={
-    validacion_InicioSesion: validacion_InicioSesion
+    
+    validacion_grupos: validacion_grupos
 }

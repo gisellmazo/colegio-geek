@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router=Router();
-const { validacion_InicioSesion } = require('../../validaciones/validaciones')
+const { validacion_grupos } = require('../../validaciones/validaciones')
 
 const { pool } = require('../../database/database');
 
@@ -14,7 +14,7 @@ router.get('/inicio_sesion', async(req, res) => {
 
     
     try {
-        const validacion= await validacion_InicioSesion.validateAsync(req.query);   
+        const validacion= await validacion_InicioSesion.validateAsync(req.body);   
         
         if (tipo_usuario == 1) {
             let result = await client.query(`select * from administrador where contrasena = $1 and numero_documento = $2`, [contrasena, numero_documento])
@@ -198,6 +198,9 @@ router.post('/registrar_materia', async (req, res) => {
 })
 
 router.post('/registrar_grupo', async (req, res) => {
+
+    const validacion= await validacion_grupos.validateAsync(req.body);  
+
     try {
         const {
             codigo_grupo,
