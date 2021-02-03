@@ -1,8 +1,9 @@
 const { Router } = require('express');
 const router=Router();
-const { validacion_InicioSesion } = require('../../validaciones/validaciones')
+const { validacion_InicioSesion, validacion_registro_materia} = require('../../validaciones/validaciones')
 
 const { pool } = require('../../database/database');
+
 
 router.get('/inicio_sesion', async(req, res) => {
     let client = await pool.connect()
@@ -162,6 +163,9 @@ router.post('/registrar_profesor', async (req, res) => {
 
 router.post('/registrar_materia', async (req, res) => {
     try {
+
+        const validacion = await validacion_registro_materia.validateAsync(req.body);
+
         const {
             codigo_materia,
             nombre,
