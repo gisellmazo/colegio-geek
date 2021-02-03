@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const router=Router();
+const { validacion_InicioSesion } = require('../../validaciones/validaciones')
 
 const { pool } = require('../../database/database');
 
@@ -10,7 +11,11 @@ router.get('/inicio_sesion', async(req, res) => {
         contrasena,
         tipo_usuario
     } = req.query
+
+    
     try {
+        const validacion= await validacion_InicioSesion.validateAsync(req.query);   
+        console.log(result)
         if (tipo_usuario == 1) {
             let result = await client.query(`select * from administrador where contrasena = $1 and numero_documento = $2`, [contrasena, numero_documento])
             if (result.rowCount == 0) {
