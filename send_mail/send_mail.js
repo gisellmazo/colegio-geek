@@ -132,7 +132,6 @@ router.post("/send_mail", (req, res) => {
   </body>
   
   </html>`;
-
   const mailOptions = {
     from: "academia.colegiogeek@gmail.com",
     to: to,

@@ -1,4 +1,5 @@
-const { Pool } =require('pg');
+const { Pool } = require('pg');
+require('dotenv').config();
 
 const pool = new Pool({
     host: process.env.DB_HOST,
@@ -14,8 +15,6 @@ const pool = new Pool({
   //   console.log("===========");
   //   console.log(client);
   //   console.log("===========");
-  });
-  
-  
-  
-  module.exports = { pool };
+});
+
+module.exports = { pool };

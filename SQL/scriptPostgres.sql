@@ -12,9 +12,8 @@ ALTER TABLE grados DROP CONSTRAINT fk_grados_materias;
 ALTER TABLE notas DROP CONSTRAINT fk_notas_estudiante;
 ALTER TABLE notas DROP CONSTRAINT fk_notas_grupos;
 ALTER TABLE notas DROP CONSTRAINT fk_notas_materias;
-
 -- Eliminar tablas
-DROP TABLE IF EXISTS administrador
+DROP TABLE IF EXISTS administrador;
 DROP TABLE IF EXISTS materias;
 DROP TABLE IF EXISTS estudiantes;
 DROP TABLE IF EXISTS profesores;
@@ -88,7 +87,7 @@ CREATE TABLE grados_cursados(
 CREATE TABLE grupos(
     id_grupo SERIAL PRIMARY key,
     codigo_grupo VARCHAR(10) UNIQUE NOT NULL,
-    id_profesor INTEGER UNIQUE NOT NULL,
+    id_profesor INTEGER NOT NULL,
     id_grado INTEGER NOT NULL,
     jornada jornada NOT NULL
 );
