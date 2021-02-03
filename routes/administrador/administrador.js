@@ -176,18 +176,25 @@ router.post('/registrar_profesor', async (req, res) => {
 });
 
 router.post('/registrar_materia', async (req, res) => {
-  try {
-    const { codigo_materia, nombre, id_profesor, id_grados } = req.body;
-    const client = await pool.connect();
-    const response = await client.query(
-      `INSERT INTO materias(
+    try {
+
+        const validacion = await validacion_registro_materia.validateAsync(req.body);
+
+        const {
+            codigo_materia,
+            nombre,
+            id_profesor,
+            id_grados
+        } = req.body
+        const client = await pool.connect()
+        const response = await client.query(`INSERT INTO materias(
             codigo_materia,
             nombre,
             id_profesor,
             id_grados) VALUES ($1, $2, $3, $4)`,
       [codigo_materia, nombre, id_profesor, id_grados]
     );
-
+    
     if (response.rowsCount > 0) {
       res.json({
         id_materia: response.rows[0].id_materia,

@@ -39,6 +39,16 @@ const validacion_Profesor = Joi.object({
     }
 )
 
+const validacion_registro_materia = Joi.object(
+    {
+        codigo_materia: Joi.string().required(),
+        nombre: Joi.string().required(), 
+        id_profesor: Joi.number().required(),
+        id_grados: Joi.number().required()
+    }
+)
+
+
 module.exports ={
     validacion_registrarEstudiante: validacion_registrarEstudiante,
     validacion_Profesor,

@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const router = Router();
-
 const { pool } = require('../../database/database');
 
 // Ver Perfil Profesor
