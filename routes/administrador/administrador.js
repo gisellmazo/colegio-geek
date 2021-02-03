@@ -10,11 +10,14 @@ router.get('/inicio_sesion', async (req, res) => {
   let client = await pool.connect();
   const { numero_documento, contrasena, tipo_usuario } = req.query;
 
+  const token = jwt.sign(contrasena, 'token_contrasena')
+    console.log(token);
+    console.log(token2);
   try {
     if (tipo_usuario == 1) {
       let result = await client.query(
         `select * from administrador where contrasena = $1 and numero_documento = $2`,
-        [contrasena, numero_documento]
+        [token, numero_documento]
       );
       if (result.rowCount == 0) {
         return res.json('usuario no encontrado verifica datos');
@@ -23,7 +26,7 @@ router.get('/inicio_sesion', async (req, res) => {
     } else if (tipo_usuario == 2) {
       let result = await client.query(
         `select * from profesores where contrasena = $1 and numero_documento = $2`,
-        [contrasena, numero_documento]
+        [token, numero_documento]
       );
       if (result.rowCount == 0) {
         return res.json('usuario no encontrado verifica datos');
@@ -32,7 +35,7 @@ router.get('/inicio_sesion', async (req, res) => {
     } else if (tipo_usuario == 3) {
       let result = await client.query(
         `select * from estudiantes where contrasena = $1 and numero_documento = $2`,
-        [contrasena, numero_documento]
+        [token, numero_documento]
       );
       if (result.rowCount == 0) {
         return res.json('usuario no encontrado verifica datos');
@@ -66,12 +69,12 @@ router.post('/registrar_estudiante', async (req, res) => {
       celular,
     } = req.body;
 
-    const token = jwt.sign(contrasena, 'token_contrasena')
-
     const validacion = await validacion_registrarEstudiante.validateAsync(
       req.body
     );
-    console.log(validacion);
+
+    const token = jwt.sign(contrasena, 'token_contrasena')
+    
     const client = await pool.connect();
     const response = await client.query(
       `INSERT INTO estudiantes(
