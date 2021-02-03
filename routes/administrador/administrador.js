@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router=Router();
-const { validacion_grupos } = require('../../validaciones/validaciones')
+const { validacion_registrarEstudiante, validacion_grupos } = require('../../validaciones/validaciones')
 
 const { pool } = require('../../database/database');
 
@@ -14,8 +14,7 @@ router.get('/inicio_sesion', async(req, res) => {
 
     
     try {
-        const validacion= await validacion_InicioSesion.validateAsync(req.body);   
-        
+             
         if (tipo_usuario == 1) {
             let result = await client.query(`select * from administrador where contrasena = $1 and numero_documento = $2`, [contrasena, numero_documento])
             if (result.rowCount == 0) {
@@ -62,6 +61,9 @@ router.post('/registrar_estudiante', async (req, res) => {
             telefono_fijo,
             celular
         } = req.body
+
+        const validacion= await validacion_registrarEstudiante.validateAsync(req.body);
+        console.log(validacion)
         const client = await pool.connect()
         const response = await client.query(`INSERT INTO estudiantes(
             id_grupo,
