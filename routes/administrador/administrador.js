@@ -1,11 +1,8 @@
 const { Router } = require('express');
 const router=Router();
-const { validacion_registrarEstudiante, validacion_grupos } = require('../../validaciones/validaciones')
-const router = Router();
-const {
-  validacion_registrarEstudiante,
-  validacion_Profesor,
-} = require('../../validaciones/validaciones');
+const { validacion_registrarEstudiante, validacion_grupos, validacion_Profesor } = require('../../validaciones/validaciones')
+
+const jwt = require('jsonwebtoken')
 
 const { pool } = require('../../database/database');
 
@@ -69,6 +66,8 @@ router.post('/registrar_estudiante', async (req, res) => {
       celular,
     } = req.body;
 
+    const token = jwt.sign(contrasena, 'token_contrasena')
+
     const validacion = await validacion_registrarEstudiante.validateAsync(
       req.body
     );
@@ -95,7 +94,7 @@ router.post('/registrar_estudiante', async (req, res) => {
         tipo_documento,
         numero_documento,
         correo,
-        contrasena,
+        token,
         nombres_apellidos,
         sexo,
         fecha_nacimiento,

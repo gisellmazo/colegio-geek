@@ -29,6 +29,7 @@ const validacion_Profesor = Joi.object({
     contrasena: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
   });
 
+//Validar registro de grupos
   const validacion_grupos = Joi.object(
     {
         codigo_grupo: Joi.string().required(),
