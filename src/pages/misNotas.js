@@ -5,18 +5,7 @@ import Sidebar from "../components/sidebar";
 import Card from "../components/card"
 
 
-const getEstudianteId = async () => {
-    try {
-      const response = await fetch('http://localhost:5057/ver_mis_notas');
-      const jsonData = await response.json();
 
-      //console.log(jsonData);
-
-      setTodos(jsonData);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
 
 const MisNotas = () => {
     return (
