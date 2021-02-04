@@ -5,7 +5,7 @@ import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import "../styles/estudiantes.css";
 
-function verEstudiantesProfesor(props) {
+function VerEstudiantesProfesor(props) {
   const nombreEstudiante = "Pedro García Fernandéz ";
   const gradoEstudiante = "10-1";
   const fotoEstudiante = props;
@@ -46,7 +46,7 @@ function verEstudiantesProfesor(props) {
                         />
                       </div>
                       <p class="h5 card-text m-1 p-1">
-                        Grado: {datos[0].id_grupo}
+                        Grado: {datos[0].id_grado}
                       </p>
                       <button
                         type="button"
@@ -70,7 +70,7 @@ function verEstudiantesProfesor(props) {
                         />
                       </div>
                       <p class="h5 card-text m-1 p-1">
-                        Grado: {gradoEstudiante}
+                        Grado: {datos[0].id_grado}
                       </p>
                       <button
                         type="button"
@@ -94,7 +94,7 @@ function verEstudiantesProfesor(props) {
                         />
                       </div>
                       <p class="h5 card-text m-1 p-1">
-                        Grado: {gradoEstudiante}
+                        Grado: {datos[0].id_grado}
                       </p>
                       <button
                         type="button"
@@ -118,7 +118,7 @@ function verEstudiantesProfesor(props) {
                         />
                       </div>
                       <p class="h5 card-text m-1 p-1">
-                        Grado: {gradoEstudiante}
+                        Grado: {datos[0].id_grado}
                       </p>
                       <button
                         type="button"
@@ -142,7 +142,7 @@ function verEstudiantesProfesor(props) {
                         />
                       </div>
                       <p class="h5 card-text m-1 p-1">
-                        Grado: {gradoEstudiante}
+                        Grado: {datos[0].id_grado}
                       </p>
                       <button
                         type="button"
@@ -166,7 +166,7 @@ function verEstudiantesProfesor(props) {
                         />
                       </div>
                       <p class="h5 card-text m-1 p-1">
-                        Grado: {gradoEstudiante}
+                        Grado: {datos[0].id_grado}
                       </p>
                       <button
                         type="button"
@@ -190,7 +190,7 @@ function verEstudiantesProfesor(props) {
                         />
                       </div>
                       <p class="h5 card-text m-1 p-1">
-                        Grado: {gradoEstudiante}
+                        Grado: {datos[0].id_grado}
                       </p>
                       <button
                         type="button"
@@ -214,7 +214,7 @@ function verEstudiantesProfesor(props) {
                         />
                       </div>
                       <p class="h5 card-text m-1 p-1">
-                        Grado: {gradoEstudiante}
+                        Grado: {datos[0].id_grado}
                       </p>
                       <button
                         type="button"
@@ -239,4 +239,4 @@ function verEstudiantesProfesor(props) {
   );
 }
 
-export default withRouter(verEstudiantesProfesor);
+export default withRouter(VerEstudiantesProfesor);
