@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from 'react';
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import "../styles/perfil.css";
@@ -12,6 +13,15 @@ let numEstudiantes = 230;
 
 
 function Perfil() {
+
+  const [datos, setdatos] = useState([{}])
+    
+    useEffect(() => {
+        fetch('/perfil_profesor?id_profesor=1')
+            .then(response => response.json())
+            .then(data => setdatos(data));
+            console.log(datos)
+    }, [])
 
   return (
     <>
@@ -35,17 +45,17 @@ function Perfil() {
             <div>
               <ul class="list-group mt-4 pr-5 pl-5  ">
                 <li class="list-group-item text-center">
-                  Nombres y Apellidos:&nbsp; {nombre}
+                  Nombres y Apellidos: { datos[0].nombres_apellidos}
                 </li>
 
                 <li class="list-group-item text-center">
                   Número de grupos a cargo: &nbsp; {numGrupos}
                 </li>
                 <li class="list-group-item text-center">
-                  materia: &nbsp; {materia}
+                  materia: { datos[0].id_materia}
                 </li>
                 <li class="list-group-item text-center">
-                  Número de estudiantes a cargo: &nbsp; {numEstudiantes}
+                  Número de estudiantes a cargo: { datos[0].id_grupo}
                 </li>
                 
               </ul>
