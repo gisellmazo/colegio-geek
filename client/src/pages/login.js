@@ -7,8 +7,11 @@ import * as Yup from 'yup';
 import { withRouter } from "react-router-dom";
 
 import { Formik, Form } from 'formik';
+import { useEffect, useState } from "react";
 
-const login = () => {
+function login() {
+
+
     const validate = Yup.object({
         usuario: Yup.number()
             .required('El usuario es requerido'),

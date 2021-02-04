@@ -17,11 +17,11 @@ router.get('/inicio_sesion', async (req, res) => {
 
   const token = jwt.sign(contrasena, 'token_contrasena');
   console.log(token);
-  console.log(token2);
+
   try {
     if (tipo_usuario == 1) {
       let result = await client.query(
-        `select * from administrador where contrasena = $1 and numero_documento = $2`,
+        `select * from administrador where contrasena = $1 and numero_documento = $2 RETURNING id_administrador`,
         [token, numero_documento]
       );
       if (result.rowCount == 0) {
@@ -30,7 +30,7 @@ router.get('/inicio_sesion', async (req, res) => {
       return res.json(result.rows);
     } else if (tipo_usuario == 2) {
       let result = await client.query(
-        `select * from profesores where contrasena = $1 and numero_documento = $2`,
+        `select * from profesores where contrasena = $1 and numero_documento = $2 RETURNING id_profesor`,
         [token, numero_documento]
       );
       if (result.rowCount == 0) {
@@ -39,7 +39,7 @@ router.get('/inicio_sesion', async (req, res) => {
       return res.json(result.rows);
     } else if (tipo_usuario == 3) {
       let result = await client.query(
-        `select * from estudiantes where contrasena = $1 and numero_documento = $2`,
+        `select id_estudiante from estudiantes where contrasena = $1 and numero_documento = $2`,
         [token, numero_documento]
       );
       if (result.rowCount == 0) {
