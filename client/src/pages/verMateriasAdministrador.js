@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import "../styles/materiasAdministrador.css";
 
-function verMateriasAdministrador(props) {
- 
+function VerMateriasAdministrador(props) {
+
+  const [datos, setdatos] = useState([{}])
+
+  useEffect(() => {
+    fetch('/ver_materias_administrador')
+      .then(response => response.json())
+      .then(data => setdatos(data));
+  }, [])
+
   return (
     <>
+      {console.log(datos)}
       <div className="grid-container">
         <div className="s">
           <Sidebar
@@ -27,45 +36,15 @@ function verMateriasAdministrador(props) {
           <div className="mt-4">
             <div className="main align-middle d-flex pl-5 pr-4">
               <div class="row">
-                <div class="col-sm-4">
-                  <div class="card">
-                    <div class="card-body align-self-center">
-                      <h4 class="card-title">Geografía</h4>
-                      <div class="m-1 p-1">
-                          <h5>Profesor:</h5>
-                      </div>
-                      <div class="m-1 p-1">
-                          <p>Fabio León Restrepo</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4 ">
-                  <div class="card">
-                    <div class="card-body align-self-center">
-                      <h4 class="card-title">Historia</h4>
-                      <div class="m-1 p-1">
-                          <h5>Profesor:</h5>
-                      </div>
-                      <div class="m-1 p-1">
-                          <p>Jaime Alberto Giraldo</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-4 ">
-                  <div class="card">
-                    <div class="card-body align-self-center">
-                      <h4 class="card-title">Inglés</h4>
-                      <div class="m-1 p-1">
-                          <h5>Profesor:</h5>
-                      </div>
-                      <div class="m-1 p-1">
-                          <p>María Dolores Smith</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {
+                ()=>{
+                  datos.map(function(item,index,array){
+                  
+
+                  })}
+                }                
+                
+
               </div>
             </div>
           </div>
@@ -79,4 +58,4 @@ function verMateriasAdministrador(props) {
   );
 }
 
-export default withRouter(verMateriasAdministrador);
+export default withRouter(VerMateriasAdministrador);

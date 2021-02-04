@@ -1,4 +1,4 @@
-.grid-container {
+/* .grid-container {
     display: grid;
     grid-template-columns: 0.9fr 1.2fr 1fr 1fr;
     grid-template-rows: 0.5fr 0.8fr 0.2fr;
@@ -27,7 +27,8 @@
 .F {
     grid-area: F;
 }
-
+*/
 .card {
     width: 20em;
-}
+    margin:5%;
+} 

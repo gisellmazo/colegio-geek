@@ -17,11 +17,10 @@ router.get('/inicio_sesion', async (req, res) => {
 
   const token = jwt.sign(contrasena, 'token_contrasena');
   console.log(token);
-
   try {
     if (tipo_usuario == 1) {
       let result = await client.query(
-        `select * from administrador where contrasena = $1 and numero_documento = $2 RETURNING id_administrador`,
+        `select id_admin from administrador where contrasena = $1 and numero_documento = $2`,
         [token, numero_documento]
       );
       if (result.rowCount == 0) {
@@ -30,7 +29,7 @@ router.get('/inicio_sesion', async (req, res) => {
       return res.json(result.rows);
     } else if (tipo_usuario == 2) {
       let result = await client.query(
-        `select * from profesores where contrasena = $1 and numero_documento = $2 RETURNING id_profesor`,
+        `select id_profesor from profesores where contrasena = $1 and numero_documento = $2 `,
         [token, numero_documento]
       );
       if (result.rowCount == 0) {
@@ -257,6 +256,19 @@ router.get('/ver_grupos', async (req, res) => {
   client.query(`SELECT * FROM  grupos`, (error, resulset) => {
     client.release(true);
     if (error) {
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
+
+router.get('/ver_materias_administrador', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT materias.nombre, profesores.nombres_apellidos FROM  materias INNER JOIN profesores ON materias.id_profesor=profesores.id_profesor`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
       return res.status(500).send('Se presento un error en la base de datos.');
     } else {
       return res.json(resulset.rows);

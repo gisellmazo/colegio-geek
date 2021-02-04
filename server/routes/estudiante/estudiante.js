@@ -4,7 +4,7 @@ const router = Router();
 const { pool } = require('../../database/database');
 
 //Perfil estudiante
-router.get('/perfil_estudiante', async (req, res) => {
+router.get('/perfil_estudiante/', async (req, res) => {
   const { id_estudiante } = req.query;
 
   try {
@@ -21,7 +21,7 @@ router.get('/perfil_estudiante', async (req, res) => {
   }
 });
 
-router.get('/ver_profesores', async (req, res) => {
+router.get('/ver_profesores/', async (req, res) => {
   const { id_estudiante } = req.query;
 
   try {
@@ -38,14 +38,15 @@ router.get('/ver_profesores', async (req, res) => {
   }
 });
 
-router.get('/ver_mis_notas', async (req, res) => {
+router.get('/ver_mis_notas/', async (req, res) => {
   const { id_estudiante } = req.query;
 
   try {
     const result = await pool.query(
-      'SELECT materias.nombre, notas.nota FROM notas INNER JOIN materias ON materias.id_materia = notas.id_materia WHERE notas.id_estudiante = $1 ',
+      'SELECT materias.nombre, notas.nota FROM notas INNER JOIN materias ON materias.id_materia = notas.id_materia WHERE notas.id_estudiante = $1 ORDER BY materias.nombre',
       [id_estudiante]
     );
+    
     if (result.rowCount > 0) {
       return res.json(result.rows);
     }
