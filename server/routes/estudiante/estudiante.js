@@ -1,4 +1,5 @@
 const { Router, response } = require('express');
+const { Client } = require('pg');
 const router=Router();
 
 const { pool } = require('../../database/database');
@@ -6,11 +7,11 @@ const { pool } = require('../../database/database');
 //Perfil estudiante
 router.get('/perfil_estudiante', async(req, res)=>{
 
-
+    let client = await pool.connect();
     const {id_estudiante} = req.query
     
     try {
-        const result = await pool.query('SELECT estudiantes.nombres_apellidos as nombre_estudiante, codigo_grupo, grupos.id_grado, grupos.id_profesor, profesores.nombres_apellidos  FROM estudiantes INNER JOIN grupos ON grupos.id_grupo =  estudiantes.id_grupo INNER JOIN profesores ON grupos.id_profesor = profesores.id_profesor WHERE estudiantes.id_estudiante = $1 ', [id_estudiante])
+        const result = await client.query('SELECT estudiantes.nombres_apellidos as nombre_estudiante, grupos.codigo_grupo, grupos.id_grado, grupos.id_profesor, profesores.nombres_apellidos  FROM estudiantes INNER JOIN grupos ON grupos.id_grupo =  estudiantes.id_grupo INNER JOIN profesores ON grupos.id_profesor = profesores.id_profesor WHERE estudiantes.id_estudiante = $1 ', [id_estudiante])
         if(result.rowCount>0){
             return res.json(result.rows)
         }
