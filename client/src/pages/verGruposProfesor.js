@@ -40,7 +40,7 @@ function VerGruposProfesor() {
                       <p class="h5 card-text m-1 p-1">
                         Grupo: {datos[0].id_grupo} <br />
                         Código del grupo: {datos[0].codigo_grupo} <br />
-                        Materia:{ datos[0].id_materia} <br />
+                        Materia:{datos[0].id_materia} <br />
                         Número de estudiantes:
                       </p>
                     </div>
@@ -52,9 +52,9 @@ function VerGruposProfesor() {
                       <h4 class="card-title">{}</h4>
                       <div class=""></div>
                       <p class="h5 card-text m-1 p-1">
-                        Grupo: {} <br />
-                        Código del grupo: <br />
-                        Materia: <br />
+                        Grupo: {datos[0].id_grupo} <br />
+                        Código del grupo: {datos[0].codigo_grupo} <br />
+                        Materia:{datos[0].id_materia}  <br />
                         Número de estudiantes:
                       </p>
                     </div>
@@ -66,9 +66,9 @@ function VerGruposProfesor() {
                       <h4 class="card-title">{}</h4>
 
                       <p class="h5 card-text m-1 p-1">
-                        Grupo: {} <br />
-                        Código del grupo: <br />
-                        Materia: <br />
+                        Grupo: {datos[0].id_grupo} <br />
+                        Código del grupo: {datos[0].codigo_grupo} <br />
+                        Materia: {datos[0].id_materia}  <br />
                         Número de estudiantes:
                       </p>
                     </div>
@@ -80,9 +80,9 @@ function VerGruposProfesor() {
                       <h4 class="card-title">{}</h4>
 
                       <p class="h5 card-text m-1 p-1">
-                        Grupo: {} <br />
-                        Código del grupo: <br />
-                        Materia: <br />
+                        Grupo: {datos[0].id_grupo} <br />
+                        Código del grupo: {datos[0].codigo_grupo} <br />
+                        Materia: {datos[0].id_materia} <br />
                         Número de estudiantes:
                       </p>
                     </div>
@@ -94,9 +94,9 @@ function VerGruposProfesor() {
                       <h4 class="card-title">{}</h4>
 
                       <p class="h5 card-text m-1 p-1">
-                        Grupo: {} <br />
-                        Código del grupo: <br />
-                        Materia: <br />
+                        Grupo: {datos[0].id_grupo}<br />
+                        Código del grupo:{datos[0].codigo_grupo}  <br />
+                        Materia: {datos[0].id_materia}  <br />
                         Número de estudiantes:
                       </p>
                     </div>
@@ -108,9 +108,9 @@ function VerGruposProfesor() {
                       <h4 class="card-title">{}</h4>
 
                       <p class="h5 card-text m-1 p-1">
-                        Grupo: {} <br />
-                        Código del grupo: <br />
-                        Materia: <br />
+                        Grupo: {datos[0].id_grupo}<br />
+                        Código del grupo: {datos[0].codigo_grupo} <br />
+                        Materia: {datos[0].id_materia}  <br />
                         Número de estudiantes:
                       </p>
                     </div>
@@ -122,9 +122,9 @@ function VerGruposProfesor() {
                       <h4 class="card-title">{}</h4>
 
                       <p class="h5 card-text m-1 p-1">
-                        Grupo: {} <br />
-                        Código del grupo: <br />
-                        Materia: <br />
+                        Grupo:{datos[0].id_grupo} <br />
+                        Código del grupo: {datos[0].codigo_grupo} <br />
+                        Materia: {datos[0].id_materia}  <br />
                         Número de estudiantes:
                       </p>
                     </div>
@@ -136,9 +136,9 @@ function VerGruposProfesor() {
                       <h4 class="card-title">{}</h4>
 
                       <p class="h5 card-text m-1 p-1">
-                        Grupo: {} <br />
-                        Código del grupo: <br />
-                        Materia: <br />
+                        Grupo: {datos[0].id_grupo}<br />
+                        Código del grupo: {datos[0].codigo_grupo} <br />
+                        Materia: {datos[0].id_materia} <br />
                         Número de estudiantes:
                       </p>
                     </div>

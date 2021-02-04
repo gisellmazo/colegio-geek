@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from 'react';
 import { withRouter } from "react-router-dom";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
@@ -8,6 +9,16 @@ function verEstudiantesProfesor(props) {
   const nombreEstudiante = "Pedro García Fernandéz ";
   const gradoEstudiante = "10-1";
   const fotoEstudiante = props;
+
+  const [datos, setdatos] = useState([{}])
+
+  useEffect(() => {
+    fetch('/ver_estudiantes_profesor?id_profesor=1')
+        .then(response => response.json())
+        .then(data => setdatos(data));
+}, [])
+
+
   return (
     <>
       <div className="grid-container">
@@ -26,7 +37,7 @@ function verEstudiantesProfesor(props) {
                 <div class="col-sm-6">
                   <div class="card">
                     <div class="card-body align-self-center">
-                      <h4 class="card-title">{nombreEstudiante}</h4>
+                      <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
                       <div class="m-1 p-1">
                         <img
                           src="https://thispersondoesnotexist.com/image"
@@ -35,7 +46,7 @@ function verEstudiantesProfesor(props) {
                         />
                       </div>
                       <p class="h5 card-text m-1 p-1">
-                        Grado: {gradoEstudiante}
+                        Grado: {datos[0].id_grupo}
                       </p>
                       <button
                         type="button"
@@ -50,7 +61,7 @@ function verEstudiantesProfesor(props) {
                 <div class="col-sm-6 ">
                   <div class="card">
                     <div class="card-body align-self-center">
-                      <h4 class="card-title">{nombreEstudiante}</h4>
+                      <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
                       <div class="m-1 p-1">
                         <img
                           src="https://thispersondoesnotexist.com/image"
@@ -74,7 +85,7 @@ function verEstudiantesProfesor(props) {
                 <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
-                      <h4 class="card-title">{nombreEstudiante}</h4>
+                      <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
                       <div class="m-1 p-1">
                         <img
                           src="https://thispersondoesnotexist.com/image"
@@ -98,7 +109,7 @@ function verEstudiantesProfesor(props) {
                 <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
-                      <h4 class="card-title">{nombreEstudiante}</h4>
+                      <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
                       <div class="m-1 p-1">
                         <img
                           src="https://thispersondoesnotexist.com/image"
@@ -122,7 +133,7 @@ function verEstudiantesProfesor(props) {
                 <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
-                      <h4 class="card-title">{nombreEstudiante}</h4>
+                      <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
                       <div class="m-1 p-1">
                         <img
                           src="https://thispersondoesnotexist.com/image"
@@ -146,7 +157,7 @@ function verEstudiantesProfesor(props) {
                 <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
-                      <h4 class="card-title">{nombreEstudiante}</h4>
+                      <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
                       <div class="m-1 p-1">
                         <img
                           src="https://thispersondoesnotexist.com/image"
@@ -170,7 +181,7 @@ function verEstudiantesProfesor(props) {
                 <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
-                      <h4 class="card-title">{nombreEstudiante}</h4>
+                      <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
                       <div class="m-1 p-1">
                         <img
                           src="https://thispersondoesnotexist.com/image"
@@ -194,7 +205,7 @@ function verEstudiantesProfesor(props) {
                 <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
-                      <h4 class="card-title">{nombreEstudiante}</h4>
+                      <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
                       <div class="m-1 p-1">
                         <img
                           src="https://thispersondoesnotexist.com/image"
