@@ -1,10 +1,22 @@
 import React from "react";
+import { useEffect, useState } from 'react';
 import { withRouter } from "react-router-dom";
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import "../styles/grupos.css";
 
-function verGruposProfesor() {
+function VerGruposProfesor() {
+
+  const [datos, setdatos] = useState([{}])
+
+  useEffect(() => {
+    fetch('/ver_grupos_profesor?id_profesor=1')
+        .then(response => response.json())
+        .then(data => setdatos(data));
+        console.log(datos)
+}, [])
+
+
   return (
     <>
       <div className="grid-container">
@@ -26,9 +38,9 @@ function verGruposProfesor() {
                       <h4 class="card-title">{}</h4>
 
                       <p class="h5 card-text m-1 p-1">
-                        Grupo: {} <br />
-                        Código del grupo: <br />
-                        Materia: <br />
+                        Grupo: {datos[0].id_grupo} <br />
+                        Código del grupo: {datos[0].codigo_grupo} <br />
+                        Materia:{ datos[0].id_materia} <br />
                         Número de estudiantes:
                       </p>
                     </div>
@@ -144,4 +156,4 @@ function verGruposProfesor() {
   );
 }
 
-export default withRouter(verGruposProfesor);
+export default withRouter(VerGruposProfesor);
