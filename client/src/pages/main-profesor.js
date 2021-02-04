@@ -1,10 +1,13 @@
 import React from "react";
+import {useEffect,useState} from 'react';
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 import { withRouter } from "react-router-dom";
 import "../styles/pantallasPrincipales.css";
 
 function Main({ history }) {
+
+
   return (
     <>
       <div className="grid-container">

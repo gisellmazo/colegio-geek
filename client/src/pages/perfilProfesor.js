@@ -12,6 +12,7 @@ let numEstudiantes = 230;
 
 
 function Perfil() {
+
   return (
     <>
       <div class="grid-container ">
