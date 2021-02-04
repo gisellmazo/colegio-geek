@@ -13,7 +13,6 @@ function Main_estudiante() {
     useEffect(()=>{
         fetch('/perfil_estudiante?id_estudiante=1')
         .then(response => response.json())
-
         .then(data => console.log(data));
     },[])
     //
@@ -38,7 +37,7 @@ function Main_estudiante() {
                     <div>
                         <ul className="list-group mt-4 pr-5 pl-5  ">
                             <li className="list-group-item text-center">
-                                Nombres y Apellidos:
+                                Nombres y Apellidos: 
                             </li>
 
                             <li className="list-group-item text-center">
