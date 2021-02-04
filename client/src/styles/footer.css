@@ -1,0 +1,13 @@
+.btn{
+    width: 160%;
+}
+.btn-primary{
+  background-color: #2C1C4C !important;
+  border-color: #2C1C4C !important;
+}
+
+.foot-down{
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+}

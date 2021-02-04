@@ -1,0 +1,33 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 0.9fr 1.2fr 1fr 1fr;
+    grid-template-rows: 0.5fr 0.8fr 0.2fr;
+    gap: 0px 0px;
+
+    grid-template-areas:
+        "s P P P"
+        "s P P P"
+        "F F F F";
+}
+
+.s {
+    grid-area: s;
+}
+
+
+
+.PEP {
+    overflow:  auto !important;
+    grid-area: P;
+    background-color: #2C1C4C !important;
+    width: 74.9em;
+    height: 39.4em;
+}
+
+.F {
+    grid-area: F;
+}
+
+.card {
+    width: 20em;
+}

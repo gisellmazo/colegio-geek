@@ -1,0 +1,11 @@
+.container-row{
+    width: 35%;
+}
+
+.container-row-middle{
+    width: 10%;
+}
+
+.scroll{
+    overflow: scroll !important;
+}

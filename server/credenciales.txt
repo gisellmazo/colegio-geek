@@ -1,0 +1,9 @@
+host: bdbkwufvp9cmdzpyl1d6-postgresql.services.clever-cloud.com
+database name: bdbkwufvp9cmdzpyl1d6
+user: ubpcmf1mfsoc3mxcjabb
+password: 84LskJsWwNbYnZNj9xvj
+port: 5432
+
+
+
+psql -h bdbkwufvp9cmdzpyl1d6-postgresql.services.clever-cloud.com -p 5432 -U ubpcmf1mfsoc3mxcjabb -d bdbkwufvp9cmdzpyl1d6
