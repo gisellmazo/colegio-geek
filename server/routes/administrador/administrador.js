@@ -251,6 +251,19 @@ router.post('/registrar_grupo', async (req, res) => {
   }
 });
 
+router.get('/ver_materias', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT * FROM  materias`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
+
+
 router.get('/ver_grupos', async (req, res) => {
   const client = await pool.connect();
   client.query(`SELECT * FROM  grupos`, (error, resulset) => {
