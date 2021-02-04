@@ -1,22 +1,26 @@
 import React from 'react';
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 
 
 function Main_estudiante() {
-    useEffect(()=>{
-        fetch('/perfil_estudiante?id_estudiante=1')
-        .then(response => response.json())
-        .then(data => console.log(data));
-    },[])
-    //
+
+    const [datos, setdatos] = useState([{}])
     
+    useEffect(() => {
+        fetch('/perfil_estudiante?id_estudiante=1')
+            .then(response => response.json())
+            .then(data => setdatos(data));
+    }, [])
+    //
+
     return (
-        <div className="grid-container ">
+        <div className="grid-container">
+
             <div className="s">
-            <Sidebar name1="Mi perfil" name2="Mis notas" ruta1="/estudiante" ruta2="/ver_mis_notas" />
+                <Sidebar name1="Mi perfil" name2="Mis notas" ruta1="/estudiante" ruta2="/ver_mis_notas" />
             </div>
             <div className="PP">
                 <div className="mt-3 profile-photo ">
@@ -34,17 +38,17 @@ function Main_estudiante() {
                     <div>
                         <ul className="list-group mt-4 pr-5 pl-5  ">
                             <li className="list-group-item text-center">
-                                Nombres y Apellidos: 
+                                Nombres y Apellidos: { datos[0].nombre_estudiante}
                             </li>
 
                             <li className="list-group-item text-center">
-                                Código de mi grupo: 
+                                Código de mi grupo:  { datos[0].codigo_grupo}
                             </li>
                             <li className="list-group-item text-center">
-                                Grado: 
+                                Grado:   { datos[0].id_grado}
                             </li>
                             <li className="list-group-item text-center">
-                                Director de grupo: 
+                                Director de grupo: { datos[0].nombres_apellidos}
                             </li>
 
                         </ul>
