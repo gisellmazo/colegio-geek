@@ -1,19 +1,31 @@
 import React from 'react';
+import {useEffect, useState} from 'react';
 import { withRouter } from 'react-router-dom';
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
 
 
+
+
+
+
 function Main_estudiante() {
+    useEffect(()=>{
+        fetch('/perfil_estudiante?id_estudiante=1')
+        .then(response => response.json())
+
+        .then(data => console.log(data));
+    },[])
+    //
     return (
-        <div class="grid-container ">
-            <div class="s">
+        <div className="grid-container ">
+            <div className="s">
             <Sidebar name1="Mi perfil" name2="Mis notas" ruta1="/estudiante" ruta2="/ver_mis_notas" />
             </div>
-            <div class="PP">
+            <div className="PP">
                 <div className="mt-3 profile-photo ">
-                    <div class="row">
-                        <div class="col-md-6 offset-md-3 img-photo">
+                    <div className="row">
+                        <div className="col-md-6 offset-md-3 img-photo">
                             <img
                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUuC-VE9AlCZKatywv50H0TpGGCAEsvwN-aQ&usqp=CAU"
                                 alt="Profile"
@@ -24,18 +36,18 @@ function Main_estudiante() {
                         </div>
                     </div>
                     <div>
-                        <ul class="list-group mt-4 pr-5 pl-5  ">
-                            <li class="list-group-item text-center">
+                        <ul className="list-group mt-4 pr-5 pl-5  ">
+                            <li className="list-group-item text-center">
                                 Nombres y Apellidos:
                             </li>
 
-                            <li class="list-group-item text-center">
+                            <li className="list-group-item text-center">
                                 Código de mi grupo: 
                             </li>
-                            <li class="list-group-item text-center">
+                            <li className="list-group-item text-center">
                                 Grado: 
                             </li>
-                            <li class="list-group-item text-center">
+                            <li className="list-group-item text-center">
                                 Director de grupo: 
                             </li>
 
@@ -43,7 +55,7 @@ function Main_estudiante() {
                     </div>
                 </div>
             </div>
-            <div class="F">
+            <div className="F">
                 <Footer cargo="Estudiante" />
             </div>
         </div>
