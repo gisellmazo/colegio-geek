@@ -13,6 +13,7 @@ function Main_estudiante() {
         fetch('/perfil_estudiante?id_estudiante=1')
             .then(response => response.json())
             .then(data => setdatos(data));
+            console.log(datos)
     }, [])
     //
 
