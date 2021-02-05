@@ -101,7 +101,7 @@ function RegistrarGrupo() {
                                         </div>
                                         <div class="container-row-middle"></div>
                                         <div class="container-row">
-                                            <CampoFormulario label="id del profesor" id="id_profesor" type="number" name="id_profesor" estilo="texto-blanco" className="form-control diseno-imputs" placeholder={stateProfesor} />
+                                            <CampoFormulario label="id del profesor" id="id_profesor" type="number" name="id_profesor" estilo="texto-blanco" className="form-control diseno-imputs" defaultvalue={stateProfesor} />
                                             <CampoFormulario label=" id Jornada" type="number" name="jornada" estilo="texto-blanco" className="form-control diseno-imputs" placeholder={stateJornada} />
                                             <CampoFormulario label="Este grupo pertenece al grado:" type="number" name="id_grado" estilo="texto-blanco" className="form-control diseno-imputs" />
 

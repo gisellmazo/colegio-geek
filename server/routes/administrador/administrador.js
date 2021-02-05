@@ -289,4 +289,19 @@ router.get('/ver_materias_administrador', async (req, res) => {
   });
 });
 
+router.get('/ver_estudiantes_administrador', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT estudiantes.nombres_apellidos, grupos.id_grado, estudiantes.id_grupo, grupos.codigo_grupo
+  FROM estudiantes 
+  INNER JOIN grupos ON estudiantes.id_grupo=grupos.id_grupo`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
+
 module.exports = router;

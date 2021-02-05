@@ -22,7 +22,7 @@ function RegistrarEstudiante() {
               },
             body: JSON.stringify({
                  
-                codigo_estudiante:'2021012',
+                codigo_materia:'2021012',
                 tipo_documento: datos.tipo_documento,
                 correo: datos.correo,    
                 contrasena: datos.contrasena,
