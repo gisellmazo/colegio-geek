@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
@@ -6,6 +7,16 @@ import Card from "../components/card"
 
 
 const MisNotas = () => {
+
+    const [datos, setdatos] = useState([{}])
+   
+    useEffect(() => {
+        fetch('/ver_mis_notas?id_estudiante=1')
+            .then(response => response.json())
+            .then(data => setdatos(data));
+            console.log(datos)
+    }, [])
+    
     return (
         <div class="grid-container ">
             <div class="s">
@@ -16,31 +27,11 @@ const MisNotas = () => {
                     <div className="main align-middle d-flex pl-4 pr-4 PEP">
                         <div class="row">
                             <div class="col-sm-6">
-                                <Card name="nombre materia 1" ruta="/registrarestudiante" />
-                            </div>
-                            <div class="col-sm-6 ">
-                                <Card name="Registrar profesor" ruta="/registrarprofesor" />
-                            </div>
-                            <div class="col-sm-6 mt-5 bottom-pa">
-                                <Card name="Registrar grupo" />
-                            </div>
-                            <div class="col-sm-6 mt-5 bottom-pa">
-                                <Card name="Registrar materia" />
-                            </div>
-                            <div class="col-sm-6 mt-5 bottom-pa">
-                                <Card name="Registrar materia" />
-                            </div>
-                            <div class="col-sm-6 mt-5 bottom-pa">
-                                <Card name="Registrar materia" />
-                            </div>
-                            <div class="col-sm-6 mt-5 bottom-pa">
-                                <Card name="Registrar materia" />
-                            </div>
-                            <div class="col-sm-6 mt-5 bottom-pa">
-                                <Card name="Registrar materia" />
-                            </div>
-                            <div class="col-sm-6 mt-5 bottom-pa">
-                                <Card name="Registrar materia" />
+                                {
+                                    datos.map((item) => 
+                                        <Card name={item.nombre} ruta="/registrarestudiante" />
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
