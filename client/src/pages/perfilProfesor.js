@@ -49,7 +49,7 @@ function Perfil() {
                 </li>
 
                 <li class="list-group-item text-center">
-                  Número de grupos a cargo: &nbsp; {numGrupos}
+                  Número de grupos a cargo: { datos[0].id_grupos}
                 </li>
                 <li class="list-group-item text-center">
                   materia: { datos[0].id_materia}
