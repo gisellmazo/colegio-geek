@@ -69,7 +69,7 @@ function VerGruposProfesor() {
                         Grupo: {datos[0].id_grupo} <br />
                         Código del grupo: {datos[0].codigo_grupo} <br />
                         Materia: {datos[0].id_materia}  <br />
-                        Número de estudiantes:
+                        Número de estudiantes:{datos[0].id_estudiante} 
                       </p>
                     </div>
                   </div>
