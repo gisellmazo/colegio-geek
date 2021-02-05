@@ -16,7 +16,7 @@ function RegistrarEstudiante() {
 
     function registrar(datos){
         fetch('/registrar_estudiante',{
-             method: 'POST', 
+            method: 'POST', 
             headers: {
                 'Content-Type': 'application/json'
               },
