@@ -43,7 +43,7 @@ router.get('/ver_mis_notas', async (req, res) => {
 
   try {
     const result = await pool.query(
-      'SELECT materias.nombre, notas.nota FROM notas INNER JOIN materias ON materias.id_materia = notas.id_materia WHERE notas.id_estudiante = $1 ',
+      'SELECT materias.nombre, notas.nota, profesores.nombres_apellidos FROM notas INNER JOIN materias ON materias.id_materia = notas.id_materia INNER JOIN profesores ON materias.id_profesor = profesores.id_profesor WHERE notas.id_estudiante = $1 ',
       [id_estudiante]
     );
     if (result.rowCount > 0) {

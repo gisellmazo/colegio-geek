@@ -26,13 +26,21 @@ const MisNotas = () => {
                 <div className="mt-4">
                     <div className="main align-middle d-flex pl-4 pr-4 PEP">
                         <div class="row">
-                            <div class="col-sm-6">
-                                {
-                                    datos.map((item) => 
-                                        <Card name={item.nombre} ruta="/registrarestudiante" />
-                                    )
-                                }
-                            </div>
+                            {
+                                datos.map((item) => 
+                                    <div class="col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body align-self-center">
+                                                <p class="h5 card-text m-1 p-1">
+                                                Materia: {item.nombre} <br />
+                                                profesor: {item.nombres_apellidos} <br />
+                                                Nota: {item.nota} 
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            }  
                         </div>
                     </div>
                 </div>
