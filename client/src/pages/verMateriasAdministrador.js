@@ -29,7 +29,6 @@ function VerMateriasAdministrador() {
             ruta3="/ver_estudiantes_administrador"
             ruta4="/ver_grupos_administrador"
             ruta5="/ver_materias_administrador"
-
           />
         </div>
         <div className="PEP ">

@@ -32,7 +32,35 @@ function VerEstudiantesProfesor(props) {
           <div className="mt-4">
             <div className="main align-middle d-flex pl-5 pr-4">
               <div class="row">
-                <div class="col-sm-6">
+                {
+                  datos.map(function (dato, index, array) {
+                return <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body align-self-center">
+                      <h4 class="card-title">{dato.nombres_estudiante}</h4>
+                      <div class="m-1 p-1">
+                        <img
+                          src="https://thispersondoesnotexist.com/image"
+                          width="200em"
+                          alt="50em"
+                        />
+                      </div>
+                      <p class="h5 card-text m-1 p-1">
+                        Grado: {dato.id_grado}
+                      </p>
+                      <button
+                        type="button"
+                        // onClick={() => history.push("/estudianteId")}
+                        class="btn-p btn-primary"
+                      >
+                        Ir a sus notas
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                  })  
+              }
+                {/* <div class="col-sm-6 ">
                   <div class="card">
                     <div class="card-body align-self-center">
                       <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
@@ -55,8 +83,8 @@ function VerEstudiantesProfesor(props) {
                       </button>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6 ">
+                </div> */}
+                {/* <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
                       <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
@@ -79,8 +107,8 @@ function VerEstudiantesProfesor(props) {
                       </button>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6 mt-5 bottom-pa">
+                </div> */}
+                {/* <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
                       <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
@@ -103,8 +131,8 @@ function VerEstudiantesProfesor(props) {
                       </button>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6 mt-5 bottom-pa">
+                </div> */}
+                {/* <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
                       <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
@@ -127,8 +155,8 @@ function VerEstudiantesProfesor(props) {
                       </button>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6 mt-5 bottom-pa">
+                </div> */}
+                {/* <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
                       <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
@@ -151,8 +179,8 @@ function VerEstudiantesProfesor(props) {
                       </button>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6 mt-5 bottom-pa">
+                </div> */}
+                {/* <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
                       <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
@@ -175,8 +203,8 @@ function VerEstudiantesProfesor(props) {
                       </button>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6 mt-5 bottom-pa">
+                </div> */}
+                {/* <div class="col-sm-6 mt-5 bottom-pa">
                   <div class="card">
                     <div class="card-body align-self-center">
                       <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
@@ -199,31 +227,7 @@ function VerEstudiantesProfesor(props) {
                       </button>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6 mt-5 bottom-pa">
-                  <div class="card">
-                    <div class="card-body align-self-center">
-                      <h4 class="card-title">{datos[0].nombres_estudiante}</h4>
-                      <div class="m-1 p-1">
-                        <img
-                          src="https://thispersondoesnotexist.com/image"
-                          width="200em"
-                          alt="50em"
-                        />
-                      </div>
-                      <p class="h5 card-text m-1 p-1">
-                        Grado: {datos[0].id_grado}
-                      </p>
-                      <button
-                        type="button"
-                        // onClick={() => history.push("/estudianteId")}
-                        class="btn-p btn-primary"
-                      >
-                        Ir a sus notas
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
