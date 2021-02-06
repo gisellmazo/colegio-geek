@@ -32,21 +32,25 @@ function VerGruposProfesor() {
           <div className="mt-4">
             <div className=" pl-5 pr-4">
               <div class="row">
-                <div class="col-sm-6">
+                {
+                  datos.map(function (dato, index, array) {
+                return <div class="col-sm-6">
                   <div class="card">
                     <div class="card-body align-self-center">
                       <h4 class="card-title">{}</h4>
 
                       <p class="h5 card-text m-1 p-1">
-                        Grupo: {datos[0].id_grupo} <br />
-                        Código del grupo: {datos[0].codigo_grupo} <br />
-                        Materia:{datos[0].id_materia} <br />
-                        Número de estudiantes: {datos[0].id_estudiante}
+                        Grupo: {dato.id_grupo} <br />
+                        Código del grupo: {dato.codigo_grupo} <br />
+                        Materia:{dato.id_materia} <br />
+                        Número de estudiantes: {dato.id_estudiante}
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6 ">
+                  })
+                }
+                {/* <div class="col-sm-6 ">
                   <div class="card">
                     <div class="card-body align-self-center">
                       <h4 class="card-title">{}</h4>
@@ -129,8 +133,8 @@ function VerGruposProfesor() {
                       </p>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6 mt-5 bottom-pa pb-2">
+                </div> */}
+                {/* <div class="col-sm-6 mt-5 bottom-pa pb-2">
                   <div class="card">
                     <div class="card-body align-self-center">
                       <h4 class="card-title">{}</h4>
@@ -143,7 +147,7 @@ function VerGruposProfesor() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
