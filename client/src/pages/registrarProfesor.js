@@ -59,6 +59,7 @@ function RegistrarProfesor() {
                         ruta3="/ver_estudiantes_administrador"
                         ruta4="/ver_grupos_administrador"
                         ruta5="/ver_materias_administrador"
+                        ruta6="/generar_reportes_administrador"
                     />
                 </div>
                 <div class="PM">

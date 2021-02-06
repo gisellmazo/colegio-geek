@@ -14,7 +14,11 @@ import "../styles/registros.css"
 
 function RegistrarEstudiante() {
 
+    
+    
     function registrar(datos){
+        const fecha= new Date().getFullYear()+"0";
+        const id_estudiante= 29;
         fetch('/registrar_estudiante',{
             method: 'POST', 
             headers: {
@@ -22,7 +26,7 @@ function RegistrarEstudiante() {
               },
             body: JSON.stringify({
                  
-                codigo_estudiante:'2021014',
+                codigo_estudiante:"F",
                 tipo_documento: datos.tipo_documento,
                 correo: datos.correo,    
                 contrasena: datos.contrasena,
@@ -35,8 +39,9 @@ function RegistrarEstudiante() {
                 celular: datos.celular,
                 id_grupo:datos.id_grupo,
                 numero_documento:datos.numero_documento     })
-        })
+        }).then(function(res){ alert('Estudiante creado')})
         
+        .fetch('/')
     }
      
  
@@ -67,19 +72,22 @@ function RegistrarEstudiante() {
 
     return (
         <div>
+            
             <div class="grid-container">
                 <div class="s">
                     <Sidebar
                         name1="Nuevo registro"
-                        name2="profesores"
-                        name3="estudiantes"
-                        name4="grupos"
+                        name2="Profesores"
+                        name3="Estudiantes"
+                        name4="Grupos"
                         name5="materias"
+                        name6="Generar reportes"
                         ruta1="/administrador"
                         ruta2="/ver_profesores_administrador"
                         ruta3="/ver_estudiantes_administrador"
                         ruta4="/ver_grupos_administrador"
                         ruta5="/ver_materias_administrador"
+                        ruta6="/generar_reportes_administrador"
                     />
                 </div>
                 <div class="PM">
