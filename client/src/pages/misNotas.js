@@ -32,7 +32,6 @@ function MisNotas() {
                                             <div class="card-body align-self-center">
                                                 <p class="h5 card-text m-1 p-1">
                                                 Materia: {item.nombre} <br />
-                                                profesor: {item.nombres_apellidos} <br />
                                                 Nota: {item.nota} 
                                                 </p>
                                             </div>

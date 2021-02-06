@@ -9,10 +9,26 @@ import Sidebar from "../components/sidebar";
 import CampoFormulario from "../components/CampoFormulario"
 
 function RegistrarGrupo() {
+
+    function registrar(datos){
+        fetch('/registrar_grupo',{
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                jornada: datos.jornada,
+                codigo_grupo: datos.codigo_grupo,
+                id_grado: datos.id_grado,
+                id_profesor: datos.id_profesor  })
+        })
+        
+    }
+
     const validate = Yup.object({
         id_profesor: Yup.number()
             .required('Campo requerido'),
-        jornada: Yup.number()
+        jornada: Yup.string()
             .required('Campo requerido')
             .max(3, 'solo hay 3 jornadas')
             .required('Campo requerido'),
@@ -20,7 +36,7 @@ function RegistrarGrupo() {
             .max(11, "solo hasta grado 11")
             .min(6, 'El grado mas bajo es 6')
             .required('Campo requerido'),
-        codigo_grupo: Yup.number()
+        codigo_grupo: Yup.string()
             .required('Campo requerido')
 
     })
@@ -53,7 +69,7 @@ function RegistrarGrupo() {
                             validationSchema={validate}
                             onSubmit={values => {
                                 console.log(values)
-
+                                registrar(values);
                             }}
                         >
                             {formik => (
@@ -95,14 +111,14 @@ function RegistrarGrupo() {
                                             </select>
                                             <br /><br />
                                             {/* {Fecha= Date.now()} */}
-                                            <CampoFormulario label="Codigo del grupo:" type="number" name="codigo_grupo" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                            <CampoFormulario label="Codigo del grupo:" type="text" name="codigo_grupo" estilo="texto-blanco" className="form-control diseno-imputs" />
 
 
                                         </div>
                                         <div class="container-row-middle"></div>
                                         <div class="container-row">
-                                            <CampoFormulario label="id del profesor" id="id_profesor" type="number" name="id_profesor" estilo="texto-blanco" className="form-control diseno-imputs" defaultvalue={stateProfesor} />
-                                            <CampoFormulario label=" id Jornada" type="number" name="jornada" estilo="texto-blanco" className="form-control diseno-imputs" placeholder={stateJornada} />
+                                            <CampoFormulario label="id del profesor" id="id_profesor" type="number" name="id_profesor" estilo="texto-blanco" className="form-control diseno-imputs" placeholder={stateProfesor} />
+                                            <CampoFormulario label=" id Jornada" type="text" name="jornada" estilo="texto-blanco" className="form-control diseno-imputs" placeholder={stateJornada} />
                                             <CampoFormulario label="Este grupo pertenece al grado:" type="number" name="id_grado" estilo="texto-blanco" className="form-control diseno-imputs" />
 
                                         </div>
