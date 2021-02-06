@@ -16,7 +16,7 @@ function VerEstudiantesProfesor(props) {
         .then(data => setdatos(data));
 }, [])
 
-
+console.log(datos);
   return (
     <>
       <div className="grid-container">
@@ -37,7 +37,7 @@ function VerEstudiantesProfesor(props) {
                 return <div class="col-sm-6">
                   <div class="card">
                     <div class="card-body align-self-center">
-                      <h4 class="card-title">{dato.nombres_estudiante}</h4>
+                      <h4 class="card-title">{dato.nombres_apellidos}</h4>
                       <div class="m-1 p-1">
                         <img
                           src="https://thispersondoesnotexist.com/image"
@@ -46,8 +46,10 @@ function VerEstudiantesProfesor(props) {
                         />
                       </div>
                       <p class="h5 card-text m-1 p-1">
-                        Grado: {dato.id_grado}
+                        Grado: {dato.id_grado} <br/>
+                        Grupo {dato.id_grupo}
                       </p>
+
                       <button
                         type="button"
                         // onClick={() => history.push("/estudianteId")}

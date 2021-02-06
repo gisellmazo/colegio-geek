@@ -44,14 +44,19 @@ CREATE TABLE materias(
     codigo_materia VARCHAR(10) UNIQUE NOT NULL,
     nombre VARCHAR(50) NOT NULL,
     id_profesor INTEGER UNIQUE NOT NULL,
-    id_grados INTEGER NOT NULL
+    id_grado1 INTEGER DEFAULT NULL,
+    id_grado2 INTEGER DEFAULT NULL,
+    id_grado3 INTEGER DEFAULT NULL,
+    id_grado4 INTEGER DEFAULT NULL,
+    id_grado5 INTEGER DEFAULT NULL,
+    id_grado6 INTEGER DEFAULT NULL,
 );
 
 CREATE TABLE estudiantes(
     id_estudiante SERIAL PRIMARY KEY,
     id_grupo INTEGER NOT NULL,
     codigo_estudiante VARCHAR(50) UNIQUE NOT NULL,
-    tipo_documento tipo_documento NOT NULL,
+    tipo_documento tipo_documento NOT NULL, --OBLIGATORIO AUTOMATIZAR ESTA VAINA
     numero_documento VARCHAR(50) UNIQUE NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
@@ -62,7 +67,9 @@ CREATE TABLE estudiantes(
     ciudad VARCHAR(50) NOT NULL,
     telefono_fijo VARCHAR(20) NOT NULL,
     celular VARCHAR(20),
-    tipo_usuario INTEGER DEFAULT 3 NOT NULL
+    tipo_usuario INTEGER DEFAULT 3 NOT NULL,
+    foto VARCHAR(255),
+    pdf_documento VARCHAR(255)
 );
 
 CREATE TABLE profesores(
@@ -85,7 +92,7 @@ CREATE TABLE grados_cursados(
 );
 
 CREATE TABLE grupos(
-    id_grupo SERIAL PRIMARY key,
+    id_grupo SERIAL PRIMARY KEY,
     codigo_grupo VARCHAR(10) UNIQUE NOT NULL,
     id_profesor INTEGER NOT NULL,
     id_grado INTEGER NOT NULL,
@@ -111,7 +118,17 @@ ALTER TABLE materias
   ADD CONSTRAINT fk_materias_profesores 
   FOREIGN KEY(id_profesor) REFERENCES profesores(id_profesor),
   ADD CONSTRAINT fk_materias_grados 
-  FOREIGN KEY(id_grados) REFERENCES grados(id_grado);
+  FOREIGN KEY(id_grado1) REFERENCES grados(id_grado),
+  ADD CONSTRAINT fk_materias_grados 
+  FOREIGN KEY(id_grado2) REFERENCES grados(id_grado)
+  ADD CONSTRAINT fk_materias_grados 
+  FOREIGN KEY(id_grado3) REFERENCES grados(id_grado)
+  ADD CONSTRAINT fk_materias_grados 
+  FOREIGN KEY(id_grado4) REFERENCES grados(id_grado)
+  ADD CONSTRAINT fk_materias_grados 
+  FOREIGN KEY(id_grado5) REFERENCES grados(id_grado)
+  ADD CONSTRAINT fk_materias_grados 
+  FOREIGN KEY(id_grado6) REFERENCES grados(id_grado);
 
 ALTER TABLE estudiantes
   ADD CONSTRAINT fK_estudiantes_grupos 
