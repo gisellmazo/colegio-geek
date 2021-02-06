@@ -323,7 +323,7 @@ router.get('/ver_profesores_administrador', async (req, res) => {
 
 router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT COUNT(id_estudiante), materias.nombre 
+  client.query(`SELECT COUNT(id_estudiante) as cantidad_estudiantes, materias.nombre 
   FROM estudiantes
   INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo
   INNER JOIN materias ON grupos.id_grado = materias.id_grados
@@ -369,5 +369,24 @@ router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
   
   
 }) */
+
+router.get('/cantidad_estudiantes_profesor_grado', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT COUNT(id_estudiante) as cantidad_estudiantes, profesores.nombres_apellidos, grupos.id_grado 
+  FROM estudiantes
+  INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo
+  INNER JOIN materias ON grupos.id_grado = materias.id_grados
+  INNER JOIN profesores ON profesores.id_profesor=materias.id_profesor
+  GROUP BY grupos.id_grado, profesores.nombres_apellidos`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
+
 
 module.exports = router;
