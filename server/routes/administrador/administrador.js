@@ -338,6 +338,23 @@ router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
   });
 });
 
+//servicio promedio de notas
+router.get('/promedio_notas_grupo', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT avg(nota) as promedio_notas, grupos.id_grupo
+  FROM notas 
+  INNER JOIN grupos ON notas.id_grupo = grupos.id_grupo
+  group by grupos.id_grupo`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
+
 
 
 /* router.get('/ver_id_estudiante', async (req, res) => {
