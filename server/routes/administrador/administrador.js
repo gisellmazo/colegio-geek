@@ -338,6 +338,26 @@ router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
   });
 });
 
+
+//servicio promedio de notas
+router.get('/promedio_notas_grupo', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT avg(nota) as promedio_notas, grupos.id_grupo
+  FROM notas 
+  INNER JOIN grupos ON notas.id_grupo = grupos.id_grupo
+  group by grupos.id_grupo`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
+
+
+
 router.get('/ver_id_estudiante', async (req, res) => {
   const client = await pool.connect();
   client.query(`SELECT MAX(id_estudiante) as ultimo_id FROM estudiantes`, (error, resulset) => {
@@ -369,6 +389,19 @@ router.get('/cantidad_estudiantes_profesor_grado', async (req, res) => {
   });
 });
 
+router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT estudiantes.nombres_apellidos, notas.nota FROM notas JOIN estudiantes ON notas.id_estudiante = estudiantes.id_estudiante
+  ORDER BY estudiantes.nombres_apellidos`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
 
 /* router.get('/datos_para_grados_cursados', async (req, res) => {
   const client = await pool.connect();

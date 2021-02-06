@@ -25,8 +25,21 @@ function RegistrarProfesor() {
                 correo: datos.correo,    
                 contrasena: datos.contrasena,
                 })
-        }).then(function(res){ alert(res) })
-
+        }).then(function(res){ alert('Profesor creado correctamente') })
+        fetch('/send_mail', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              to: datos.correo,
+              subject: 'Bienvenido al Colegio Geek!,  ' + datos.nombres_apellidos,
+              username: datos.numero_documento,
+              password: datos.contrasena,
+              full_name: datos.nombres_apellidos,
+            }),
+          });
+        
     }
 
     const [documento, setdocumento] = useState("")
@@ -50,10 +63,11 @@ function RegistrarProfesor() {
                 <div class="s">
                     <Sidebar 
                         name1="Nuevo registro"
-                        name2="profesores"
-                        name3="estudiantes"
-                        name4="grupos"
-                        name5="materias"
+                        name2="Profesores"
+                        name3="Estudiantes"
+                        name4="Grupos"
+                        name5="Materias"
+                        name6="Generar reportes"
                         ruta1="/administrador"
                         ruta2="/ver_profesores_administrador"
                         ruta3="/ver_estudiantes_administrador"
