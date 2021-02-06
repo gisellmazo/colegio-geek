@@ -53,17 +53,17 @@ function RegistrarGrupo() {
        
     },[])
     console.log(datosProfesores)
-
     return (
         <div>
             <div class="grid-container">
                 <div class="s">
                     <Sidebar 
                         name1="Nuevo registro"
-                        name2="profesores"
-                        name3="estudiantes"
-                        name4="grupos"
-                        name5="materias"
+                        name2="Profesores"
+                        name3="Estudiantes"
+                        name4="Grupos"
+                        name5="Materias"
+                        name6="Generar Reportes"
                         ruta1="/administrador"
                         ruta2="/ver_profesores_administrador"
                         ruta3="/ver_estudiantes_administrador"

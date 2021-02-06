@@ -24,7 +24,6 @@ const IngresarNotas = () => {
             })
         }).then(function(res){ alert(res) })
     }
-
     const validate = Yup.object({
         id_estudiante: Yup.number()
             .required('Campo requerido'),
