@@ -2,7 +2,12 @@ CREATE DATABASE colegio_geek;
 
 --- Eliminar relaciones
 ALTER TABLE materias DROP CONSTRAINT fk_materias_profesores ;
-ALTER TABLE materias DROP CONSTRAINT fk_materias_grados;
+ALTER TABLE materias DROP CONSTRAINT fk_materias_grados1;
+ALTER TABLE materias DROP CONSTRAINT fk_materias_grados2;
+ALTER TABLE materias DROP CONSTRAINT fk_materias_grados3;
+ALTER TABLE materias DROP CONSTRAINT fk_materias_grados4;
+ALTER TABLE materias DROP CONSTRAINT fk_materias_grados5;
+ALTER TABLE materias DROP CONSTRAINT fk_materias_grados6;
 ALTER TABLE estudiantes DROP CONSTRAINT fK_estudiantes_grupos;
 ALTER TABLE profesores DROP CONSTRAINT fk_profesores_materias;
 ALTER TABLE grados_cursados DROP CONSTRAINT fk_grados_cursados_estudiantes;
@@ -25,7 +30,6 @@ DROP TABLE IF EXISTS notas;
 -- Crear campos enum
 CREATE TYPE tipo_documento AS ENUM('TI','CC','NUIP', 'CE');
 CREATE TYPE sexo AS ENUM('F','M');
-CREATE TYPE grado_cursado AS ENUM('6','7', '8', '9', '10', '11');
 CREATE TYPE estado AS ENUM('1','2', '3');
 CREATE TYPE jornada AS ENUM('1','2', '3');
 CREATE TYPE grado AS ENUM('6','7', '8', '9', '10', '11');
@@ -49,7 +53,7 @@ CREATE TABLE materias(
     id_grado3 INTEGER DEFAULT NULL,
     id_grado4 INTEGER DEFAULT NULL,
     id_grado5 INTEGER DEFAULT NULL,
-    id_grado6 INTEGER DEFAULT NULL,
+    id_grado6 INTEGER DEFAULT NULL
 );
 
 CREATE TABLE estudiantes(
@@ -80,14 +84,14 @@ CREATE TABLE profesores(
     nombres_apellidos VARCHAR(50) NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
-    tipo_usuario INTEGER DEFAULT 2 NOT NULL
+    tipo_usuario INTEGER DEFAULT 2 
 );
 
 CREATE TABLE grados_cursados(
     id_grado_cursado SERIAL PRIMARY KEY,
     id_estudiante integer NOT NULL,
     ano VARCHAR(10) NOT NULL,
-    grado_cursado grado_cursado NOT NULL,
+    grado_cursado INTEGER NOT NULL,
     estado estado NOT NULL,
     nota_promedio INTEGER
 );
@@ -117,17 +121,17 @@ CREATE TABLE notas(
 ALTER TABLE materias
   ADD CONSTRAINT fk_materias_profesores 
   FOREIGN KEY(id_profesor) REFERENCES profesores(id_profesor),
-  ADD CONSTRAINT fk_materias_grados 
+  ADD CONSTRAINT fk_materias_grados1 
   FOREIGN KEY(id_grado1) REFERENCES grados(id_grado),
-  ADD CONSTRAINT fk_materias_grados 
-  FOREIGN KEY(id_grado2) REFERENCES grados(id_grado)
-  ADD CONSTRAINT fk_materias_grados 
-  FOREIGN KEY(id_grado3) REFERENCES grados(id_grado)
-  ADD CONSTRAINT fk_materias_grados 
-  FOREIGN KEY(id_grado4) REFERENCES grados(id_grado)
-  ADD CONSTRAINT fk_materias_grados 
-  FOREIGN KEY(id_grado5) REFERENCES grados(id_grado)
-  ADD CONSTRAINT fk_materias_grados 
+  ADD CONSTRAINT fk_materias_grados2
+  FOREIGN KEY(id_grado2) REFERENCES grados(id_grado),
+  ADD CONSTRAINT fk_materias_grados3 
+  FOREIGN KEY(id_grado3) REFERENCES grados(id_grado),
+  ADD CONSTRAINT fk_materias_grados4 
+  FOREIGN KEY(id_grado4) REFERENCES grados(id_grado),
+  ADD CONSTRAINT fk_materias_grados5
+  FOREIGN KEY(id_grado5) REFERENCES grados(id_grado),
+  ADD CONSTRAINT fk_materias_grados6
   FOREIGN KEY(id_grado6) REFERENCES grados(id_grado);
 
 ALTER TABLE estudiantes
@@ -155,3 +159,20 @@ ALTER TABLE notas
   FOREIGN KEY(id_grupo) REFERENCES grupos(id_grupo),
   ADD CONSTRAINT fk_notas_materias
   FOREIGN KEY(id_materia) REFERENCES materias(id_materia);
+
+-- crear disparador o trigger
+create function grados_cursados_AI() returns trigger
+as
+$$
+begin
+
+	insert into grados_cursados (id_estudiante, ano, grado_cursado, estado) values (new.id_estudiante, '2021', new.id_grado, '1');
+
+return new;
+end
+$$
+language plpgsql;
+
+create trigger AI_insert after insert on estudiantes
+for each row 
+execute procedure grados_cursados_AI();
