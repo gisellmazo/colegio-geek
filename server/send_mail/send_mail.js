@@ -1,23 +1,23 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 //nodemailer
-smtpTransport = require("nodemailer-smtp-transport");
-const nodemailer = require("nodemailer");
+smtpTransport = require('nodemailer-smtp-transport');
+const nodemailer = require('nodemailer');
 
 let transporter = nodemailer.createTransport(
   smtpTransport({
-    service: "gmail",
-    host: "smtp.gmail.com",
+    service: 'gmail',
+    host: 'smtp.gmail.com',
     auth: {
-      user: "academia.colegiogeek@gmail.com",
-      pass: "colegio123",
+      user: 'academia.colegiogeek@gmail.com',
+      pass: 'colegio123',
     },
   })
 );
 
-router.post("/send_mail", (req, res) => {
-  let { to, subject, message, full_name } = req.body;
+router.post('/send_mail', (req, res) => {
+  let { to, subject, username, password, full_name } = req.body;
   contentHTML = `<!DOCTYPE html>
   <html lang="en">
   
@@ -56,7 +56,7 @@ router.post("/send_mail", (req, res) => {
                           font-family: Arial, Helvetica, sans-serif;
                           margin-left: 35px;
                           color: #2e1f4a;">
-                                  Bienvenid@ a Colegio Geek ${full_name} tu registro ha sido exitoso!
+                                  Bienvenid@ a Colegio Geek, ${full_name} tu registro ha sido exitoso!
   
                               </span>
                           </div>
@@ -95,7 +95,7 @@ router.post("/send_mail", (req, res) => {
                               font-weight: bold;
                               margin-left: 35px;
                               margin-top: 10px;
-                              ">Usuario:</span>
+                              ">Usuario: ${username}</span>
                       </td>
                   </tr>
                   <tr>
@@ -104,25 +104,28 @@ router.post("/send_mail", (req, res) => {
                               font-weight: bold;
                               margin-left: 35px;
                               margin-top: 10px;
-                              ">Contraseña:</span>
+                              ">Contraseña: ${password}</span>
                       </td>
                   </tr>
                   <tr>
                       <td>
-                          <div style="    width: 140px;
-                              height: 20px;
-                              margin-top: 30px;
-                              margin-left: auto;
-                              margin-right: auto;
-                              background-color: #2e1f4a;
-                              color: white;
-                              border-radius: 10px;
-                              padding: 15px;
-                              cursor: pointer;
-                              margin-bottom: 20px;
-                              text-align: center;
-                              font-weight: bold;
-                              font-size: 20px;">Ir a perfil</div>
+                          
+                          <div style="width: 140px;
+                          height: 20px;
+                          margin-top: 30px;
+                          margin-left: auto;
+                          margin-right: auto;
+                          background-color: #2e1f4a;
+                          color: white;
+                          border-radius: 10px;
+                          padding: 15px;
+                          cursor: pointer;
+                          margin-bottom: 20px;
+                          text-align: center;
+                          font-weight: bold;
+                          font-size: 20px;"><a style="text-decoration:none; color: white;" href="www.google.com">Ir a perfil</a></div>
+                          
+                          
                       </td>
                   </tr>
                   </tr>
@@ -133,7 +136,7 @@ router.post("/send_mail", (req, res) => {
   
   </html>`;
   const mailOptions = {
-    from: "academia.colegiogeek@gmail.com",
+    from: 'academia.colegiogeek@gmail.com',
     to: to,
     subject: subject,
     html: contentHTML,
@@ -144,7 +147,7 @@ router.post("/send_mail", (req, res) => {
       console.log(error);
     } else {
       console.log(`sent: ${info.response}`);
-      res.json({ message: "Correo enviado" });
+      res.json({ message: 'Correo enviado' });
     }
   });
 });

@@ -25,7 +25,20 @@ function RegistrarProfesor() {
                 correo: datos.correo,    
                 contrasena: datos.contrasena,
                 })
-        }).then(function(res){ alert(res) })
+        }).then(function(res){ alert('Profesor creado correctamente') })
+        fetch('/send_mail', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              to: datos.correo,
+              subject: 'Bienvenido al Colegio Geek!,  ' + datos.nombres_apellidos,
+              username: datos.numero_documento,
+              password: datos.contrasena,
+              full_name: datos.nombres_apellidos,
+            }),
+          });
         
     }
 
