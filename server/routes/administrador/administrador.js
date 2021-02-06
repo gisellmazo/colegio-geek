@@ -405,5 +405,18 @@ router.get('/cantidad_estudiantes_profesor_grado', async (req, res) => {
   });
 });
 
+router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT estudiantes.nombres_apellidos, notas.nota FROM notas JOIN estudiantes ON notas.id_estudiante = estudiantes.id_estudiante
+  ORDER BY estudiantes.nombres_apellidos`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
 
 module.exports = router;
