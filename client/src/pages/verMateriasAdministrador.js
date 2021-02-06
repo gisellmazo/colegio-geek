@@ -24,11 +24,13 @@ function VerMateriasAdministrador() {
             name3="estudiantes"
             name4="grupos"
             name5="materias"
+            name6="Generar Reporte"
             ruta1="/administrador"
             ruta2="/ver_profesores_administrador"
             ruta3="/ver_estudiantes_administrador"
             ruta4="/ver_grupos_administrador"
             ruta5="/ver_materias_administrador"
+            ruta6="/generar_reportes_administrador"
           />
         </div>
         <div className="PEP ">
