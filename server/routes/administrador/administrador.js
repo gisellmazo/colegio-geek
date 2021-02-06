@@ -209,7 +209,7 @@ router.post('/registrar_materia', async (req, res) => {
         id_grados,
       });
     } else {
-      res.json('Materia registrada');
+      res.send('Materia registrada');
     }
   } catch (e) {
     console.log(e);

@@ -19,17 +19,17 @@ function RegistrarProfesor() {
               },
             body: JSON.stringify({
                  
-                tipo_documento: 'CC',
+                tipo_documento: datos.tipo_documento,
                 numero_documento: datos.numero_documento,
                 nombres_apellidos: datos.nombres_apellidos,
                 correo: datos.correo,    
                 contrasena: datos.contrasena,
-                id_materia: datos.id_materia   })
-        })
+                })
+        }).then(function(res){ alert(res) })
         
     }
 
-
+    const [documento, setdocumento] = useState("")
     
 
 
@@ -48,7 +48,18 @@ function RegistrarProfesor() {
         <div>
             <div class="grid-container">
                 <div class="s">
-                    <Sidebar name1="Nuevo registro" name2="profesores" name3="estudiantes" name4="grupos" name5="materias" ruta1="/administrador" ruta2="/" ruta4="/ver_grupos_administrador" ruta5="/ver_materias_administrador"/>
+                    <Sidebar 
+                        name1="Nuevo registro"
+                        name2="profesores"
+                        name3="estudiantes"
+                        name4="grupos"
+                        name5="materias"
+                        ruta1="/administrador"
+                        ruta2="/ver_profesores_administrador"
+                        ruta3="/ver_estudiantes_administrador"
+                        ruta4="/ver_grupos_administrador"
+                        ruta5="/ver_materias_administrador"
+                    />
                 </div>
                 <div class="PM">
                     <div className="mt-4">
@@ -60,8 +71,8 @@ function RegistrarProfesor() {
                                 numero_documento: '',
                                 nombres_apellidos: '',
                                 correo: '',
-                                contrasena: '',
-                                materia: ''
+                                contrasena: ''
+                                
 
                             }}
                             validationSchema={validate}
@@ -77,18 +88,23 @@ function RegistrarProfesor() {
                                         <div class="container-row">
                                             <label className="texto-blanco">tipo de documento:</label>
                                             <br />
-                                            <select name="tipo_documento">
-                                                <option value="cc">Cedula de cuidadanía</option>
-                                                <option value="pp">Permiso especial de permanencia</option>
-                                            </select>
+                                            <select onChange={(e) => {
+                                                    const selecteddocumento = e.target.value;
+                                                    setdocumento(selecteddocumento);
+
+                                                }}>
+                                                    <option value="CC">Cedula de ciudadanía</option>
+                                                    <option value="TI">Tarjeta de identidad</option>
+                                                    <option value="PP">Permiso especial de permanencia</option>
+                                                </select>
                                             <br /> <br />
                                             <CampoFormulario label="Nombre Completo:" type="text" name="nombres_apellidos" estilo="texto-blanco" className="form-control diseno-imputs" />
                                             <CampoFormulario label="Correo:" type="email" name="correo" estilo="texto-blanco" className="form-control diseno-imputs" />
-                                            <CampoFormulario label="Materia asignada:" type="text" name="materia" estilo="texto-blanco" className="form-control diseno-imputs" />
 
                                         </div>
                                         <div class="container-row-middle"></div>
                                         <div class="container-row">
+                                            <CampoFormulario label="tipo documento:" type="string" name="tipo_documento" estilo="texto-blanco" className="form-control diseno-imputs" placeholder={documento}/>
                                             <CampoFormulario label="Numero documento:" type="text" name="numero_documento" estilo="texto-blanco" className="form-control diseno-imputs" />
                                             <CampoFormulario label="Contraseña:" type="password" name="contrasena" estilo="texto-blanco" className="form-control diseno-imputs" />
                                         </div>

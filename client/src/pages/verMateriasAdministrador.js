@@ -41,7 +41,7 @@ function VerMateriasAdministrador() {
                             <div className="card">
                               <div className="card-body">
                                 <h5 className="card-title">
-                                  {dato.nombre}
+                                  <b>{dato.nombre}</b>
                                 </h5>
                                 <p className="card-text">
                                   Profesor encargado del area: <br/>
@@ -55,6 +55,7 @@ function VerMateriasAdministrador() {
                 }
               </div>
             </div>
+            <br/><br/><br/><br/>
           </div>
 
         </div>
