@@ -16,7 +16,7 @@ const generarReportesAdministrador = () => {
                         name3="estudiantes"
                         name4="grupos"
                         name5="materias"
-                        name6="Generar Reporets"
+                        name6="Generar Reportes"
                         ruta1="/administrador"
                         ruta2="/ver_profesores_administrador"
                         ruta3="/ver_estudiantes_administrador"
