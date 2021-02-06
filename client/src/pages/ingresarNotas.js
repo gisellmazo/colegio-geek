@@ -8,12 +8,30 @@ import Sidebar from "../components/sidebar";
 import CampoFormulario from "../components/CampoFormulario"
 
 const IngresarNotas = () => {
+    function IngresarNotas(values){
+        console.log(values)
+        fetch('/ingresar_notas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify({
+                id_estudiante: 1,
+                id_grupo: 10,
+                id_materia: 3,
+                tipo_nota: 'seguimiento',
+                nota: 2
+            })
+        }).then(function(res){ alert(res) })
+    }
     const validate = Yup.object({
         id_estudiante: Yup.number()
             .required('Campo requerido'),
         id_grupo: Yup.number()
             .required('Campo requerido'),
         nota: Yup.number()
+            .required('Campo requerido'),
+        tipo_nota: Yup.string()
             .required('Campo requerido')
 
     })
@@ -43,7 +61,8 @@ const IngresarNotas = () => {
                                 }}
                                 validationSchema={validate}
                                 onSubmit={values => {
-                                    console.log(values)
+                                    
+                                    IngresarNotas(values)
                                 }}
                             >
                                 {formik => (
@@ -53,7 +72,7 @@ const IngresarNotas = () => {
                                             <div class="container-row">
 
                                                 <CampoFormulario label="id grupo:" type="number" name="id_grupo" estilo="texto-blanco" className="form-control diseno-imputs" />
-                                                <CampoFormulario label="tipo de nota:" type="number" name="tipo_nota" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="tipo de nota:" type="text" name="tipo_nota" estilo="texto-blanco" className="form-control diseno-imputs" />
 
 
                                             </div>

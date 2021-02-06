@@ -107,12 +107,11 @@ CREATE TABLE grados(
 CREATE TABLE notas(
     id_notas SERIAL PRIMARY KEY,
     id_estudiante INTEGER NOT NULL,
-    id_grupo INTEGER NOT NULL,
+    id_grupo INTEGER NOT NULL, --elimnar
     id_materia INTEGER NOT NULL,
     tipo_nota tipo_nota NOT NULL,
     nota FLOAT NOT NULL
 );
-
 -- Crear relaciones
 ALTER TABLE materias
   ADD CONSTRAINT fk_materias_profesores 

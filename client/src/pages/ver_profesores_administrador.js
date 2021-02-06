@@ -20,13 +20,14 @@ function VerProfesoresAdministrador() {
         <div className="s">
           <Sidebar
             name1="Nuevo registro"
-            name2="profesores"
-            name3="estudiantes"
-            name4="grupos"
-            name5="materias"
+            name2="Profesores"
+            name3="Estudiantes"
+            name4="Grupos"
+            name5="Materias"
             name6="Generar Reportes"
             ruta1="/administrador"
             ruta2="/ver_profesores_administrador"
+            ruta3="/ver_estudiantes_administrador"
             ruta4="/ver_grupos_administrador"
             ruta5="/ver_materias_administrador"
             ruta6="/generar_reportes_administrador"
@@ -46,10 +47,10 @@ function VerProfesoresAdministrador() {
                                   {dato.nombres_apellidos}
                                 </h5>
                                 <p className="card-text">
-                                  Asignatura encargada: <br/>
-                                  <b>{dato.nombre}</b>
-                                  Id del profesor: <br/>
-                                  <b>{dato.id_profesor}</b>
+                                  Asignatura encargada: 
+                                  <b>{dato.nombre}</b><br/>
+                                  Id del profesor: 
+                                  <b>{dato.id_profesor}</b><br/>
                                 </p>
                               </div>
                             </div>
@@ -58,8 +59,9 @@ function VerProfesoresAdministrador() {
                   })
                 }
               </div>
-              <br/><br/><br/>
+              
             </div>
+            <br/><br/><br/>
           </div>
 
         </div>

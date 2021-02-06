@@ -188,7 +188,6 @@ router.post('/registrar_materia', async (req, res) => {
     const validacion = await validacion_registro_materia.validateAsync(
       req.body
     );
-
     const { codigo_materia, nombre, id_profesor, id_grados } = req.body;
     const client = await pool.connect();
     const response = await client.query(
@@ -209,7 +208,7 @@ router.post('/registrar_materia', async (req, res) => {
         id_grados,
       });
     } else {
-      res.json('Materia registrada');
+      res.send('Materia registrada');
     }
   } catch (e) {
     console.log(e);
@@ -321,5 +320,52 @@ router.get('/ver_profesores_administrador', async (req, res) => {
     }
   });
 });
+
+router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT COUNT(id_estudiante), materias.nombre 
+  FROM estudiantes
+  INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo
+  INNER JOIN materias ON grupos.id_grado = materias.id_grados
+  GROUP BY materias.nombre`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
+
+/* router.get('/ver_id_estudiante', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT MAX(id_estudiante) FROM estudiantes`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+}); */
+
+/* router.patch('/cambiar_codigo_estudiante', async(req,res)=>{
+
+  try {
+    const {codigo_estudiante,id_estudiante} =req.body
+  
+    const client = await pool.connect();
+    client.query(`UPDATE estudiantes SET codigo_estudiante = $1 
+    WHERE id_estudiante = $2`, [codigo_estudiante, id_estudiante])
+
+  } catch (error) {
+    console.log(error)
+    res.json({message:error})
+  }
+  
+  
+}) */
 
 module.exports = router;

@@ -52,4 +52,40 @@ router.get('/ver_grupos_profesor', async (req, res) => {
   }
 });
 
+//Ingresar notas.
+router.post('/ingresar_notas', async (req, res) => {
+  try {
+    //const validacion = await validacion_grupos.validateAsync(req.body);
+    const { id_estudiante,id_grupo,tipo_nota,nota,id_materia } = req.body;
+    const client = await pool.connect();
+    const response = await client.query(
+      `INSERT INTO notas(
+        id_estudiante,
+        id_grupo,
+        tipo_nota,
+        nota,
+        id_materia ) VALUES ($1, $2, $3, $4, $5)`,
+      [id_estudiante,id_grupo,tipo_nota,nota,id_materia ]
+    );
+
+    if (response.rowsCount > 0) {
+      res.json({
+        id_grupo: response.rows[0].id_nota,
+        id_estudiante,
+        id_grupo,
+        tipo_nota,
+        nota,
+        id_materia 
+      });
+    } else {
+      res.json('Nota ingresada');
+    }
+  } catch (e) {
+    console.log(e)
+    res
+      .status(500)
+      .json({ errorCode: e.errno, message: 'Error en el servidor' });
+  }
+});
+
 module.exports = router;
