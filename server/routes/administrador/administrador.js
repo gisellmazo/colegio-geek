@@ -8,7 +8,8 @@ const {
 } = require('../../validaciones/validaciones');
 
 const jwt = require('jsonwebtoken');
-
+const PDF = require('pdfkit')
+const fs = require('fs')
 const { pool } = require('../../database/database');
 
 router.get('/inicio_sesion', async (req, res) => {
@@ -323,7 +324,7 @@ router.get('/ver_profesores_administrador', async (req, res) => {
 
 router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT COUNT(id_estudiante) as cantidad_estudiantes, materias.nombre 
+  client.query(`SELECT COUNT(id_estudiante) as cantidad_estudiantes, materias.nombre as nombre_materia
   FROM estudiantes
   INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo
   INNER JOIN materias ON grupos.id_grado = materias.id_grados
@@ -333,10 +334,39 @@ router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
       console.log(error)
       return res.status(500).send('Se presento un error en la base de datos.');
     } else {
-      return res.json(resulset.rows);
+      let doc = new PDF();
+      doc.pipe(fs.createWriteStream(__dirname + '/reportes/cantidad_estudiantes_por_asignatura.pdf'))
+
+      doc.text('Cantidad estudiantes por asignatura', {
+        align: 'center'
+      })
+      let respuesta = resulset.rows
+      for(let i=0; i< resulset.rows.length; i++){
+        doc.text(respuesta[i].nombre_materia + ':', {
+          align: "left"
+        })
+        doc.text(respuesta[i].cantidad_estudiantes, {
+          align: "left"
+        })
+        
+
+      doc.text(' ', {
+        align: "left"
+      })
+      
+    }
+      doc.end();
     }
   });
 });
+
+router.get('/descargar_cantidad_estudiantes_materia', (req,res)=>{
+  var file = fs.readFileSync(__dirname + '/reportes/cantidad_estudiantes_por_asignatura.pdf', 'binary');
+
+  res.setHeader('Content-Length', file.length);
+  res.write(file, 'binary');
+  res.end();
+})
 
 
 //servicio promedio de notas
@@ -398,7 +428,8 @@ router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
       console.log(error)
       return res.status(500).send('Se presento un error en la base de datos.');
     } else {
-      return res.json(resulset.rows);
+      return res.json(resulset.rows)
+
     }
   });
 });
