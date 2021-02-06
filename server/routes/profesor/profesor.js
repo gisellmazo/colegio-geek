@@ -28,7 +28,7 @@ router.get('/ver_estudiantes_profesor', async (req, res) => {
   try {
     const { id_profesor } = req.query;
     const response = await pool.query(
-      `SELECT estudiantes.nombres_apellidos, estudiantes.id_grupo FROM estudiantes INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo WHERE id_profesor = $1`,[
+      `SELECT estudiantes.nombres_apellidos, estudiantes.id_grupo, grupos.id_grado FROM estudiantes INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo WHERE id_profesor = $1 ORDER BY estudiantes.id_grupo`,[
         id_profesor
       ]
     );
