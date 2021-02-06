@@ -5,7 +5,7 @@ import Sidebar from "../components/sidebar";
 import Card from "../components/card"
 import "../styles/pantallasPrincipales.css";
 
-const Administrador = () => {
+const generarReportesAdministrador = () => {
     return (
         <div>
             <div class="grid-container">
@@ -16,7 +16,7 @@ const Administrador = () => {
                         name3="estudiantes"
                         name4="grupos"
                         name5="materias"
-                        name6="Generar Reportes"
+                        name6="Generar Reporets"
                         ruta1="/administrador"
                         ruta2="/ver_profesores_administrador"
                         ruta3="/ver_estudiantes_administrador"
@@ -30,16 +30,22 @@ const Administrador = () => {
                         <div className="main align-middle d-flex pl-4 pr-4">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <Card name="Registrar estudiante" ruta="/registrar_estudiante"/>
+                                    <Card name="Reporte de cantidad de estudiantes por asignaturas" ruta="/registrar_estudiante"/>
                                 </div>
                                 <div class="col-sm-6 ">
-                                    <Card name="Registrar profesor" ruta="/registrar_profesor"/>
+                                    <Card name="Reporte de cantidad de estudiantes por profesor según el grado" ruta="/registrar_profesor"/>
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Registrar grupo" ruta="/registrar_grupo"/>
+                                    <Card name="Reporte de calificaciones filtradas por estudiante" ruta="/registrar_grupo"/>
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Registrar materia" ruta="/registrar_materia"/>
+                                    <Card name="Reporte promedio de notas por grupo de estudiantes" ruta="/registrar_materia"/>
+                                </div>
+                                <div class="col-sm-6 mt-5 bottom-pa">
+                                    <Card name="Reporte promedio de notas por materia" ruta="/registrar_materia"/>
+                                </div>
+                                <div class="col-sm-6 mt-5 bottom-pa">
+                                    <Card name="Reporte promedio de notas por grado" ruta="/registrar_materia"/>
                                 </div>
 
                             </div>
@@ -55,4 +61,4 @@ const Administrador = () => {
     );
 };
 
-export default withRouter(Administrador);
+export default withRouter(generarReportesAdministrador);
