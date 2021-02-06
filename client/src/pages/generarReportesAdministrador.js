@@ -6,11 +6,21 @@ import Card from "../components/card"
 import "../styles/pantallasPrincipales.css";
 
 const GenerarReportesAdministrador = () => {
+
+    function reporteCantidadEstudiantesAsignatura(){
+        fetch('/cantidad_estudiantes_asignatura',{
+            method: 'GET'
+        }).then(function(){
+            fetch('//descargar_cantidad_estudiantes_materia',{
+                method: 'GET'
+            })
+        })
+    }
     return (
         <div>
             <div class="grid-container">
                 <div class="s">
-                    <Sidebar 
+                    <Sidebar
                         name1="Nuevo registro"
                         name2="Profesores"
                         name3="Estudiantes"
@@ -30,28 +40,41 @@ const GenerarReportesAdministrador = () => {
                         <div className="main align-middle d-flex pl-4 pr-4">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <Card name="Reporte de cantidad de estudiantes por asignaturas" ruta=""/>
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h5 className="card-title">Reporte de cantidad de estudiantes por asignatura</h5>
+                                            <p className="card-text">
+                                                clic para descargar pdf con el reporte
+                                            </p>
+                                            
+                                                <button type="button" className="btn-p btn-primary" onClick={reporteCantidadEstudiantesAsignatura()}>
+                                                    Ir
+                                                </button>
+                                            
+
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-sm-6 ">
-                                    <Card name="Reporte de cantidad de estudiantes por profesor según el grado" ruta=""/>
+                                    <Card name="Reporte de cantidad de estudiantes por profesor según el grado" ruta="" />
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Reporte de calificaciones filtradas por estudiante" ruta=""/>
+                                    <Card name="Reporte de calificaciones filtradas por estudiante" ruta="" />
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Reporte promedio de notas por grupo de estudiantes, por materia y por grado" ruta="/registrar_materia"/>
+                                    <Card name="Reporte promedio de notas por grupo de estudiantes, por materia y por grado" ruta="/registrar_materia" />
                                 </div>
-                               
+
 
                             </div>
                         </div>
                     </div>
                 </div>
 
-                
+
             </div>
 
-        <Footer cargo="Administrador"/>
+            <Footer cargo="Administrador" />
         </div>
     );
 };
