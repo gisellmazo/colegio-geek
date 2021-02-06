@@ -26,7 +26,7 @@ function RegistrarProfesor() {
                 contrasena: datos.contrasena,
                 })
         }).then(function(res){ alert(res) })
-        
+
     }
 
     const [documento, setdocumento] = useState("")

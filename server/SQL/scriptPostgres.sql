@@ -112,7 +112,6 @@ CREATE TABLE notas(
     tipo_nota tipo_nota NOT NULL,
     nota FLOAT NOT NULL
 );
-
 -- Crear relaciones
 ALTER TABLE materias
   ADD CONSTRAINT fk_materias_profesores 

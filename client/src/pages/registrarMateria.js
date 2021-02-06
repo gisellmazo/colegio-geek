@@ -23,7 +23,6 @@ function RegistrarMateria() {
       })
     }).then(function(res){ alert(res) });
   }
-
   const validate = Yup.object({
     nombre: Yup.string().required('campo requerido'),
     codigo_materia: Yup.string().required('Campo requerido'),

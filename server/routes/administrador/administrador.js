@@ -188,7 +188,6 @@ router.post('/registrar_materia', async (req, res) => {
     const validacion = await validacion_registro_materia.validateAsync(
       req.body
     );
-
     const { codigo_materia, nombre, id_profesor, id_grados } = req.body;
     const client = await pool.connect();
     const response = await client.query(

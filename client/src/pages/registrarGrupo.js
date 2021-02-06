@@ -53,7 +53,6 @@ function RegistrarGrupo() {
        
     },[])
     console.log(datosProfesores)
-
     return (
         <div>
             <div class="grid-container">

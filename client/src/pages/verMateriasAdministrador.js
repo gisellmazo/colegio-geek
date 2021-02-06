@@ -52,7 +52,6 @@ function VerMateriasAdministrador() {
                               </div>
                             </div>
                           </div>
-
                   })
                 }
               </div>

@@ -12,9 +12,7 @@ import "../styles/pantallasPrincipales.css";
 import "../styles/registros.css"
 
 
-function RegistrarEstudiante() {
-
-    
+function RegistrarEstudiante() {  
     
     function registrar(datos){
         const fecha= new Date().getFullYear()+"0";
