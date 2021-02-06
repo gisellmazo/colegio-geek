@@ -13,8 +13,6 @@ import '../styles/registros.css';
 
 function RegistrarEstudiante() {
   function registrar(datos) {
-    const fecha = new Date().getFullYear() + '0';
-    const id_estudiante = 29;
     fetch('/registrar_estudiante', {
       method: 'POST',
       headers: {

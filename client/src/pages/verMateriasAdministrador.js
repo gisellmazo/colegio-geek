@@ -20,10 +20,10 @@ function VerMateriasAdministrador() {
         <div className="s">
           <Sidebar
             name1="Nuevo registro"
-            name2="profesores"
-            name3="estudiantes"
-            name4="grupos"
-            name5="materias"
+            name2="Profesores"
+            name3="Estudiantes"
+            name4="Grupos"
+            name5="Materias"
             name6="Generar Reporte"
             ruta1="/administrador"
             ruta2="/ver_profesores_administrador"
@@ -52,7 +52,6 @@ function VerMateriasAdministrador() {
                               </div>
                             </div>
                           </div>
-
                   })
                 }
               </div>

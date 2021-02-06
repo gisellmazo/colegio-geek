@@ -12,10 +12,10 @@ const GenerarReportesAdministrador = () => {
                 <div class="s">
                     <Sidebar 
                         name1="Nuevo registro"
-                        name2="profesores"
-                        name3="estudiantes"
-                        name4="grupos"
-                        name5="materias"
+                        name2="Profesores"
+                        name3="Estudiantes"
+                        name4="Grupos"
+                        name5="Materias"
                         name6="Generar Reportes"
                         ruta1="/administrador"
                         ruta2="/ver_profesores_administrador"
@@ -39,14 +39,9 @@ const GenerarReportesAdministrador = () => {
                                     <Card name="Reporte de calificaciones filtradas por estudiante" ruta=""/>
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Reporte promedio de notas por grupo de estudiantes" ruta=""/>
+                                    <Card name="Reporte promedio de notas por grupo de estudiantes, por materia y por grado" ruta="/registrar_materia"/>
                                 </div>
-                                <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Reporte promedio de notas por materia" ruta=""/>
-                                </div>
-                                <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Reporte promedio de notas por grado" ruta=""/>
-                                </div>
+                               
 
                             </div>
                         </div>

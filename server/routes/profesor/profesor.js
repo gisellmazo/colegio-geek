@@ -53,7 +53,6 @@ router.get('/ver_grupos_profesor', async (req, res) => {
 });
 
 //Ingresar notas.
-
 router.post('/ingresar_notas', async (req, res) => {
   try {
     //const validacion = await validacion_grupos.validateAsync(req.body);
