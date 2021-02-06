@@ -338,6 +338,8 @@ router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
   });
 });
 
+
+
 /* router.get('/ver_id_estudiante', async (req, res) => {
   const client = await pool.connect();
   client.query(`SELECT MAX(id_estudiante) FROM estudiantes`, (error, resulset) => {

@@ -39,7 +39,7 @@ const GenerarReportesAdministrador = () => {
                                     <Card name="Reporte de calificaciones filtradas por estudiante" ruta=""/>
                                 </div>
                                 <div class="col-sm-6 mt-5 bottom-pa">
-                                    <Card name="Reporte promedio de notas por grupo de estudiantes, notas por materia y notas por grado" ruta="/registrar_materia"/>
+                                    <Card name="Reporte promedio de notas por grupo de estudiantes, por materia y por grado" ruta="/registrar_materia"/>
                                 </div>
                                
 

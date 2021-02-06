@@ -78,7 +78,7 @@ function RegistrarEstudiante() {
                         name2="Profesores"
                         name3="Estudiantes"
                         name4="Grupos"
-                        name5="materias"
+                        name5="Materias"
                         name6="Generar reportes"
                         ruta1="/administrador"
                         ruta2="/ver_profesores_administrador"
