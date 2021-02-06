@@ -54,6 +54,7 @@ CREATE TABLE materias(
 
 CREATE TABLE estudiantes(
     id_estudiante SERIAL PRIMARY KEY,
+    id_grado INTEGER NOT NULL,
     id_grupo INTEGER NOT NULL,
     codigo_estudiante VARCHAR(50) UNIQUE NOT NULL,
     tipo_documento tipo_documento NOT NULL, --OBLIGATORIO AUTOMATIZAR ESTA VAINA

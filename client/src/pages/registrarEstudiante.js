@@ -14,32 +14,37 @@ import "../styles/registros.css"
 
 function RegistrarEstudiante() {  
     
+
     function registrar(datos){
         const fecha= new Date().getFullYear()+"0";
-        const id_estudiante= 29;
-        fetch('/registrar_estudiante',{
-            method: 'POST', 
-            headers: {
-                'Content-Type': 'application/json'
-              },
-            body: JSON.stringify({
-                 
-                codigo_estudiante:"F",
-                tipo_documento: datos.tipo_documento,
-                correo: datos.correo,    
-                contrasena: datos.contrasena,
-                nombres_apellidos: datos.nombres_apellidos,
-                sexo: datos.sexo,
-                fecha_nacimiento: datos.fecha_nacimiento, 
-                direccion: datos.direccion_residencia,
-                ciudad: datos.ciudad,
-                telefono_fijo: datos.telefono,
-                celular: datos.celular,
-                id_grupo:datos.id_grupo,
-                numero_documento:datos.numero_documento     })
-        }).then(function(res){ alert('Estudiante creado')})
         
-        .fetch('/')
+        fetch('ver_id_estudiante')
+            .then(response => response.json())
+            .then(data => fetch('/registrar_estudiante',{
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                  },
+                body: JSON.stringify({
+                     
+                    codigo_estudiante:fecha+(data[0].ultimo_id+1),
+                    tipo_documento: datos.tipo_documento,
+                    correo: datos.correo,    
+                    contrasena: datos.contrasena,
+                    nombres_apellidos: datos.nombres_apellidos,
+                    sexo: datos.sexo,
+                    fecha_nacimiento: datos.fecha_nacimiento, 
+                    direccion: datos.direccion_residencia,
+                    ciudad: datos.ciudad,
+                    telefono_fijo: datos.telefono,
+                    celular: datos.celular,
+                    id_grupo:datos.id_grupo,
+                    numero_documento:datos.numero_documento     })
+            }).then(function(res){ alert('Estudiante creado')}))
+            
+        
+        
+        
     }
      
  
@@ -138,7 +143,7 @@ function RegistrarEstudiante() {
                                                 <CampoFormulario label="Ciudad de nacimiento:" type="text" name="ciudad" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Telefono:" type="text" name="telefono" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Correo:" type="email" name="correo" estilo="texto-blanco" className="form-control diseno-imputs" />
-                                                <CampoFormulario label="Id grupo:" type="number" name="id_grupo" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="Grado:" type="number" name="id_grado" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Foto:" type="file" name="foto" estilo="texto-blanco" className="form-control diseno-imputs" />
                                             </div>
                                             <div class="container-row-middle"></div>
@@ -149,6 +154,7 @@ function RegistrarEstudiante() {
                                                 <CampoFormulario label="Direccion de residencia:" type="text" name="direccion_residencia" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Celular:" type="text" name="celular" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Contraseña:" type="password" name="contrasena" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="Id grupo:" type="number" name="id_grupo" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="Documento en pdf:" type="file" name="pdf_documento" estilo="texto-blanco" className="form-control diseno-imputs" />
                                             </div>
 
