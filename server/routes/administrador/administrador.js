@@ -419,6 +419,8 @@ router.get('/cantidad_estudiantes_profesor_grado', async (req, res) => {
   });
 });
 
+
+// Servicio calificaciones por estudiante
 router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
   const client = await pool.connect();
   client.query(`SELECT estudiantes.nombres_apellidos, notas.nota FROM notas JOIN estudiantes ON notas.id_estudiante = estudiantes.id_estudiante
@@ -430,6 +432,24 @@ router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
     } else {
       return res.json(resulset.rows)
 
+    }
+  });
+});
+
+// Servicio promedio de notas pos grado
+router.get('/reporte_promedio_grado', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT avg(nota) as promedio_notas, grados.grado
+  FROM notas 
+  JOIN grupos ON notas.id_grupo = grupos.id_grupo
+  JOIN grados ON grupos.id_grado = grados.id_grado
+  group by grados.id_grado`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
     }
   });
 });
@@ -446,8 +466,6 @@ router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
     }
   });
 }); */
-
-
 
 
 module.exports = router;
