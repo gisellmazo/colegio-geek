@@ -885,7 +885,6 @@ router.get('/promedio_notas_materia', function _callee17(req, res) {
               doc.end();
             }
           });
-
         case 4:
         case "end":
           return _context17.stop();
