@@ -34,97 +34,96 @@ router.get('/inicio_sesion', function _callee(req, res) {
           client = _context.sent;
           _req$query = req.query, numero_documento = _req$query.numero_documento, contrasena = _req$query.contrasena, tipo_usuario = _req$query.tipo_usuario;
           token = jwt.sign(contrasena, 'token_contrasena');
-          console.log(token);
-          _context.prev = 6;
+          _context.prev = 5;
 
           if (!(tipo_usuario == 1)) {
-            _context.next = 16;
+            _context.next = 15;
             break;
           }
 
-          _context.next = 10;
+          _context.next = 9;
           return regeneratorRuntime.awrap(client.query("select id_admin from administrador where contrasena = $1 and numero_documento = $2", [token, numero_documento]));
 
-        case 10:
+        case 9:
           result = _context.sent;
 
           if (!(result.rowCount == 0)) {
-            _context.next = 13;
+            _context.next = 12;
             break;
           }
 
           return _context.abrupt("return", res.json('usuario no encontrado verifica datos'));
 
-        case 13:
+        case 12:
           return _context.abrupt("return", res.json(result.rows));
 
-        case 16:
+        case 15:
           if (!(tipo_usuario == 2)) {
-            _context.next = 25;
+            _context.next = 24;
             break;
           }
 
-          _context.next = 19;
+          _context.next = 18;
           return regeneratorRuntime.awrap(client.query("select id_profesor from profesores where contrasena = $1 and numero_documento = $2 ", [token, numero_documento]));
 
-        case 19:
+        case 18:
           _result = _context.sent;
 
           if (!(_result.rowCount == 0)) {
-            _context.next = 22;
+            _context.next = 21;
             break;
           }
 
           return _context.abrupt("return", res.json('usuario no encontrado verifica datos'));
 
-        case 22:
+        case 21:
           return _context.abrupt("return", res.json(_result.rows));
 
-        case 25:
+        case 24:
           if (!(tipo_usuario == 3)) {
-            _context.next = 34;
+            _context.next = 33;
             break;
           }
 
-          _context.next = 28;
+          _context.next = 27;
           return regeneratorRuntime.awrap(client.query("select id_estudiante from estudiantes where contrasena = $1 and numero_documento = $2", [token, numero_documento]));
 
-        case 28:
+        case 27:
           _result2 = _context.sent;
 
           if (!(_result2.rowCount == 0)) {
-            _context.next = 31;
+            _context.next = 30;
             break;
           }
 
           return _context.abrupt("return", res.json('usuario no encontrado verifica datos'));
 
-        case 31:
+        case 30:
           return _context.abrupt("return", res.json(_result2.rows));
 
-        case 34:
+        case 33:
           return _context.abrupt("return", res.json('usuario no encontrado verifica datos'));
 
-        case 35:
-          _context.next = 40;
+        case 34:
+          _context.next = 39;
           break;
 
-        case 37:
-          _context.prev = 37;
-          _context.t0 = _context["catch"](6);
+        case 36:
+          _context.prev = 36;
+          _context.t0 = _context["catch"](5);
           console.log(_context.t0);
 
-        case 40:
-          _context.prev = 40;
+        case 39:
+          _context.prev = 39;
           client.release(true);
-          return _context.finish(40);
+          return _context.finish(39);
 
-        case 43:
+        case 42:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[6, 37, 40, 43]]);
+  }, null, null, [[5, 36, 39, 42]]);
 });
 router.post('/registrar_estudiante', function _callee2(req, res) {
   var _req$body, id_grupo, codigo_estudiante, tipo_documento, numero_documento, correo, contrasena, nombres_apellidos, sexo, fecha_nacimiento, direccion, ciudad, telefono_fijo, celular, validacion, token, client, response;
@@ -252,7 +251,7 @@ router.post('/registrar_profesor', function _callee3(req, res) {
   }, null, null, [[0, 15]]);
 });
 router.post('/registrar_materia', function _callee4(req, res) {
-  var validacion, _req$body3, codigo_materia, nombre, id_profesor, id_grados, client, response;
+  var validacion, _req$body3, codigo_materia, nombre, id_profesor, id_grado1, id_grado2, id_grado3, id_grado4, id_grado5, id_grado6, client, response;
 
   return regeneratorRuntime.async(function _callee4$(_context4) {
     while (1) {
@@ -264,14 +263,14 @@ router.post('/registrar_materia', function _callee4(req, res) {
 
         case 3:
           validacion = _context4.sent;
-          _req$body3 = req.body, codigo_materia = _req$body3.codigo_materia, nombre = _req$body3.nombre, id_profesor = _req$body3.id_profesor, id_grados = _req$body3.id_grados;
+          _req$body3 = req.body, codigo_materia = _req$body3.codigo_materia, nombre = _req$body3.nombre, id_profesor = _req$body3.id_profesor, id_grado1 = _req$body3.id_grado1, id_grado2 = _req$body3.id_grado2, id_grado3 = _req$body3.id_grado3, id_grado4 = _req$body3.id_grado4, id_grado5 = _req$body3.id_grado5, id_grado6 = _req$body3.id_grado6;
           _context4.next = 7;
           return regeneratorRuntime.awrap(pool.connect());
 
         case 7:
           client = _context4.sent;
           _context4.next = 10;
-          return regeneratorRuntime.awrap(client.query("INSERT INTO materias(\n            codigo_materia,\n            nombre,\n            id_profesor,\n            id_grados) VALUES ($1, $2, $3, $4)", [codigo_materia, nombre, id_profesor, id_grados]));
+          return regeneratorRuntime.awrap(client.query("INSERT INTO materias(\n            codigo_materia,\n            nombre,\n            id_profesor,\n            id_grado1, \n            id_grado2, \n            id_grado3, \n            id_grado4, \n            id_grado5, \n            id_grado6) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)", [codigo_materia, nombre, id_profesor, id_grado1, id_grado2, id_grado3, id_grado4, id_grado5, id_grado6]));
 
         case 10:
           response = _context4.sent;
@@ -282,7 +281,12 @@ router.post('/registrar_materia', function _callee4(req, res) {
               codigo_materia: codigo_materia,
               nombre: nombre,
               id_profesor: id_profesor,
-              id_grados: id_grados
+              id_grado1: id_grado1,
+              id_grado2: id_grado2,
+              id_grado3: id_grado3,
+              id_grado4: id_grado4,
+              id_grado5: id_grado5,
+              id_grado6: id_grado6
             });
           } else {
             res.send('Materia registrada');
@@ -517,7 +521,7 @@ router.get('/cantidad_estudiantes_asignatura', function _callee11(req, res) {
 
         case 2:
           client = _context11.sent;
-          client.query("SELECT COUNT(id_estudiante) as cantidad_estudiantes, materias.nombre as nombre_materia\n  FROM estudiantes\n  INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo\n  INNER JOIN materias ON grupos.id_grado = materias.id_grados\n  GROUP BY materias.nombre", function (error, resulset) {
+          client.query("SELECT COUNT(id_estudiante) as cantidad_estudiantes, materias.nombre as nombre_materia\n  FROM estudiantes\n  INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo\n  INNER JOIN materias ON grupos.id_grado = materias.id_grado1 OR grupos.id_grado = materias.id_grado2 OR grupos.id_grado = materias.id_grado3 OR grupos.id_grado = materias.id_grado4 OR grupos.id_grado = materias.id_grado5 OR grupos.id_grado = materias.id_grado6\n  GROUP BY materias.nombre", function (error, resulset) {
             client.release(true);
 
             if (error) {
@@ -604,7 +608,7 @@ router.get('/cantidad_estudiantes_profesor_grado', function _callee13(req, res) 
 
         case 2:
           client = _context13.sent;
-          client.query("SELECT COUNT(id_estudiante) as cantidad_estudiantes, profesores.nombres_apellidos as nombre_profesor, grupos.id_grado as grado\n  FROM estudiantes\n  INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo\n  INNER JOIN materias ON grupos.id_grado = materias.id_grados\n  INNER JOIN profesores ON profesores.id_profesor=materias.id_profesor\n  GROUP BY grupos.id_grado, profesores.nombres_apellidos", function (error, resulset) {
+          client.query("SELECT COUNT(id_estudiante) as cantidad_estudiantes, profesores.nombres_apellidos as nombre_profesor, grupos.id_grado as grado\n  FROM estudiantes\n  INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo\n  INNER JOIN materias ON grupos.id_grado = materias.id_grado1 OR grupos.id_grado = materias.id_grado2 OR grupos.id_grado = materias.id_grado3 OR grupos.id_grado = materias.id_grado4 OR grupos.id_grado = materias.id_grado5 OR grupos.id_grado = materias.id_grado6\n  INNER JOIN profesores ON profesores.id_profesor=materias.id_profesor\n  GROUP BY grupos.id_grado, profesores.nombres_apellidos", function (error, resulset) {
             client.release(true);
 
             if (error) {
@@ -877,7 +881,6 @@ router.get('/promedio_notas_materia', function _callee17(req, res) {
                   align: 'left'
                 });
               }
-
               doc.end();
             }
           });

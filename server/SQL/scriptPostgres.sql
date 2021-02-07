@@ -159,7 +159,6 @@ ALTER TABLE grupos
   ADD CONSTRAINT fk_grupos_grados 
   FOREIGN KEY(id_grado) REFERENCES grados(id_grado);
 
-
 ALTER TABLE notas
   ADD CONSTRAINT fk_notas_estudiante 
   FOREIGN KEY(id_estudiante) REFERENCES estudiantes(id_estudiante),
