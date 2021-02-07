@@ -13,11 +13,28 @@ import { Formik, Form } from 'formik';
 function Login() {
   const [datos, setdatos] = useState([{}]);
 
-  useEffect(() => {
-    fetch('/inicio_sesion?numero_documento=15667264634&contrasena=contrasena12&tipo_usuario=3')
+function iniciarSesion() {
+     fetch('/inicio_sesion')
       .then((response) => response.json())
-      .then((data) => setdatos(data));
-  }, []);
+      .then((data) => setdatos(data))
+      .then(response=>{
+        if(response.length>0){
+          let respuesta = response[0];
+          if(respuesta.tipo_usuario == 1){
+            localStorage.setItem('id', response.id_admin)
+            window.location.href = '/administrador'
+          }else if(respuesta.tipo_usuario == 2){
+            localStorage.setItem('id', response.id_profesor)
+            window.location.href = '/profesor'
+          }else if(respuesta.tipo_usuario == 3){
+            localStorage.setItem('id', response.id_estudiante)
+            window.location.href = '/estudiante'
+          }
+
+
+        }
+      })
+    }
   //    
   console.log(datos[0].id_estudiante)
   const validate = Yup.object({
@@ -76,7 +93,7 @@ function Login() {
                       className='form-control diseno-imputs'
                     />
                     <br />
-                    <button type='submit' className='diseno-imputs'>
+                    <button type='submit' onClick={iniciarSesion()} className='diseno-imputs'>
                       Ingresar
                     </button>
                   </div>
