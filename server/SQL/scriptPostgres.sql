@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS grados;
 DROP TABLE IF EXISTS notas;
 
 -- Crear campos enum
-CREATE TYPE tipo_documento AS ENUM('TI','CC','NUIP', 'CE');
+CREATE TYPE tipo_documento AS ENUM('TI','CC','PP', 'CE');
 CREATE TYPE sexo AS ENUM('F','M');
 CREATE TYPE estado AS ENUM('1','2', '3');
 CREATE TYPE jornada AS ENUM('1','2', '3');
@@ -58,10 +58,9 @@ CREATE TABLE materias(
 
 CREATE TABLE estudiantes(
     id_estudiante SERIAL PRIMARY KEY,
-    id_grado INTEGER NOT NULL,
     id_grupo INTEGER NOT NULL,
     codigo_estudiante VARCHAR(50) UNIQUE NOT NULL,
-    tipo_documento tipo_documento NOT NULL, --OBLIGATORIO AUTOMATIZAR ESTA VAINA
+    tipo_documento tipo_documento NOT NULL, 
     numero_documento VARCHAR(50) UNIQUE NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
@@ -102,6 +101,15 @@ CREATE TABLE grupos(
     id_profesor INTEGER NOT NULL,
     id_grado INTEGER NOT NULL,
     jornada jornada NOT NULL
+);
+
+CREATE TABLE plan_evaluaciones(
+  id_plan_evaluacion SERIAL PRIMARY KEY,
+  nota_seguimiento1 INTEGER,
+  nota_seguimiento2 INTEGER,
+  nota_seguimiento3 INTEGER,
+  nota_parcial INTEGER,
+  nota_final INTEGER
 );
 
 CREATE TABLE grados(
@@ -150,7 +158,6 @@ ALTER TABLE grupos
   FOREIGN KEY(id_profesor) REFERENCES profesores(id_profesor),
   ADD CONSTRAINT fk_grupos_grados 
   FOREIGN KEY(id_grado) REFERENCES grados(id_grado);
-
 
 ALTER TABLE notas
   ADD CONSTRAINT fk_notas_estudiante 

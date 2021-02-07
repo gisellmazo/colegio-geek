@@ -5,5 +5,17 @@ password:
 port: 5432
 
 
-
 psql -h bdbkwufvp9cmdzpyl1d6-postgresql.services.clever-cloud.com -p 5432 -U ubpcmf1mfsoc3mxcjabb -d bdbkwufvp9cmdzpyl1d6
+
+
+
+Conexión a la bd final:
+
+host: bq1bg3qugtani85g60ve-postgresql.services.clever-cloud.com
+database name: bq1bg3qugtani85g60ve
+user: u1qvgreizvutq9sxujt4
+password: JwzgeAFIIHTYGTOQsllW
+port: 5432
+
+
+psql -h bq1bg3qugtani85g60ve-postgresql.services.clever-cloud.com -p 5432 -U u1qvgreizvutq9sxujt4 -d bq1bg3qugtani85g60ve
