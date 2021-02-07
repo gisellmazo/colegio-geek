@@ -9,6 +9,15 @@ import Sidebar from '../components/sidebar';
 import CampoFormulario from '../components/CampoFormulario';
 
 function RegistrarMateria() {
+
+  const [grado1, setgrado1]= useState(0);
+  const [grado2, setgrado2]= useState(0);
+  const [grado3, setgrado3]= useState(0);
+  const [grado4, setgrado4]= useState(0);
+  const [grado5, setgrado5]= useState(0);
+  const [grado6, setgrado6]= useState(0);
+
+
   function registrar(datos) {
     fetch('/registrar_materia', {
       method: 'POST',
@@ -19,12 +28,12 @@ function RegistrarMateria() {
         codigo_materia: datos.codigo_materia,
         nombre: datos.nombre,
         id_profesor: datos.id_profesor,
-        id_grado1:datos.id_grado1,
-        id_grado2:datos.id_grado2,
-        id_grado3:datos.id_grado3,
-        id_grado4:datos.id_grado4,
-        id_grado5:datos.id_grado5,
-        id_grado6:datos.id_grado6
+        id_grado1:grado1,
+        id_grado2:grado2,
+        id_grado3:grado3,
+        id_grado4:grado4,
+        id_grado5:grado5,
+        id_grado6:grado6
       })
     }).then(function (res) { alert(res) });
   }
@@ -70,12 +79,12 @@ function RegistrarMateria() {
                 codigo_materia: '',
                 nombre: '',
                 id_profesor: '',
-                id_grado1: '',
-                id_grado2: '',
-                id_grado3: '',
-                id_grado4: '',
-                id_grado5: '',
-                id_grado6: ''
+                id_grado1: 0,
+                id_grado2: 0,
+                id_grado3: 0,
+                id_grado4: 0,
+                id_grado5: 0,
+                id_grado6: 0
               }}
               validationSchema={validate}
               onSubmit={(values) => {
@@ -115,27 +124,93 @@ function RegistrarMateria() {
                       <label className="texto-blanco">Selecciona los grados asignados a esta materia:</label>
                       <br/>
                       <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox1" name="id_grado1" value="6" />
+                        <input 
+                          className="form-check-input" 
+                          type="checkbox" 
+                          id="inlineCheckbox1" 
+                          name="id_grado1" 
+                          value="6" 
+                          onClickCapture={(e) => {
+                                  const selectedgrado = e.target.value;
+                                  setgrado1(selectedgrado);
+
+                          }}
+                        />
                         <label className="form-check-label texto-blanco" for="inlineCheckbox1">6</label>
                       </div>
                       <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="id_grado2" value="7"/>
+                        <input 
+                          className="form-check-input" 
+                          type="checkbox" 
+                          id="inlineCheckbox2" 
+                          name="id_grado2" 
+                          value="7"
+                          onClickCapture={(e) => {
+                            const selectedgrado = e.target.value;
+                            setgrado2(selectedgrado);
+
+                          }}
+                        />
                         <label className="form-check-label texto-blanco" for="inlineCheckbox2">7</label>
                       </div>
                       <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="id_grado3" value="8" />
+                        <input 
+                          className="form-check-input" 
+                          type="checkbox" 
+                          id="inlineCheckbox2" 
+                          name="id_grado3" 
+                          value="8" 
+                          onClickCapture={(e) => {
+                            const selectedgrado = e.target.value;
+                            setgrado3(selectedgrado);
+
+                          }}
+                        />
                         <label className="form-check-label texto-blanco" for="inlineCheckbox2">8</label>
                       </div>
                       <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="id_grado4" value="9" />
+                        <input 
+                          className="form-check-input" 
+                          type="checkbox" 
+                          id="inlineCheckbox2" 
+                          name="id_grado4" 
+                          value="9"
+                          onClickCapture={(e) => {
+                            const selectedgrado = e.target.value;
+                            setgrado4(selectedgrado);
+
+                          }} 
+                        />
                         <label className="form-check-label texto-blanco" for="inlineCheckbox2">9</label>
                       </div>
                       <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="id_grado5" value="10" />
+                        <input 
+                          className="form-check-input" 
+                          type="checkbox" 
+                          id="inlineCheckbox2" 
+                          name="id_grado5" 
+                          value="10" 
+                          onClickCapture={(e) => {
+                            const selectedgrado = e.target.value;
+                            setgrado5(selectedgrado);
+
+                          }}
+                        />
                         <label className="form-check-label texto-blanco" for="inlineCheckbox2">10</label>
                       </div>
                       <div className="form-check form-check-inline">
-                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="id_grado6" value="11" />
+                        <input 
+                          className="form-check-input" 
+                          type="checkbox" 
+                          id="inlineCheckbox2" 
+                          name="id_grado6" 
+                          value="11" 
+                          onClickCapture={(e) => {
+                            const selectedgrado = e.target.value;
+                            setgrado6(selectedgrado);
+
+                          }}
+                        />
                         <label className="form-check-label texto-blanco" for="inlineCheckbox2">11</label>
                       </div>
                      
