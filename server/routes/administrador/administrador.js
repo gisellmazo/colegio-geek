@@ -372,6 +372,23 @@ router.get('/promedio_notas_materia', async (req, res) => {
   });
 });
 
+//servicio promedio de notas por grado
+router.get('/promedio_notas_grado', async (req, res) => {
+  const client = await pool.connect();
+  client.query(`SELECT avg(nota) as promedio_notas, grados.id_grado
+  FROM notas 
+  INNER JOIN grupos ON grupos.id_grado = notas.id_grupo 
+  INNER JOIN grados ON grados.id_grado = notas.id_grupo
+  group by grados.id_grado`, (error, resulset) => {
+    client.release(true);
+    if (error) {
+      console.log(error)
+      return res.status(500).send('Se presento un error en la base de datos.');
+    } else {
+      return res.json(resulset.rows);
+    }
+  });
+});
 
 
 /* router.get('/ver_id_estudiante', async (req, res) => {
