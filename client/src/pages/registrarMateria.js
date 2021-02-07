@@ -19,7 +19,12 @@ function RegistrarMateria() {
         codigo_materia: datos.codigo_materia,
         nombre: datos.nombre,
         id_profesor: datos.id_profesor,
-        id_grados: '9',
+        id_grado1:datos.id_grado1,
+        id_grado2:datos.id_grado2,
+        id_grado3:datos.id_grado3,
+        id_grado4:datos.id_grado4,
+        id_grado5:datos.id_grado5,
+        id_grado6:datos.id_grado6
       })
     }).then(function(res){ alert(res) });
   }
@@ -54,7 +59,12 @@ function RegistrarMateria() {
                 codigo_materia: '',
                 nombre: '',
                 id_profesor: '',
-                id_grados: '',
+                id_grado1: '',
+                id_grado2: '',
+                id_grado3: '',
+                id_grado4: '',
+                id_grado5: '',
+                id_grado6: ''
               }}
               validationSchema={validate}
               onSubmit={(values) => {

@@ -20,6 +20,7 @@ function Perfil() {
   return (
     <>
       <div class="grid-container ">
+        {console.log(datos)}
         <div class="s">
         <Sidebar name1="Mi espacio" name2="Ingresar notas" ruta1="/profesor" ruta2=""/>
         </div>
@@ -43,10 +44,10 @@ function Perfil() {
                 </li>
 
                 <li class="list-group-item text-center">
-                Esta a cargo del grupo: { datos[0].id_grupos}
+                Esta a cargo del grupo: { datos[0].id_grupo}
                 </li>
                 <li class="list-group-item text-center">
-                  Materia: { datos[0].id_materia}
+                  Materia: { datos[0].nombre}
                 </li>
                 <li class="list-group-item text-center">
                  El código de su grupo a cargo: { datos[0].codigo_grupo}
