@@ -12,6 +12,9 @@ import "../styles/pantallasPrincipales.css";
 import "../styles/registros.css"
 
 function RegistrarEstudiante() {
+
+  const [documento, setdocumento] = useState("");
+
   function registrar(datos) {
     const fecha = new Date().getFullYear() + '0';
 
@@ -25,7 +28,7 @@ function RegistrarEstudiante() {
           },
           body: JSON.stringify({
             codigo_estudiante: fecha + (data[0].ultimo_id + 1),
-            tipo_documento: datos.tipo_documento,
+            tipo_documento: documento,
             correo: datos.correo,
             contrasena: datos.contrasena,
             nombres_apellidos: datos.nombres_apellidos,
@@ -41,6 +44,7 @@ function RegistrarEstudiante() {
         }).then(function (res) {
           alert('Estudiante creado');
         })
+        
       );
 
     fetch('/send_mail', {
@@ -58,7 +62,7 @@ function RegistrarEstudiante() {
     });
   }
 
-    const [documento, setdocumento] = useState("");
+    
 
     
   const validate = Yup.object({
@@ -70,8 +74,7 @@ function RegistrarEstudiante() {
     telefono: Yup.string().required('Campo requerido'),
     celular: Yup.string().required('Campo requerido'),
     correo: Yup.string().required('Campo requerido'),
-    contrasena: Yup.string().required('campo requerido'),
-    tipo_documento: Yup.string('').required('Campo requerido'),
+    contrasena: Yup.string().required('campo requerido')
   });
 
     return (
@@ -107,8 +110,8 @@ function RegistrarEstudiante() {
                   telefono: '',
                   celular: '',
                   correo: '',
-                  //foto: '',
-                  //pdf_documento: '',
+                  foto: '',
+                  pdf_documento: '',
                   contrasena: '',
                   id_grupo: '',
                 }}
@@ -131,6 +134,7 @@ function RegistrarEstudiante() {
                               const selecteddocumento = e.target.value;
                               setdocumento(selecteddocumento);
                             }}>
+                            <option>-</option>
                             <option value='CC'>Cedula de ciudadanía</option>
                             <option value='TI'>Tarjeta de identidad</option>
                             <option value='PP'>
@@ -174,13 +178,7 @@ function RegistrarEstudiante() {
                             estilo='texto-blanco'
                             className='form-control diseno-imputs'
                           />
-                          <CampoFormulario
-                            label='Id grupo:'
-                            type='number'
-                            name='id_grupo'
-                            estilo='texto-blanco'
-                            className='form-control diseno-imputs'
-                          />
+                          
                           <CampoFormulario
                             label='Foto:'
                             type='file'
@@ -191,14 +189,6 @@ function RegistrarEstudiante() {
                         </div>
                         <div class='container-row-middle'></div>
                         <div class='container-row'>
-                          <CampoFormulario
-                            label='tipo documento:'
-                            type='string'
-                            name='tipo_documento'
-                            estilo='texto-blanco'
-                            className='form-control diseno-imputs'
-                            placeholder={documento}
-                          />
                           <CampoFormulario
                             label='Numero documento:'
                             type='string'
@@ -231,6 +221,13 @@ function RegistrarEstudiante() {
                             label='Contraseña:'
                             type='password'
                             name='contrasena'
+                            estilo='texto-blanco'
+                            className='form-control diseno-imputs'
+                          />
+                          <CampoFormulario
+                            label='Id grupo:'
+                            type='number'
+                            name='id_grupo'
                             estilo='texto-blanco'
                             className='form-control diseno-imputs'
                           />

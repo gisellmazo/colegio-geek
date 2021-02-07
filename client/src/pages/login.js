@@ -56,7 +56,7 @@ function Login() {
               <div>
                 <Form>
                   <div class='row g-3 align-items-center'>
- 
+              
                     <CampoFormulario
                       label='Tipo usuario:'
                       type='number'

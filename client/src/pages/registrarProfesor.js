@@ -11,6 +11,8 @@ import CampoFormulario from "../components/CampoFormulario"
 
 function RegistrarProfesor() {
 
+    const [documento, setdocumento] = useState("")
+
     function registrarProfesor(datos){
         fetch('/registrar_profesor',{
              method: 'POST', 
@@ -19,7 +21,7 @@ function RegistrarProfesor() {
               },
             body: JSON.stringify({
                  
-                tipo_documento: datos.tipo_documento,
+                tipo_documento: documento,
                 numero_documento: datos.numero_documento,
                 nombres_apellidos: datos.nombres_apellidos,
                 correo: datos.correo,    
@@ -42,7 +44,7 @@ function RegistrarProfesor() {
         
     }
 
-    const [documento, setdocumento] = useState("")
+    
     
 
 
@@ -108,6 +110,7 @@ function RegistrarProfesor() {
                                                     setdocumento(selecteddocumento);
 
                                                 }}>
+                                                    <option>-</option>
                                                     <option value="CC">Cedula de ciudadanía</option>
                                                     <option value="TI">Tarjeta de identidad</option>
                                                     <option value="PP">Permiso especial de permanencia</option>
@@ -119,7 +122,7 @@ function RegistrarProfesor() {
                                         </div>
                                         <div class="container-row-middle"></div>
                                         <div class="container-row">
-                                            <CampoFormulario label="tipo documento:" type="string" name="tipo_documento" estilo="texto-blanco" className="form-control diseno-imputs" placeholder={documento}/>
+                                        
                                             <CampoFormulario label="Numero documento:" type="text" name="numero_documento" estilo="texto-blanco" className="form-control diseno-imputs" />
                                             <CampoFormulario label="Contraseña:" type="password" name="contrasena" estilo="texto-blanco" className="form-control diseno-imputs" />
                                         </div>
