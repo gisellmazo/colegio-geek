@@ -360,12 +360,15 @@ router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
         let doc = new PDF();
         doc.pipe(
           fs.createWriteStream(
-            __dirname + '/cantidad_estudiantes_por_asignatura.pdf'
+            __dirname + '/reportes/cantidad_estudiantes_por_asignatura.pdf'
           )
         );
-        // doc.image('/client/public/images/logo-colegio-geek.png', 5, 15, {width: 250})
-        doc.text('Cantidad estudiantes por asignatura', {
+        doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, { width: 210 });
+        doc.text('Cantidad estudiantes por asignatura:', {
           align: 'center',
+        });
+        doc.text(' ', {
+          align: 'left',
         });
         let respuesta = resulset.rows;
         for (let i = 0; i < resulset.rows.length; i++) {
@@ -387,7 +390,7 @@ router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
 });
 
 router.get('/descargar_cantidad_estudiantes_materia', function (req, res) {
-  var file = __dirname + '/cantidad_estudiantes_por_asignatura.pdf';
+  var file = __dirname + '/reportes/cantidad_estudiantes_por_asignatura.pdf';
   res.download(file);
 });
 
