@@ -525,12 +525,15 @@ router.get('/cantidad_estudiantes_asignatura', function _callee11(req, res) {
               return res.status(500).send('Se presento un error en la base de datos.');
             } else {
               var doc = new PDF();
-              doc.pipe(fs.createWriteStream(__dirname + '/cantidad_estudiantes_por_asignatura.pdf'));
-              doc.image('/logo-colegio-geek.png', 5, 15, {
-                width: 250
+              doc.pipe(fs.createWriteStream(__dirname + '/reportes/cantidad_estudiantes_por_asignatura.pdf'));
+              doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, {
+                width: 210
               });
-              doc.text('Cantidad estudiantes por asignatura', {
+              doc.text('Cantidad estudiantes por asignatura:', {
                 align: 'center'
+              });
+              doc.text(' ', {
+                align: 'left'
               });
               var respuesta = resulset.rows;
 
@@ -558,7 +561,7 @@ router.get('/cantidad_estudiantes_asignatura', function _callee11(req, res) {
   });
 });
 router.get('/descargar_cantidad_estudiantes_materia', function (req, res) {
-  var file = __dirname + '/cantidad_estudiantes_por_asignatura.pdf';
+  var file = __dirname + '/reportes/cantidad_estudiantes_por_asignatura.pdf';
   res.download(file);
 }); //servicio promedio de notas
 
@@ -691,14 +694,40 @@ router.get('/reporte_promedio_grado', function _callee16(req, res) {
 
         case 2:
           client = _context16.sent;
-          client.query("SELECT avg(nota) as promedio_notas, grados.grado\n  FROM notas \n  JOIN grupos ON notas.id_grupo = grupos.id_grupo\n  JOIN grados ON grupos.id_grado = grados.id_grado\n  group by grados.id_grado", function (error, resulset) {
+          client.query("SELECT avg(nota) as promedio_notas, grados.grado\n  FROM notas \n  JOIN grupos ON notas.id_grupo = grupos.id_grupo\n  JOIN grados ON grupos.id_grado = grados.id_grado\n  group by grados.id_grado\n  ORDER BY grados.id_grado", function (error, resulset) {
             client.release(true);
 
             if (error) {
               console.log(error);
               return res.status(500).send('Se presento un error en la base de datos.');
             } else {
-              return res.json(resulset.rows);
+              var doc = new PDF();
+              doc.pipe(fs.createWriteStream(__dirname + '/reportes/promedio_notas_grado.pdf'));
+              doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, {
+                width: 210
+              });
+              doc.text('Reporte del promedio de las notas en cada grado:', {
+                align: 'center'
+              });
+              doc.text(' ', {
+                align: 'left'
+              });
+              var respuesta = resulset.rows;
+
+              for (var i = 0; i < resulset.rows.length; i++) {
+                doc.text('El promedio de notas en el grado ' + respuesta[i].grado + ' es:', {
+                  align: 'left'
+                });
+                doc.text(respuesta[i].promedio_notas, {
+                  align: 'left'
+                });
+                doc.text(' ', {
+                  align: 'left'
+                });
+              }
+
+              doc.end();
+              return res.send(resulset.rows);
             }
           });
 
@@ -708,6 +737,10 @@ router.get('/reporte_promedio_grado', function _callee16(req, res) {
       }
     }
   });
+});
+router.get('/descargar_reporte_promedio_grado', function (req, res) {
+  var file = __dirname + '/reportes/promedio_notas_grado.pdf';
+  res.download(file);
 });
 /* router.get('/datos_para_grados_cursados', async (req, res) => {
   const client = await pool.connect();
