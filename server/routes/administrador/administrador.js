@@ -13,6 +13,7 @@ const fs = require('fs');
 const { pool } = require('../../database/database');
 
 
+
 router.get('/inicio_sesion', async (req, res) => {
   let client = await pool.connect();
   const { numero_documento, contrasena, tipo_usuario } = req.query;
@@ -74,6 +75,8 @@ router.post('/registrar_estudiante', async (req, res) => {
       telefono_fijo,
       celular,
     } = req.body;
+
+    
 
     const validacion = await validacion_registrarEstudiante.validateAsync(
       req.body
@@ -351,6 +354,7 @@ router.get('/ver_profesores_administrador', async (req, res) => {
     }
   );
 });
+
 
 router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
   const client = await pool.connect();
