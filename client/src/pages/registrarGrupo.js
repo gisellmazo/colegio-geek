@@ -21,7 +21,13 @@ function RegistrarGrupo() {
                 codigo_grupo: datos.codigo_grupo,
                 id_grado: datos.id_grado,
                 id_profesor: datos.id_profesor  })
-        })
+        }).then(function (res) {
+            if (res.status != 200) {
+              alert('ERROR!! al grupo estudiante compruebe que los datos son correctos')
+            } else {
+              alert('Grupo registrado con exito')
+            }
+          })
         
     }
 

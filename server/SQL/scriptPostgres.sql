@@ -35,6 +35,8 @@ CREATE TYPE jornada AS ENUM('1','2', '3');
 CREATE TYPE grado AS ENUM('6','7', '8', '9', '10', '11');
 CREATE TYPE tipo_nota AS ENUM('seguimiento','parcial', 'final');
 
+
+ALTER TYPE grado ADD VALUE '0' BEFORE '6';
 -- Crear tablas
 CREATE TABLE administrador(
   id_admin SERIAL PRIMARY KEY,
@@ -166,6 +168,8 @@ ALTER TABLE notas
   FOREIGN KEY(id_grupo) REFERENCES grupos(id_grupo),
   ADD CONSTRAINT fk_notas_materias
   FOREIGN KEY(id_materia) REFERENCES materias(id_materia);
+
+
 
 -- crear disparador o trigger
 create function grados_cursados_AI() returns trigger

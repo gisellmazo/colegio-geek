@@ -42,6 +42,7 @@ function iniciarSesion() {
     contraseña: Yup.string()
       .required('Contraseña requerida')
       .min(8, 'la contraseña debe tener al menos 8 caractéres'),
+    tipo_usuario: Yup.number()
   });
 
   return (
@@ -72,14 +73,13 @@ function iniciarSesion() {
               <div>
                 <Form>
                   <div class='row g-3 align-items-center'>
-                    <label>tipo usuario:</label>
-                    <select name='tipo_usuario' className='diseno-imputs'>
-                      <option value='0'> </option>
-                      <option value='1'>Administrador</option>
-                      <option value='2'>Profesor</option>
-                      <option value='3'>Estudiante</option>
-                    </select>
-
+ 
+                    <CampoFormulario
+                      label='Tipo usuario:'
+                      type='number'
+                      name='tipo_usuario'
+                      className='form-control diseno-imputs color-letra'
+                    />
                     <CampoFormulario
                       label='Usuario:'
                       type='number'

@@ -25,7 +25,7 @@ console.log(datos);
             name1="Mi espacio"
             name2="Ingresar notas"
             ruta1="/profesor"
-            ruta2=""
+            ruta2="/ingresar_notas"
           />
         </div>
         <div className="PEP ">

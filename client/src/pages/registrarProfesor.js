@@ -25,7 +25,13 @@ function RegistrarProfesor() {
                 correo: datos.correo,    
                 contrasena: datos.contrasena,
                 })
-        }).then(function(res){ alert('Profesor creado correctamente') })
+        }).then(function (res) {
+            if (res.status != 200) {
+              alert('ERROR!! al grupo profesor compruebe que los datos son correctos')
+            } else {
+              alert('Profesor registrado con exito')
+            }
+          })
         fetch('/send_mail', {
             method: 'POST',
             headers: {
