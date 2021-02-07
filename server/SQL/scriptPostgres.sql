@@ -110,7 +110,7 @@ CREATE TABLE plan_evaluaciones(
   nota_seguimiento3 INTEGER,
   nota_parcial INTEGER,
   nota_final INTEGER
-)
+);
 
 CREATE TABLE grados(
     id_grado SERIAL PRIMARY KEY,
