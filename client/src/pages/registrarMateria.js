@@ -70,12 +70,12 @@ function RegistrarMateria() {
                 codigo_materia: '',
                 nombre: '',
                 id_profesor: '',
-                id_grado1: 6,
-                id_grado2: 7,
-                id_grado3: 8,
-                id_grado4: 9,
-                id_grado5: 10,
-                id_grado6: 11
+                id_grado1: '',
+                id_grado2: '',
+                id_grado3: '',
+                id_grado4: '',
+                id_grado5: '',
+                id_grado6: ''
               }}
               validationSchema={validate}
               onSubmit={(values) => {
