@@ -462,7 +462,7 @@ router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
   const client = await pool.connect();
   client.query(
     `SELECT estudiantes.nombres_apellidos, notas.nota FROM notas JOIN estudiantes ON notas.id_estudiante = estudiantes.id_estudiante
-  ORDER BY estudiantes.nombres_apellidos`,
+    ORDER BY estudiantes.nombres_apellidos`,
     (error, resulset) => {
       client.release(true);
       if (error) {
@@ -471,7 +471,34 @@ router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
           .status(500)
           .send('Se presento un error en la base de datos.');
       } else {
-        return res.json(resulset.rows);
+        //return res.json(resulset.rows);
+        let doc = new PDF();
+        doc.pipe(
+          fs.createWriteStream(
+            __dirname + '/reportes/reporte_calificaciones_por_estudiante.pdf'
+          )
+        );
+        doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, { width: 210 });
+        doc.text('Calificaciones por estudiante:', {
+          align: 'center',
+        });
+        doc.text(' ', {
+          align: 'left',
+        });
+        let respuesta = resulset.rows;
+        for (let i = 0; i < resulset.rows.length; i++) {
+          doc.text(respuesta[i].nombres_apellidos + ':', {
+            align: 'left',
+          });
+          doc.text(respuesta[i].nota, {
+            align: 'left',
+          });
+
+          doc.text(' ', {
+            align: 'left',
+          });
+        }
+        doc.end();
       }
     }
   );

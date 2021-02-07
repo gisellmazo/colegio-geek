@@ -11,6 +11,12 @@ const GenerarReportesAdministrador = () => {
       method: 'GET',
     });
   }
+
+  function reporteCalificacionesPorEstudiante() {
+    fetch('/reporte_calificaciones_por_estudiante', {
+      method: 'GET',
+    });
+  }
   return (
     <div>
       <div class='grid-container'>
@@ -63,10 +69,26 @@ const GenerarReportesAdministrador = () => {
                   />
                 </div>
                 <div class='col-sm-6 mt-5 bottom-pa'>
-                  <Card
-                    name='Reporte de calificaciones filtradas por estudiante'
-                    ruta=''
-                  />
+                <div className='card'>
+                    <div className='card-body'>
+                      <h5 className='card-title'>
+                        Reporte de calificaciones por estudiante
+                      </h5>
+                      <p className='card-text'>
+                        Clic para descargar pdf con el reporte
+                      </p>
+                      <a
+                        href='http://localhost:5002/descargar_calificaciones_por_estudiante'
+                        download>
+                        <button
+                          type='button'
+                          className='btn-p btn-primary'
+                          onClick={reporteCalificacionesPorEstudiante()}>
+                          Ir
+                        </button>
+                      </a>
+                    </div>
+                  </div>
                 </div>
                 <div class='col-sm-6 mt-5 bottom-pa'>
                   <Card
