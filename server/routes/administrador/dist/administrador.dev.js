@@ -525,20 +525,23 @@ router.get('/cantidad_estudiantes_asignatura', function _callee11(req, res) {
               return res.status(500).send('Se presento un error en la base de datos.');
             } else {
               var doc = new PDF();
-              doc.pipe(fs.createWriteStream(__dirname + '/cantidad_estudiantes_por_asignatura.pdf'));
-              doc.image('/logo-colegio-geek.png', 5, 15, {
-                width: 250
+              doc.pipe(fs.createWriteStream(__dirname + '/reportes/cantidad_estudiantes_por_asignatura.pdf'));
+              doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, {
+                width: 210
               });
-              doc.text('Cantidad estudiantes por asignatura', {
+              doc.text('Cantidad estudiantes por asignatura:', {
                 align: 'center'
+              });
+              doc.text(' ', {
+                align: 'left'
               });
               var respuesta = resulset.rows;
 
               for (var i = 0; i < resulset.rows.length; i++) {
-                doc.text(respuesta[i].nombre_materia + ':', {
+                doc.text('Materia: ' + respuesta[i].nombre_materia + ':', {
                   align: 'left'
                 });
-                doc.text(respuesta[i].cantidad_estudiantes, {
+                doc.text('Cantidad de estudiantes: ' + respuesta[i].cantidad_estudiantes, {
                   align: 'left'
                 });
                 doc.text(' ', {
@@ -558,11 +561,10 @@ router.get('/cantidad_estudiantes_asignatura', function _callee11(req, res) {
   });
 });
 router.get('/descargar_cantidad_estudiantes_materia', function (req, res) {
-  var file = __dirname + '/cantidad_estudiantes_por_asignatura.pdf';
+  var file = __dirname + '/reportes/cantidad_estudiantes_por_asignatura.pdf';
   res.download(file);
-}); //servicio promedio de notas
-
-router.get('/promedio_notas_grupo', function _callee12(req, res) {
+});
+router.get('/ver_id_estudiante', function _callee12(req, res) {
   var client;
   return regeneratorRuntime.async(function _callee12$(_context12) {
     while (1) {
@@ -573,7 +575,7 @@ router.get('/promedio_notas_grupo', function _callee12(req, res) {
 
         case 2:
           client = _context12.sent;
-          client.query("SELECT avg(nota) as promedio_notas, grupos.id_grupo\n  FROM notas \n  INNER JOIN grupos ON notas.id_grupo = grupos.id_grupo\n  group by grupos.id_grupo", function (error, resulset) {
+          client.query("SELECT MAX(id_estudiante) as ultimo_id FROM estudiantes", function (error, resulset) {
             client.release(true);
 
             if (error) {
@@ -591,7 +593,7 @@ router.get('/promedio_notas_grupo', function _callee12(req, res) {
     }
   });
 });
-router.get('/ver_id_estudiante', function _callee13(req, res) {
+router.get('/cantidad_estudiantes_profesor_grado', function _callee13(req, res) {
   var client;
   return regeneratorRuntime.async(function _callee13$(_context13) {
     while (1) {
@@ -602,14 +604,42 @@ router.get('/ver_id_estudiante', function _callee13(req, res) {
 
         case 2:
           client = _context13.sent;
-          client.query("SELECT MAX(id_estudiante) as ultimo_id FROM estudiantes", function (error, resulset) {
+          client.query("SELECT COUNT(id_estudiante) as cantidad_estudiantes, profesores.nombres_apellidos as nombre_profesor, grupos.id_grado as grado\n  FROM estudiantes\n  INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo\n  INNER JOIN materias ON grupos.id_grado = materias.id_grados\n  INNER JOIN profesores ON profesores.id_profesor=materias.id_profesor\n  GROUP BY grupos.id_grado, profesores.nombres_apellidos", function (error, resulset) {
             client.release(true);
 
             if (error) {
               console.log(error);
               return res.status(500).send('Se presento un error en la base de datos.');
             } else {
-              return res.json(resulset.rows);
+              var doc = new PDF();
+              doc.pipe(fs.createWriteStream(__dirname + '/reportes/cantidad_estudiantes_profesor_grado.pdf'));
+              doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, {
+                width: 210
+              });
+              doc.text('Cantidad de estudiantes por profesor según el grado:', {
+                align: 'center'
+              });
+              doc.text(' ', {
+                align: 'left'
+              });
+              var respuesta = resulset.rows;
+
+              for (var i = 0; i < resulset.rows.length; i++) {
+                doc.text('Profesor: ' + respuesta[i].nombre_profesor + ':', {
+                  align: 'left'
+                });
+                doc.text('Grado: ' + respuesta[i].grado, {
+                  align: 'left'
+                });
+                doc.text('Cantidad de estudiantes: ' + respuesta[i].cantidad_estudiantes, {
+                  align: 'left'
+                });
+                doc.text(' ', {
+                  align: 'left'
+                });
+              }
+
+              doc.end();
             }
           });
 
@@ -620,7 +650,12 @@ router.get('/ver_id_estudiante', function _callee13(req, res) {
     }
   });
 });
-router.get('/cantidad_estudiantes_profesor_grado', function _callee14(req, res) {
+router.get('/descargar_cantidad_estudiantes_profesor_grado', function (req, res) {
+  var file = __dirname + '/reportes/cantidad_estudiantes_profesor_grado.pdf';
+  res.download(file);
+}); // Servicio calificaciones por estudiante
+
+router.get('/reporte_calificaciones_por_estudiante', function _callee14(req, res) {
   var client;
   return regeneratorRuntime.async(function _callee14$(_context14) {
     while (1) {
@@ -631,14 +666,40 @@ router.get('/cantidad_estudiantes_profesor_grado', function _callee14(req, res) 
 
         case 2:
           client = _context14.sent;
-          client.query("SELECT COUNT(id_estudiante) as cantidad_estudiantes, profesores.nombres_apellidos, grupos.id_grado \n  FROM estudiantes\n  INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo\n  INNER JOIN materias ON grupos.id_grado = materias.id_grados\n  INNER JOIN profesores ON profesores.id_profesor=materias.id_profesor\n  GROUP BY grupos.id_grado, profesores.nombres_apellidos", function (error, resulset) {
+          client.query("SELECT estudiantes.nombres_apellidos, notas.nota FROM notas JOIN estudiantes ON notas.id_estudiante = estudiantes.id_estudiante\n    ORDER BY estudiantes.nombres_apellidos", function (error, resulset) {
             client.release(true);
 
             if (error) {
               console.log(error);
               return res.status(500).send('Se presento un error en la base de datos.');
             } else {
-              return res.json(resulset.rows);
+              //return res.json(resulset.rows);
+              var doc = new PDF();
+              doc.pipe(fs.createWriteStream(__dirname + '/reportes/reporte_calificaciones_por_estudiante.pdf'));
+              doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, {
+                width: 210
+              });
+              doc.text('Calificaciones por estudiante:', {
+                align: 'center'
+              });
+              doc.text(' ', {
+                align: 'left'
+              });
+              var respuesta = resulset.rows;
+
+              for (var i = 0; i < resulset.rows.length; i++) {
+                doc.text('Nombre: ' + respuesta[i].nombres_apellidos + ':', {
+                  align: 'left'
+                });
+                doc.text('Nota: ' + respuesta[i].nota, {
+                  align: 'left'
+                });
+                doc.text(' ', {
+                  align: 'left'
+                });
+              }
+
+              doc.end();
             }
           });
 
@@ -648,9 +709,13 @@ router.get('/cantidad_estudiantes_profesor_grado', function _callee14(req, res) 
       }
     }
   });
-}); // Servicio calificaciones por estudiante
+});
+router.get('/descargar_calificaciones_por_estudiante', function (req, res) {
+  var file = __dirname + '/reportes/reporte_calificaciones_por_estudiante.pdf';
+  res.download(file);
+}); //servicio promedio de notas
 
-router.get('/reporte_calificaciones_por_estudiante', function _callee15(req, res) {
+router.get('/promedio_notas_grupo', function _callee15(req, res) {
   var client;
   return regeneratorRuntime.async(function _callee15$(_context15) {
     while (1) {
@@ -661,14 +726,39 @@ router.get('/reporte_calificaciones_por_estudiante', function _callee15(req, res
 
         case 2:
           client = _context15.sent;
-          client.query("SELECT estudiantes.nombres_apellidos, notas.nota FROM notas JOIN estudiantes ON notas.id_estudiante = estudiantes.id_estudiante\n  ORDER BY estudiantes.nombres_apellidos", function (error, resulset) {
+          client.query("SELECT avg(nota) as promedio_notas, grupos.codigo_grupo\n  FROM notas \n  INNER JOIN grupos ON notas.id_grupo = grupos.id_grupo\n  group by grupos.id_grupo", function (error, resulset) {
             client.release(true);
 
             if (error) {
               console.log(error);
               return res.status(500).send('Se presento un error en la base de datos.');
             } else {
-              return res.json(resulset.rows);
+              var doc = new PDF();
+              doc.pipe(fs.createWriteStream(__dirname + '/reportes/promedio_notas_grupo.pdf'));
+              doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, {
+                width: 210
+              });
+              doc.text('Reporte del promedio de las notas en cada grado:', {
+                align: 'center'
+              });
+              doc.text(' ', {
+                align: 'left'
+              });
+              var respuesta = resulset.rows;
+
+              for (var i = 0; i < resulset.rows.length; i++) {
+                doc.text(respuesta[i].codigo_grupo + ':', {
+                  align: 'left'
+                });
+                doc.text(respuesta[i].promedio_notas, {
+                  align: 'left'
+                });
+                doc.text(' ', {
+                  align: 'left'
+                });
+              }
+
+              doc.end();
             }
           });
 
@@ -678,9 +768,12 @@ router.get('/reporte_calificaciones_por_estudiante', function _callee15(req, res
       }
     }
   });
-}); // Servicio promedio de notas pos grado
-
-router.get('/reporte_promedio_grado', function _callee16(req, res) {
+});
+router.get('/descargar_promedio_notas_grupo', function (req, res) {
+  var file = __dirname + '/reportes/promedio_notas_grupo.pdf';
+  res.download(file);
+});
+router.get('/promedio_notas_grado', function _callee16(req, res) {
   var client;
   return regeneratorRuntime.async(function _callee16$(_context16) {
     while (1) {
@@ -691,14 +784,39 @@ router.get('/reporte_promedio_grado', function _callee16(req, res) {
 
         case 2:
           client = _context16.sent;
-          client.query("SELECT avg(nota) as promedio_notas, grados.grado\n  FROM notas \n  JOIN grupos ON notas.id_grupo = grupos.id_grupo\n  JOIN grados ON grupos.id_grado = grados.id_grado\n  group by grados.id_grado", function (error, resulset) {
+          client.query("SELECT avg(nota) as promedio_notas, grados.grado\n  FROM notas \n  JOIN grupos ON notas.id_grupo = grupos.id_grupo\n  JOIN grados ON grupos.id_grado = grados.id_grado\n  group by grados.id_grado\n  ORDER BY grados.id_grado", function (error, resulset) {
             client.release(true);
 
             if (error) {
               console.log(error);
               return res.status(500).send('Se presento un error en la base de datos.');
             } else {
-              return res.json(resulset.rows);
+              var doc = new PDF();
+              doc.pipe(fs.createWriteStream(__dirname + '/reportes/promedio_notas_grado.pdf'));
+              doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, {
+                width: 210
+              });
+              doc.text('Reporte del promedio de las notas en cada grado:', {
+                align: 'center'
+              });
+              doc.text(' ', {
+                align: 'left'
+              });
+              var respuesta = resulset.rows;
+
+              for (var i = 0; i < resulset.rows.length; i++) {
+                doc.text('El promedio de notas en el grado ' + respuesta[i].grado + ' es:', {
+                  align: 'left'
+                });
+                doc.text(respuesta[i].promedio_notas, {
+                  align: 'left'
+                });
+                doc.text(' ', {
+                  align: 'left'
+                });
+              }
+
+              doc.end();
             }
           });
 
@@ -709,17 +827,70 @@ router.get('/reporte_promedio_grado', function _callee16(req, res) {
     }
   });
 });
-/* router.get('/datos_para_grados_cursados', async (req, res) => {
-  const client = await pool.connect();
-  client.query(`SELECT `, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      console.log(error)
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      return res.json(resulset.rows);
+router.get('/descargar_promedio_notas_grado', function (req, res) {
+  var file = __dirname + '/reportes/promedio_notas_grado.pdf';
+  res.download(file);
+}); //servicio promedio de notas por materia
+
+router.get('/promedio_notas_materia', function _callee17(req, res) {
+  var client;
+  return regeneratorRuntime.async(function _callee17$(_context17) {
+    while (1) {
+      switch (_context17.prev = _context17.next) {
+        case 0:
+          _context17.next = 2;
+          return regeneratorRuntime.awrap(pool.connect());
+
+        case 2:
+          client = _context17.sent;
+          client.query("SELECT avg(nota) as promedio_notas, materias.codigo_materia, materias.nombre\n  FROM notas \n  INNER JOIN materias ON notas.id_materia = materias.id_materia\n  group by materias.id_materia", function (error, resulset) {
+            client.release(true);
+
+            if (error) {
+              console.log(error);
+              return res.status(500).send('Se presento un error en la base de datos.');
+            } else {
+              var doc = new PDF();
+              doc.pipe(fs.createWriteStream(__dirname + '/reportes/promedio_notas_materia.pdf'));
+              doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, {
+                width: 210
+              });
+              doc.text('Reporte del promedio de las notas en cada materia:', {
+                align: 'center'
+              });
+              doc.text(' ', {
+                align: 'left'
+              });
+              var respuesta = resulset.rows;
+
+              for (var i = 0; i < resulset.rows.length; i++) {
+                doc.text('El nombre de la materia es ' + respuesta[i].nombre, {
+                  align: 'left'
+                });
+                doc.text(respuesta[i].codigo_materia, {
+                  align: 'left'
+                });
+                doc.text(respuesta[i].promedio_notas, {
+                  align: 'left'
+                });
+                doc.text(' ', {
+                  align: 'left'
+                });
+              }
+
+              doc.end();
+            }
+          });
+
+        case 4:
+        case "end":
+          return _context17.stop();
+      }
     }
   });
-}); */
-
+});
+router.get('/descargar_promedio_notas_materia', function (req, res) {
+  var file = __dirname + '/reportes/promedio_notas_materia.pdf';
+  res.download(file);
+});
 module.exports = router;
