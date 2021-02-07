@@ -1,7 +1,7 @@
 host: bdbkwufvp9cmdzpyl1d6-postgresql.services.clever-cloud.com
 database name: bdbkwufvp9cmdzpyl1d6
 user: ubpcmf1mfsoc3mxcjabb
-password: 84LskJsWwNbYnZNj9xvj
+password: 
 port: 5432
 
 
