@@ -8,8 +8,8 @@ const {
 } = require('../../validaciones/validaciones');
 
 const jwt = require('jsonwebtoken');
-const PDF = require('pdfkit')
-const fs = require('fs')
+const PDF = require('pdfkit');
+const fs = require('fs');
 const { pool } = require('../../database/database');
 
 router.get('/inicio_sesion', async (req, res) => {
@@ -245,7 +245,7 @@ router.post('/registrar_grupo', async (req, res) => {
       res.json('Grupo registrado');
     }
   } catch (e) {
-    console.log(e)
+    console.log(e);
     res
       .status(500)
       .json({ errorCode: e.errno, message: 'Error en el servidor' });
@@ -264,194 +264,237 @@ router.get('/ver_materias', async (req, res) => {
   });
 });
 
-
 router.get('/ver_grupos_administrador', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT grupos.id_grupo, grupos.codigo_grupo, grupos.id_grado, grupos.jornada, profesores.nombres_apellidos FROM  grupos INNER JOIN profesores ON grupos.id_profesor= profesores.id_profesor`, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      return res.json(resulset.rows);
+  client.query(
+    `SELECT grupos.id_grupo, grupos.codigo_grupo, grupos.id_grado, grupos.jornada, profesores.nombres_apellidos FROM  grupos INNER JOIN profesores ON grupos.id_profesor= profesores.id_profesor`,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        return res.json(resulset.rows);
+      }
     }
-  });
+  );
 });
 
 router.get('/ver_materias_administrador', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT materias.nombre, profesores.nombres_apellidos FROM  materias INNER JOIN profesores ON materias.id_profesor=profesores.id_profesor`, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      console.log(error)
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      return res.json(resulset.rows);
+  client.query(
+    `SELECT materias.nombre, profesores.nombres_apellidos FROM  materias INNER JOIN profesores ON materias.id_profesor=profesores.id_profesor`,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        return res.json(resulset.rows);
+      }
     }
-  });
+  );
 });
 
 router.get('/ver_estudiantes_administrador', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT estudiantes.nombres_apellidos, grupos.id_grado, estudiantes.id_grupo, grupos.codigo_grupo
+  client.query(
+    `SELECT estudiantes.nombres_apellidos, grupos.id_grado, estudiantes.id_grupo, grupos.codigo_grupo
   FROM estudiantes 
   INNER JOIN grupos ON estudiantes.id_grupo=grupos.id_grupo
-  ORDER BY grupos.id_grado`, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      console.log(error)
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      return res.json(resulset.rows);
+  ORDER BY grupos.id_grado`,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        return res.json(resulset.rows);
+      }
     }
-  });
+  );
 });
 
 router.get('/ver_profesores_administrador', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT profesores.nombres_apellidos, profesores.id_profesor, materias.nombre 
+  client.query(
+    `SELECT profesores.nombres_apellidos, profesores.id_profesor, materias.nombre 
   FROM profesores
   INNER JOIN materias ON profesores.id_profesor = materias.id_profesor
-  `, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      console.log(error)
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      return res.json(resulset.rows);
+  `,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        return res.json(resulset.rows);
+      }
     }
-  });
+  );
 });
 
 router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT COUNT(id_estudiante) as cantidad_estudiantes, materias.nombre as nombre_materia
+  client.query(
+    `SELECT COUNT(id_estudiante) as cantidad_estudiantes, materias.nombre as nombre_materia
   FROM estudiantes
   INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo
   INNER JOIN materias ON grupos.id_grado = materias.id_grados
-  GROUP BY materias.nombre`, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      console.log(error)
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      let doc = new PDF();
-      doc.pipe(fs.createWriteStream(__dirname + '/reportes/cantidad_estudiantes_por_asignatura.pdf'))
+  GROUP BY materias.nombre`,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        let doc = new PDF();
+        doc.pipe(
+          fs.createWriteStream(
+            __dirname + '/cantidad_estudiantes_por_asignatura.pdf'
+          )
+        );
+        // doc.image('/client/public/images/logo-colegio-geek.png', 5, 15, {width: 250})
+        doc.text('Cantidad estudiantes por asignatura', {
+          align: 'center',
+        });
+        let respuesta = resulset.rows;
+        for (let i = 0; i < resulset.rows.length; i++) {
+          doc.text(respuesta[i].nombre_materia + ':', {
+            align: 'left',
+          });
+          doc.text(respuesta[i].cantidad_estudiantes, {
+            align: 'left',
+          });
 
-      doc.text('Cantidad estudiantes por asignatura', {
-        align: 'center'
-      })
-      let respuesta = resulset.rows
-      for(let i=0; i< resulset.rows.length; i++){
-        doc.text(respuesta[i].nombre_materia + ':', {
-          align: "left"
-        })
-        doc.text(respuesta[i].cantidad_estudiantes, {
-          align: "left"
-        })
-        
-
-      doc.text(' ', {
-        align: "left"
-      })
-      
+          doc.text(' ', {
+            align: 'left',
+          });
+        }
+        doc.end();
+      }
     }
-      doc.end();
-    }
-  });
+  );
 });
 
-router.get('/descargar_cantidad_estudiantes_materia', (req,res)=>{
-  var file = fs.readFileSync(__dirname + '/reportes/cantidad_estudiantes_por_asignatura.pdf', 'binary');
-
-  res.setHeader('Content-Length', file.length);
-  res.write(file, 'binary');
-  res.end();
-})
-
+router.get('/descargar_cantidad_estudiantes_materia', function (req, res) {
+  var file = __dirname + '/cantidad_estudiantes_por_asignatura.pdf';
+  res.download(file);
+});
 
 //servicio promedio de notas
 router.get('/promedio_notas_grupo', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT avg(nota) as promedio_notas, grupos.id_grupo
+  client.query(
+    `SELECT avg(nota) as promedio_notas, grupos.id_grupo
   FROM notas 
   INNER JOIN grupos ON notas.id_grupo = grupos.id_grupo
-  group by grupos.id_grupo`, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      console.log(error)
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      return res.json(resulset.rows);
+  group by grupos.id_grupo`,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        return res.json(resulset.rows);
+      }
     }
-  });
+  );
 });
-
-
 
 router.get('/ver_id_estudiante', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT MAX(id_estudiante) as ultimo_id FROM estudiantes`, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      console.log(error)
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      return res.json(resulset.rows);
+  client.query(
+    `SELECT MAX(id_estudiante) as ultimo_id FROM estudiantes`,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        return res.json(resulset.rows);
+      }
     }
-  });
+  );
 });
 
 router.get('/cantidad_estudiantes_profesor_grado', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT COUNT(id_estudiante) as cantidad_estudiantes, profesores.nombres_apellidos, grupos.id_grado 
+  client.query(
+    `SELECT COUNT(id_estudiante) as cantidad_estudiantes, profesores.nombres_apellidos, grupos.id_grado 
   FROM estudiantes
   INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo
   INNER JOIN materias ON grupos.id_grado = materias.id_grados
   INNER JOIN profesores ON profesores.id_profesor=materias.id_profesor
-  GROUP BY grupos.id_grado, profesores.nombres_apellidos`, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      console.log(error)
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      return res.json(resulset.rows);
+  GROUP BY grupos.id_grado, profesores.nombres_apellidos`,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        return res.json(resulset.rows);
+      }
     }
-  });
+  );
 });
-
 
 // Servicio calificaciones por estudiante
 router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT estudiantes.nombres_apellidos, notas.nota FROM notas JOIN estudiantes ON notas.id_estudiante = estudiantes.id_estudiante
-  ORDER BY estudiantes.nombres_apellidos`, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      console.log(error)
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      return res.json(resulset.rows)
-
+  client.query(
+    `SELECT estudiantes.nombres_apellidos, notas.nota FROM notas JOIN estudiantes ON notas.id_estudiante = estudiantes.id_estudiante
+  ORDER BY estudiantes.nombres_apellidos`,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        return res.json(resulset.rows);
+      }
     }
-  });
+  );
 });
 
 // Servicio promedio de notas pos grado
 router.get('/reporte_promedio_grado', async (req, res) => {
   const client = await pool.connect();
-  client.query(`SELECT avg(nota) as promedio_notas, grados.grado
+  client.query(
+    `SELECT avg(nota) as promedio_notas, grados.grado
   FROM notas 
   JOIN grupos ON notas.id_grupo = grupos.id_grupo
   JOIN grados ON grupos.id_grado = grados.id_grado
-  group by grados.id_grado`, (error, resulset) => {
-    client.release(true);
-    if (error) {
-      console.log(error)
-      return res.status(500).send('Se presento un error en la base de datos.');
-    } else {
-      return res.json(resulset.rows);
+  group by grados.id_grado`,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        return res.json(resulset.rows);
+      }
     }
-  });
+  );
 });
 
 /* router.get('/datos_para_grados_cursados', async (req, res) => {
@@ -466,6 +509,5 @@ router.get('/reporte_promedio_grado', async (req, res) => {
     }
   });
 }); */
-
 
 module.exports = router;
