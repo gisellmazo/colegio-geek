@@ -372,12 +372,15 @@ router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
         });
         let respuesta = resulset.rows;
         for (let i = 0; i < resulset.rows.length; i++) {
-          doc.text(respuesta[i].nombre_materia + ':', {
+          doc.text('Materia: ' + respuesta[i].nombre_materia + ':', {
             align: 'left',
           });
-          doc.text(respuesta[i].cantidad_estudiantes, {
-            align: 'left',
-          });
+          doc.text(
+            'Cantidad de estudiantes: ' + respuesta[i].cantidad_estudiantes,
+            {
+              align: 'left',
+            }
+          );
 
           doc.text(' ', {
             align: 'left',
@@ -415,7 +418,7 @@ router.get('/ver_id_estudiante', async (req, res) => {
 router.get('/cantidad_estudiantes_profesor_grado', async (req, res) => {
   const client = await pool.connect();
   client.query(
-    `SELECT COUNT(id_estudiante) as cantidad_estudiantes, profesores.nombres_apellidos, grupos.id_grado 
+    `SELECT COUNT(id_estudiante) as cantidad_estudiantes, profesores.nombres_apellidos as nombre_profesor, grupos.id_grado as grado
   FROM estudiantes
   INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo
   INNER JOIN materias ON grupos.id_grado = materias.id_grados
@@ -429,11 +432,52 @@ router.get('/cantidad_estudiantes_profesor_grado', async (req, res) => {
           .status(500)
           .send('Se presento un error en la base de datos.');
       } else {
-        return res.json(resulset.rows);
+        let doc = new PDF();
+        doc.pipe(
+          fs.createWriteStream(
+            __dirname + '/reportes/cantidad_estudiantes_profesor_grado.pdf'
+          )
+        );
+        doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, { width: 210 });
+        doc.text('Cantidad de estudiantes por profesor según el grado:', {
+          align: 'center',
+        });
+        doc.text(' ', {
+          align: 'left',
+        });
+
+        let respuesta = resulset.rows;
+        for (let i = 0; i < resulset.rows.length; i++) {
+          doc.text('Profesor: ' + respuesta[i].nombre_profesor + ':', {
+            align: 'left',
+          });
+          doc.text('Grado: ' + respuesta[i].grado, {
+            align: 'left',
+          });
+          doc.text(
+            'Cantidad de estudiantes: ' + respuesta[i].cantidad_estudiantes,
+            {
+              align: 'left',
+            }
+          );
+
+          doc.text(' ', {
+            align: 'left',
+          });
+        }
+        doc.end();
       }
     }
   );
 });
+
+router.get(
+  '/descargar_cantidad_estudiantes_profesor_grado',
+  function (req, res) {
+    var file = __dirname + '/reportes/cantidad_estudiantes_profesor_grado.pdf';
+    res.download(file);
+  }
+);
 
 // Servicio calificaciones por estudiante
 router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
@@ -465,10 +509,10 @@ router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
         });
         let respuesta = resulset.rows;
         for (let i = 0; i < resulset.rows.length; i++) {
-          doc.text(respuesta[i].nombres_apellidos + ':', {
+          doc.text('Nombre: ' + respuesta[i].nombres_apellidos + ':', {
             align: 'left',
           });
-          doc.text(respuesta[i].nota, {
+          doc.text('Nota: ' + respuesta[i].nota, {
             align: 'left',
           });
 
@@ -480,6 +524,10 @@ router.get('/reporte_calificaciones_por_estudiante', async (req, res) => {
       }
     }
   );
+});
+router.get('/descargar_calificaciones_por_estudiante', function (req, res) {
+  var file = __dirname + '/reportes/reporte_calificaciones_por_estudiante.pdf';
+  res.download(file);
 });
 
 //servicio promedio de notas
@@ -551,9 +599,7 @@ router.get('/promedio_notas_grado', async (req, res) => {
       } else {
         let doc = new PDF();
         doc.pipe(
-          fs.createWriteStream(
-            __dirname + '/reportes/promedio_notas_grado.pdf'
-          )
+          fs.createWriteStream(__dirname + '/reportes/promedio_notas_grado.pdf')
         );
         doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, { width: 210 });
         doc.text('Reporte del promedio de las notas en cada grado:', {
@@ -564,9 +610,12 @@ router.get('/promedio_notas_grado', async (req, res) => {
         });
         let respuesta = resulset.rows;
         for (let i = 0; i < resulset.rows.length; i++) {
-          doc.text('El promedio de notas en el grado '+respuesta[i].grado  + ' es:', {
-            align: 'left',
-          });
+          doc.text(
+            'El promedio de notas en el grado ' + respuesta[i].grado + ' es:',
+            {
+              align: 'left',
+            }
+          );
           doc.text(respuesta[i].promedio_notas, {
             align: 'left',
           });
@@ -617,7 +666,7 @@ router.get('/promedio_notas_materia', async (req, res) => {
         });
         let respuesta = resulset.rows;
         for (let i = 0; i < resulset.rows.length; i++) {
-          doc.text("El nombre de la materia es "+respuesta[i].nombre, {
+          doc.text('El nombre de la materia es ' + respuesta[i].nombre, {
             align: 'left',
           });
           doc.text(respuesta[i].codigo_materia, {
