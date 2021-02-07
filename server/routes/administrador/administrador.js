@@ -12,12 +12,13 @@ const PDF = require('pdfkit');
 const fs = require('fs');
 const { pool } = require('../../database/database');
 
+
 router.get('/inicio_sesion', async (req, res) => {
   let client = await pool.connect();
   const { numero_documento, contrasena, tipo_usuario } = req.query;
 
   const token = jwt.sign(contrasena, 'token_contrasena');
-  console.log(token);
+  
   try {
     if (tipo_usuario == 1) {
       let result = await client.query(
@@ -189,15 +190,20 @@ router.post('/registrar_materia', async (req, res) => {
     const validacion = await validacion_registro_materia.validateAsync(
       req.body
     );
-    const { codigo_materia, nombre, id_profesor, id_grados } = req.body;
+    const { codigo_materia, nombre, id_profesor, id_grado1, id_grado2, id_grado3, id_grado4, id_grado5, id_grado6 } = req.body;
     const client = await pool.connect();
     const response = await client.query(
       `INSERT INTO materias(
             codigo_materia,
             nombre,
             id_profesor,
-            id_grados) VALUES ($1, $2, $3, $4)`,
-      [codigo_materia, nombre, id_profesor, id_grados]
+            id_grado1, 
+            id_grado2, 
+            id_grado3, 
+            id_grado4, 
+            id_grado5, 
+            id_grado6) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+      [codigo_materia, nombre, id_profesor, id_grado1, id_grado2, id_grado3, id_grado4, id_grado5, id_grado6]
     );
 
     if (response.rowsCount > 0) {
@@ -206,7 +212,12 @@ router.post('/registrar_materia', async (req, res) => {
         codigo_materia,
         nombre,
         id_profesor,
-        id_grados,
+        id_grado1, 
+        id_grado2, 
+        id_grado3, 
+        id_grado4, 
+        id_grado5, 
+        id_grado6
       });
     } else {
       res.send('Materia registrada');
@@ -347,7 +358,7 @@ router.get('/cantidad_estudiantes_asignatura', async (req, res) => {
     `SELECT COUNT(id_estudiante) as cantidad_estudiantes, materias.nombre as nombre_materia
   FROM estudiantes
   INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo
-  INNER JOIN materias ON grupos.id_grado = materias.id_grados
+  INNER JOIN materias ON grupos.id_grado = materias.id_grado1 OR grupos.id_grado = materias.id_grado2 OR grupos.id_grado = materias.id_grado3 OR grupos.id_grado = materias.id_grado4 OR grupos.id_grado = materias.id_grado5 OR grupos.id_grado = materias.id_grado6
   GROUP BY materias.nombre`,
     (error, resulset) => {
       client.release(true);
@@ -421,7 +432,7 @@ router.get('/cantidad_estudiantes_profesor_grado', async (req, res) => {
     `SELECT COUNT(id_estudiante) as cantidad_estudiantes, profesores.nombres_apellidos as nombre_profesor, grupos.id_grado as grado
   FROM estudiantes
   INNER JOIN grupos ON estudiantes.id_grupo = grupos.id_grupo
-  INNER JOIN materias ON grupos.id_grado = materias.id_grados
+  INNER JOIN materias ON grupos.id_grado = materias.id_grado1 OR grupos.id_grado = materias.id_grado2 OR grupos.id_grado = materias.id_grado3 OR grupos.id_grado = materias.id_grado4 OR grupos.id_grado = materias.id_grado5 OR grupos.id_grado = materias.id_grado6
   INNER JOIN profesores ON profesores.id_profesor=materias.id_profesor
   GROUP BY grupos.id_grado, profesores.nombres_apellidos`,
     (error, resulset) => {
