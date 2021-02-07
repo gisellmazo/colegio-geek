@@ -881,7 +881,6 @@ router.get('/promedio_notas_materia', function _callee17(req, res) {
                   align: 'left'
                 });
               }
-
               doc.end();
             }
           });

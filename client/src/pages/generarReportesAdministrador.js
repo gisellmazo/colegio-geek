@@ -171,5 +171,4 @@ const GenerarReportesAdministrador = () => {
     </div>
   );
 };
-
 export default withRouter(GenerarReportesAdministrador);

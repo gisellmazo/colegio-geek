@@ -5,7 +5,6 @@ password:
 port: 5432
 
 
-
 psql -h bdbkwufvp9cmdzpyl1d6-postgresql.services.clever-cloud.com -p 5432 -U ubpcmf1mfsoc3mxcjabb -d bdbkwufvp9cmdzpyl1d6
 
 
