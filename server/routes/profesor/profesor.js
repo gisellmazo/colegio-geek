@@ -8,9 +8,10 @@ router.get('/perfil_profesor', async (req, res) => {
     const { id_profesor } = req.query;
     const response = await pool.query(
       `SELECT profesores.nombres_apellidos, materias.nombre, grupos.codigo_grupo, grupos.id_grupo
-      FROM profesores  
-      INNER JOIN materias ON profesores.id_profesor = materias.id_profesor
+      FROM profesores 
       INNER JOIN grupos ON profesores.id_profesor = grupos.id_profesor 
+      INNER JOIN materias ON grupos.id_profesor = materias.id_profesor
+       
       WHERE profesores.id_profesor = $1`,
       [id_profesor]
     );
@@ -44,7 +45,9 @@ router.get('/ver_grupos_profesor', async (req, res) => {
   try {
     const {id_profesor} = req.query;
     const response = await pool.query(
-      `SELECT grupos.codigo_grupo, grupos.jornada FROM grupos INNER JOIN profesores ON grupos.id_profesor = profesores.id_profesor WHERE profesores.id_profesor = $1;`,[id_profesor]
+      `SELECT grupos.codigo_grupo, grupos.id_grupo FROM grupos 
+      INNER JOIN profesores ON profesores.id_profesor = $1
+      INNER JOIN materias ON grupos.id_grado = materias.id_grado1 OR grupos.id_grado = materias.id_grado2 OR grupos.id_grado = materias.id_grado3 OR grupos.id_grado = materias.id_grado4 OR grupos.id_grado = materias.id_grado5 OR grupos.id_grado = materias.id_grado6;`,[id_profesor]
     );
     return res.json(response.rows);
   } catch (error) {

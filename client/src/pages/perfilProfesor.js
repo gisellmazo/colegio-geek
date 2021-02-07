@@ -11,7 +11,7 @@ function Perfil() {
   const [datos, setdatos] = useState([{}])
     
     useEffect(() => {
-        fetch('/perfil_profesor?id_profesor=1')
+        fetch('/perfil_profesor?id_profesor=2')
             .then(response => response.json())
             .then(data => setdatos(data));
             console.log(datos)
@@ -22,7 +22,11 @@ function Perfil() {
       <div class="grid-container ">
         {console.log(datos)}
         <div class="s">
-        <Sidebar name1="Mi espacio" name2="Ingresar notas" ruta1="/profesor" ruta2=""/>
+        <Sidebar 
+          name1="Mi espacio" 
+          name2="Ingresar notas" 
+          ruta1="/profesor" 
+          ruta2="/ingresar_notas"/>
         </div>
         <div class="PP">
           <div className="mt-3 profile-photo ">

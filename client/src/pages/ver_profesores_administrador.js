@@ -38,6 +38,7 @@ function VerProfesoresAdministrador() {
           <div className="mt-4">
             <div className="main align-middle d-flex pl-5 pr-4">
               <div class="row">
+                
                 {
                   datos.map(function (dato, index, array) {
                     return <div class="col-sm-6 mt-5 bottom-pa">
@@ -58,6 +59,8 @@ function VerProfesoresAdministrador() {
 
                   })
                 }
+                
+
               </div>
               
             </div>
