@@ -23,7 +23,7 @@ router.get('/inicio_sesion', async (req, res) => {
   try {
     if (tipo_usuario == 1) {
       let result = await client.query(
-        `select id_admin from administrador where contrasena = $1 and numero_documento = $2`,
+        `select id_admin, tipo_usuario from administrador where contrasena = $1 and numero_documento = $2`,
         [token, numero_documento]
       );
       if (result.rowCount == 0) {
@@ -32,7 +32,7 @@ router.get('/inicio_sesion', async (req, res) => {
       return res.json(result.rows);
     } else if (tipo_usuario == 2) {
       let result = await client.query(
-        `select id_profesor from profesores where contrasena = $1 and numero_documento = $2 `,
+        `select id_profesor, tipo_usuario from profesores where contrasena = $1 and numero_documento = $2 `,
         [token, numero_documento]
       );
       if (result.rowCount == 0) {
@@ -41,7 +41,7 @@ router.get('/inicio_sesion', async (req, res) => {
       return res.json(result.rows);
     } else if (tipo_usuario == 3) {
       let result = await client.query(
-        `select id_estudiante from estudiantes where contrasena = $1 and numero_documento = $2`,
+        `select id_estudiante, tipo_usuario from estudiantes where contrasena = $1 and numero_documento = $2`,
         [token, numero_documento]
       );
       if (result.rowCount == 0) {

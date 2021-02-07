@@ -13,18 +13,42 @@ import { Formik, Form } from 'formik';
 function Login() {
   const [datos, setdatos] = useState([{}]);
 
-  useEffect(() => {
-    fetch('/inicio_sesion?numero_documento=15667264634&contrasena=contrasena12&tipo_usuario=3')
+function iniciarSesion(values) {
+     fetch('/inicio_sesion?' + new URLSearchParams({
+   
+         tipo_usuario: values.tipo_usuario,
+         numero_documento: values.usuario,
+         contrasena: values.contrasena
+     
+     }))
       .then((response) => response.json())
-      .then((data) => setdatos(data));
-  }, []);
+      .then((data) => setdatos(data))
+      .then(()=>{
+        console.log(datos)
+        if(datos.length >0){
+          let respuesta = datos[0];
+          console.log(respuesta.tipo_usuario)
+          if(respuesta.tipo_usuario == 1){
+            
+            localStorage.setItem('id', respuesta.id_admin, { path: "/" })
+            window.location.href = '/administrador'
+          }else if(respuesta.tipo_usuario == 2){
+            localStorage.setItem('id', respuesta.id_profesor, { path: "/" })
+            window.location.href = '/profesor'
+          }else if(respuesta.tipo_usuario == 3){
+            localStorage.setItem('id', respuesta.id_estudiante, { path: "/" })
+            window.location.href = '/estudiante'
+          }
+
+        }
+      })
+    }
   //    
   console.log(datos[0].id_estudiante)
   const validate = Yup.object({
     usuario: Yup.number().required('El usuario es requerido'),
-    contraseña: Yup.string()
-      .required('Contraseña requerida')
-      .min(8, 'la contraseña debe tener al menos 8 caractéres'),
+    contrasena: Yup.string()
+      .required('Contraseña requerida'),
     tipo_usuario: Yup.number()
   });
 
@@ -46,11 +70,12 @@ function Login() {
             initialValues={{
               tipo_usuario: '',
               usuario: '',
-              contraseña: '',
+              contrasena: '',
             }}
             validationSchema={validate}
             onSubmit={(values) => {
               console.log(values);
+              iniciarSesion(values)
             }}>
             {(formik) => (
               <div>
@@ -72,7 +97,7 @@ function Login() {
                     <CampoFormulario
                       label='Contraseña:'
                       type='password'
-                      name='contraseña'
+                      name='contrasena'
                       className='form-control diseno-imputs'
                     />
                     <br />

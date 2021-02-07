@@ -40,9 +40,13 @@ function RegistrarEstudiante() {
             celular: datos.celular,
             id_grupo: datos.id_grupo,
             numero_documento: datos.numero_documento,
-          }),
+          })
         }).then(function (res) {
-          alert('Estudiante creado');
+          if (res.status != 200) {
+            alert('ERROR!! al registrar estudiante compruebe que los datos son correctos')
+          } else {
+            alert('Estudiante registrado con exito')
+          }
         })
         
       );

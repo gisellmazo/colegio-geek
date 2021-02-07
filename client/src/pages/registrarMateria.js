@@ -35,7 +35,13 @@ function RegistrarMateria() {
         id_grado5:grado5,
         id_grado6:grado6
       })
-    }).then(function (res) { alert(res) });
+    }).then(function (res) {
+      if (res.status != 200) {
+        alert('ERROR!! al registrar materia compruebe que los datos son correctos')
+      } else {
+        alert('Materia registrado con exito')
+      }
+    });
   }
 
   const checkboxOptions = [
