@@ -1,5 +1,6 @@
 import React from 'react';
 import { ErrorMessage, useField } from 'formik';
+import Checkbox from "./Checkbox";
 
 function CampoFormulario({ label, estilo, ...props }) {
     const [field] = useField(props);
@@ -16,6 +17,9 @@ function CampoFormulario({ label, estilo, ...props }) {
             <label className={estilo}>
                 <ErrorMessage name={field.name}  />
             </label>
+            
+            
+            
 
         </div>
     );

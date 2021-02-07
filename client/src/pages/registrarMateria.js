@@ -19,14 +19,30 @@ function RegistrarMateria() {
         codigo_materia: datos.codigo_materia,
         nombre: datos.nombre,
         id_profesor: datos.id_profesor,
-        id_grados: '9',
+        id_grado1:datos.id_grado1,
+        id_grado2:datos.id_grado2,
+        id_grado3:datos.id_grado3,
+        id_grado4:datos.id_grado4,
+        id_grado5:datos.id_grado5,
+        id_grado6:datos.id_grado6
       })
-    }).then(function(res){ alert(res) });
+    }).then(function (res) { alert(res) });
   }
+
+  const checkboxOptions = [
+    { key: 'Grado 1', value: 'grado1' },
+    { key: 'Grado 2', value: 'grado2' },
+    { key: 'Grado 3', value: 'grado3' },
+    { key: 'Grado 4', value: 'grado4' },
+    { key: 'Grado 5', value: 'grado5' },
+    { key: 'Grado 6', value: 'grado6' },
+  ]
+
   const validate = Yup.object({
     nombre: Yup.string().required('campo requerido'),
     codigo_materia: Yup.string().required('Campo requerido'),
     id_profesor: Yup.number().required('Campo requerido'),
+
   });
   return (
     <div>
@@ -54,7 +70,12 @@ function RegistrarMateria() {
                 codigo_materia: '',
                 nombre: '',
                 id_profesor: '',
-                id_grados: '',
+                id_grado1: 6,
+                id_grado2: 7,
+                id_grado3: 8,
+                id_grado4: 9,
+                id_grado5: 10,
+                id_grado6: 11
               }}
               validationSchema={validate}
               onSubmit={(values) => {
@@ -89,20 +110,52 @@ function RegistrarMateria() {
                         estilo='texto-blanco'
                         className='form-control diseno-imputs'
                       />
+                      <br/>
+                     
+                      <label className="texto-blanco">Selecciona los grados asignados a esta materia:</label>
+                      <br/>
+                      <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="inlineCheckbox1" name="id_grado1" value="6" />
+                        <label className="form-check-label texto-blanco" for="inlineCheckbox1">6</label>
+                      </div>
+                      <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="id_grado2" value="7"/>
+                        <label className="form-check-label texto-blanco" for="inlineCheckbox2">7</label>
+                      </div>
+                      <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="id_grado3" value="8" />
+                        <label className="form-check-label texto-blanco" for="inlineCheckbox2">8</label>
+                      </div>
+                      <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="id_grado4" value="9" />
+                        <label className="form-check-label texto-blanco" for="inlineCheckbox2">9</label>
+                      </div>
+                      <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="id_grado5" value="10" />
+                        <label className="form-check-label texto-blanco" for="inlineCheckbox2">10</label>
+                      </div>
+                      <div className="form-check form-check-inline">
+                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="id_grado6" value="11" />
+                        <label className="form-check-label texto-blanco" for="inlineCheckbox2">11</label>
+                      </div>
+                     
+
+
+                    
+                      </div>
                     </div>
-                  </div>
-                  <br />
-                  <center>
-                    <button type='submit'>Registrar</button>
-                  </center>
+                    <br />
+                    <center>
+                      <button type='submit'>Registrar</button>
+                    </center>
                 </Form>
               )}
             </Formik>
           </div>
+          </div>
         </div>
+        <Footer cargo='Administrador' />
       </div>
-      <Footer cargo='Administrador' />
-    </div>
   );
 }
 

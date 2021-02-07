@@ -44,7 +44,12 @@ const validacion_registro_materia = Joi.object(
         codigo_materia: Joi.string().required(),
         nombre: Joi.string().required(), 
         id_profesor: Joi.number().required(),
-        id_grados: Joi.number().required()
+        id_grado1: Joi.number(),
+        id_grado2: Joi.number(),
+        id_grado3: Joi.number(),
+        id_grado4: Joi.number(),
+        id_grado5: Joi.number(),
+        id_grado6: Joi.number()
     }
 )
 
