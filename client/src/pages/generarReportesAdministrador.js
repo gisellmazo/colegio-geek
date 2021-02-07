@@ -11,6 +11,11 @@ const GenerarReportesAdministrador = () => {
       method: 'GET',
     });
   }
+  function reporteCalificacionesPorEstudiante() {
+    fetch('/reporte_calificaciones_por_estudiante', {
+      method: 'GET',
+    });
+  }
   function reportePromedio() {
     fetch('/promedio_notas_grupo', {
       method: 'GET',
@@ -22,6 +27,11 @@ const GenerarReportesAdministrador = () => {
       method: 'GET',
     });
   }
+  function reporteCantidadEstudiantesPorProfesorGrado() {
+    fetch('/cantidad_estudiantes_profesor_grado', {
+      method: 'GET',
+    });
+ }
   return (
     <div>
       <div class='grid-container'>
@@ -68,10 +78,26 @@ const GenerarReportesAdministrador = () => {
                   </div>
                 </div>
                 <div class='col-sm-6 '>
-                  <Card
-                    name='Reporte de cantidad de estudiantes por profesor según el grado'
-                    ruta=''
-                  />
+                <div className='card'>
+                    <div className='card-body'>
+                      <h5 className='card-title'>
+                        Reporte de cantidad de estudiantes por profesor según el grado
+                      </h5>
+                      <p className='card-text'>
+                        Clic para descargar pdf con el reporte
+                      </p>
+                      <a
+                        href='http://localhost:5002/descargar_cantidad_estudiantes_profesor_grado'
+                        download>
+                        <button
+                          type='button'
+                          className='btn-p btn-primary'
+                          onClick={reporteCantidadEstudiantesPorProfesorGrado()}>
+                          Ir
+                        </button>
+                      </a>
+                    </div>
+                  </div>
                 </div>
                 <div class='col-sm-6 mt-5 bottom-pa'>
                   <div className='card'>
@@ -114,10 +140,26 @@ const GenerarReportesAdministrador = () => {
                   </div>
                 </div>
                 <div class='col-sm-6 mt-5 bottom-pa'>
-                  <Card
-                    name='Reporte de cantidad de estudiantes por asignatura'
-                    ruta='/registrar_materia'
-                  />
+                <div className='card'>
+                    <div className='card-body'>
+                      <h5 className='card-title'>
+                        Reporte de calificaciones por estudiante
+                      </h5>
+                      <p className='card-text'>
+                        Clic para descargar pdf con el reporte
+                      </p>
+                      <a
+                        href='http://localhost:5002/descargar_calificaciones_por_estudiante'
+                        download>
+                        <button
+                          type='button'
+                          className='btn-p btn-primary'
+                          onClick={reporteCalificacionesPorEstudiante()}>
+                          Descargar
+                        </button>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
