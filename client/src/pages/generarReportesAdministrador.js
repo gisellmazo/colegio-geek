@@ -11,7 +11,7 @@ const GenerarReportesAdministrador = () => {
         fetch('/cantidad_estudiantes_asignatura',{
             method: 'GET'
         }).then(function(){
-            fetch('//descargar_cantidad_estudiantes_materia',{
+            fetch('/descargar_cantidad_estudiantes_materia',{
                 method: 'GET'
             })
         })
@@ -46,10 +46,12 @@ const GenerarReportesAdministrador = () => {
                                             <p className="card-text">
                                                 clic para descargar pdf con el reporte
                                             </p>
-                                            
+                                            <a href="localhost:5002/descargar_cantidad_estudiantes_materia"> 
                                                 <button type="button" className="btn-p btn-primary" onClick={reporteCantidadEstudiantesAsignatura()}>
                                                     Ir
                                                 </button>
+                                            </a>
+                                                
                                             
 
                                         </div>
