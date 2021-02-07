@@ -8,9 +8,10 @@ import Sidebar from "../components/sidebar";
 function Main_estudiante() {
 
     const [datos, setdatos] = useState([{}])
+    const id_usuario = localStorage.getItem('id')
     
     useEffect(() => {
-        fetch('/perfil_estudiante?id_estudiante=1')
+        fetch(`/perfil_estudiante?id_estudiante=${id_usuario}`)
             .then(response => response.json())
             .then(data => setdatos(data));
             console.log(datos)
