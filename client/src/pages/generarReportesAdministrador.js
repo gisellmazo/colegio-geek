@@ -11,6 +11,17 @@ const GenerarReportesAdministrador = () => {
       method: 'GET',
     });
   }
+  function reportePromedio() {
+    fetch('/promedio_notas_grupo', {
+      method: 'GET',
+    });
+    fetch('/promedio_notas_grado', {
+      method: 'GET',
+    });
+    fetch('/promedio_notas_materia', {
+      method: 'GET',
+    });
+  }
   return (
     <div>
       <div class='grid-container'>
@@ -50,7 +61,7 @@ const GenerarReportesAdministrador = () => {
                           type='button'
                           className='btn-p btn-primary'
                           onClick={reporteCantidadEstudiantesAsignatura()}>
-                          Ir
+                          Descargar
                         </button>
                       </a>
                     </div>
@@ -63,14 +74,48 @@ const GenerarReportesAdministrador = () => {
                   />
                 </div>
                 <div class='col-sm-6 mt-5 bottom-pa'>
-                  <Card
-                    name='Reporte de calificaciones filtradas por estudiante'
-                    ruta=''
-                  />
+                  <div className='card'>
+                    <div className='card-body'>
+                      <h5 className='card-title'>Reporte de promedios</h5>
+                      <p className='card-text'>
+                        Clic para descargar pdf con el reporte
+                      </p>
+                      <a
+                        href='http://localhost:5002/descargar_promedio_notas_grupo'
+                        download>
+                        <button
+                          type='button'
+                          className='btn-p btn-primary pb-1 mb-2'
+                          onClick={reportePromedio()}>
+                          Promedio por grupo
+                        </button>
+                      </a>
+                      <a
+                        href='http://localhost:5002/descargar_promedio_notas_grado'
+                        download>
+                        <button
+                          type='button'
+                          className='btn-p btn-primary pb-1 mb-2'
+                          onClick={reportePromedio()}>
+                          Promedio por grado
+                        </button>
+                      </a>
+                      <a
+                        href='http://localhost:5002/descargar_promedio_notas_materia'
+                        download>
+                        <button
+                          type='button'
+                          className='btn-p btn-primary pb-1 mb-2'
+                          onClick={reportePromedio()}>
+                          Promedio por materia
+                        </button>
+                      </a>
+                    </div>
+                  </div>
                 </div>
                 <div class='col-sm-6 mt-5 bottom-pa'>
                   <Card
-                    name='Reporte promedio de notas por grupo de estudiantes, por materia y por grado'
+                    name='Reporte de cantidad de estudiantes por asignatura'
                     ruta='/registrar_materia'
                   />
                 </div>
