@@ -7,9 +7,10 @@ import Sidebar from "../components/sidebar";
 
 function MisNotas() {
     const [datos,setdatos]=useState([{}])
+    const id_usuario = localStorage.getItem('id')
 
     useEffect(()=>{
-        fetch('/ver_mis_notas?id_estudiante=1')
+        fetch(`/ver_mis_notas?id_estudiante=${id_usuario}`)
             .then(response => response.json())
             .then(data => setdatos(data));
     },[])
