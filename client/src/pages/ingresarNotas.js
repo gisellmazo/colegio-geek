@@ -22,7 +22,13 @@ const IngresarNotas = () => {
                 tipo_nota: 'seguimiento',
                 nota: values.nota
             })
-        }).then(function(res){ alert(res) })
+        }).then(function (res) {
+      if (res.status != 200) {
+        alert('ERROR!! al registrar nota compruebe que los datos son correctos')
+      } else {
+        alert('Nota ingresada con exito')
+      }
+    });
     }
     const validate = Yup.object({
         id_estudiante: Yup.number()
