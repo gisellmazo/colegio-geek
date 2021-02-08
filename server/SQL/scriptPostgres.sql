@@ -184,6 +184,6 @@ end
 $$
 language plpgsql;
 
-create trigger AI_insert after insert on estudiantes
-for each row 
-execute procedure grados_cursados_AI();
+-- create trigger AI_insert after insert on estudiantes
+-- for each row 
+-- execute procedure grados_cursados_AI();
