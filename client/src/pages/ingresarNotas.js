@@ -16,13 +16,19 @@ const IngresarNotas = () => {
                 'Content-Type': 'application/json'
               },
             body: JSON.stringify({
-                id_estudiante: 1,
-                id_grupo: 10,
-                id_materia: 3,
+                id_estudiante: values.id_estudiante,
+                id_grupo: values.id_grupo,
+                id_materia: values.id_materia,
                 tipo_nota: 'seguimiento',
-                nota: 2
+                nota: values.nota
             })
-        }).then(function(res){ alert(res) })
+        }).then(function (res) {
+      if (res.status != 200) {
+        alert('ERROR!! al registrar nota compruebe que los datos son correctos')
+      } else {
+        alert('Nota ingresada con exito')
+      }
+    });
     }
     const validate = Yup.object({
         id_estudiante: Yup.number()
@@ -73,13 +79,14 @@ const IngresarNotas = () => {
 
                                                 <CampoFormulario label="id grupo:" type="number" name="id_grupo" estilo="texto-blanco" className="form-control diseno-imputs" />
                                                 <CampoFormulario label="tipo de nota:" type="text" name="tipo_nota" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="Nota:" type="number" name="nota" estilo="texto-blanco" className="form-control diseno-imputs" />
 
 
                                             </div>
                                             <div class="container-row-middle"></div>
                                             <div class="container-row">
                                                 <CampoFormulario label="Id estudiante:" type="number" name="id_estudiante" estilo="texto-blanco" className="form-control diseno-imputs" />
-                                                <CampoFormulario label="Nota:" type="number" name="nota" estilo="texto-blanco" className="form-control diseno-imputs" />
+                                                <CampoFormulario label="Id materia:" type="number" name="id_materia" estilo="texto-blanco" className="form-control diseno-imputs" />
 
 
                                             </div>
