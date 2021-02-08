@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "976e7140-cf3a-4110-8636-a70975b5f56a",
+		"name": "peticiones-colegiogeek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5002/registrar_estudiante",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_grupo\":1,\r\n    \"codigo_estudiante\":\"58842\",\r\n    \"tipo_documento\":\"TI\",\r\n    \"numero_documento\":\"1214743655\",\r\n    \"correo\":\"marianagomez@gmail.com\",\r\n    \"contrasena\": \"m1239874\",\r\n    \"nombres_apellidos\":\"Mariana Gómez\",\r\n    \"sexo\":\"F\",\r\n    \"fecha_nacimiento\":\"1998/04/28\",\r\n    \"direccion\":\"Calle 80 D #25-23\",\r\n    \"ciudad\":\"Medellín\",\r\n    \"telefono_fijo\":\"2110369\",\r\n    \"celular\":\"3135559415\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/registrar_estudiante",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"registrar_estudiante"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5002/registrar_profesor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tipo_documento\":\"CC\",\r\n    \"numero_documento\":\"123697445\",\r\n    \"nombres_apellidos\":\"Jose Osorio\",\r\n    \"correo\":\"josorio@gmail.com\",\r\n    \"contrasena\":\"2110357\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/registrar_profesor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"registrar_profesor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5002/ver_materias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5002/ver_materias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"ver_materias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5002/ver_grupos_administrador",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5002/ver_grupos_administrador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"ver_grupos_administrador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5002/ver_materias_administrador",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5002/ver_materias_administrador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"ver_materias_administrador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5002/ver_estudiantes_administrador",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5002/ver_estudiantes_administrador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"ver_estudiantes_administrador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5002/ver_profesores_administrador",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5002/ver_profesores_administrador",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"ver_profesores_administrador"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5002/ver_id_estudiante",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5002/ver_id_estudiante",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"ver_id_estudiante"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5002/registrar_materia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo_materia\":\"ART005\",\r\n    \"nombre\":\"Artes\",\r\n    \"id_profesor\":11,\r\n    \"id_grado1\":6, \r\n    \"id_grado2\":7, \r\n    \"id_grado3\":8, \r\n    \"id_grado4\":9, \r\n    \"id_grado5\":10, \r\n    \"id_grado6\":11\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/registrar_materia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"registrar_materia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5002/registrar_grupo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"codigo_grupo\":\"22369\",\r\n     \"id_profesor\":1,\r\n    \"id_grado\":6,\r\n    \"jornada\":\"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5002/registrar_grupo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5002",
+					"path": [
+						"registrar_grupo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
