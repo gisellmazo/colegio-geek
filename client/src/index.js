@@ -11,7 +11,6 @@ import RegistrarEstudiante from './pages/registrarEstudiante';
 import RegistrarProfesor from './pages/registrarProfesor';
 import RegistrarGrupo from './pages/registrarGrupo';
 import VerEstudiantesProfesor from './pages/verEstudiantesProfesor';
-import VerGruposProfesor from './pages/verGruposProfesor';
 import Main_estudiante from './pages/main-estudiante';
 import RegistrarMateria from './pages/registrarMateria';
 import MisNotas from './pages/misNotas';
@@ -36,7 +35,6 @@ const App = () => {
         path='/ver_estudiantes_profesor'
         component={VerEstudiantesProfesor}
       />
-      <Route path='/ver_grupos_profesor' component={VerGruposProfesor} />
       <Route path='/estudiante' component={Main_estudiante} />
       <Route path='/vermisnotas' component={MisNotas} />
       <Route

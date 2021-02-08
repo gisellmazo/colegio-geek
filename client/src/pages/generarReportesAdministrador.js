@@ -6,17 +6,14 @@ import Card from '../components/card';
 import '../styles/pantallasPrincipales.css';
 
 const GenerarReportesAdministrador = () => {
-
-  function reporteFinal(){
-    
-  }
+  function reporteFinal() {}
 
   function reporteCantidadEstudiantesAsignatura() {
     fetch('/cantidad_estudiantes_asignatura', {
       method: 'GET',
     });
   }
-  
+
   function reporteCalificacionesPorEstudiante() {
     fetch('/reporte_calificaciones_por_estudiante', {
       method: 'GET',
@@ -33,9 +30,9 @@ const GenerarReportesAdministrador = () => {
     fetch('/promedio_notas_materia', {
       method: 'GET',
     });
-    fetch('/reporte_final',{
-      method: 'GET'
-    })
+    fetch('/reporte_final', {
+      method: 'GET',
+    });
   }
 
   function reporteCantidadEstudiantesPorProfesorGrado() {
@@ -76,7 +73,7 @@ const GenerarReportesAdministrador = () => {
                         Clic para descargar pdf con el reporte
                       </p>
                       <a
-                        href='http://localhost:5002/descargar_cantidad_estudiantes_materia'
+                        href='http://34.75.141.2:5002/descargar_cantidad_estudiantes_materia'
                         download>
                         <button
                           type='button'
@@ -99,7 +96,7 @@ const GenerarReportesAdministrador = () => {
                         Clic para descargar pdf con el reporte
                       </p>
                       <a
-                        href='http://localhost:5002/descargar_cantidad_estudiantes_profesor_grado'
+                        href='http://34.75.141.2:5002/descargar_cantidad_estudiantes_profesor_grado'
                         download>
                         <button
                           type='button'
@@ -119,7 +116,7 @@ const GenerarReportesAdministrador = () => {
                         Clic para descargar pdf con el reporte
                       </p>
                       <a
-                        href='http://localhost:5002/descargar_promedio_notas_grupo'
+                        href='http://34.75.141.2:5002/descargar_promedio_notas_grupo'
                         download>
                         <button
                           type='button'
@@ -129,7 +126,7 @@ const GenerarReportesAdministrador = () => {
                         </button>
                       </a>
                       <a
-                        href='http://localhost:5002/descargar_promedio_notas_grado'
+                        href='http://34.75.141.2:5002/descargar_promedio_notas_grado'
                         download>
                         <button
                           type='button'
@@ -139,7 +136,7 @@ const GenerarReportesAdministrador = () => {
                         </button>
                       </a>
                       <a
-                        href='http://localhost:5002/descargar_promedio_notas_materia'
+                        href='http://34.75.141.2:5002/descargar_promedio_notas_materia'
                         download>
                         <button
                           type='button'
@@ -161,7 +158,7 @@ const GenerarReportesAdministrador = () => {
                         Clic para descargar pdf con el reporte
                       </p>
                       <a
-                        href='http://localhost:5002/descargar_calificaciones_por_estudiante'
+                        href='http://34.75.141.2:5002/descargar_calificaciones_por_estudiante'
                         download>
                         <button
                           type='button'
@@ -177,14 +174,12 @@ const GenerarReportesAdministrador = () => {
                 <div class='col-sm-6 mt-5 bottom-pa'>
                   <div className='card'>
                     <div className='card-body'>
-                      <h5 className='card-title'>
-                        Reporte final
-                      </h5>
+                      <h5 className='card-title'>Reporte final</h5>
                       <p className='card-text'>
                         Clic para descargar pdf con el reporte
                       </p>
                       <a
-                        href='http://localhost:5002/descargar_reporte_final'
+                        href='http://34.75.141.2:5002/descargar_reporte_final'
                         download>
                         <button
                           type='button'
@@ -195,14 +190,12 @@ const GenerarReportesAdministrador = () => {
                       </a>
                     </div>
                   </div>
-                  <br/><br/> <br/> <br/>
+                  <br />
+                  <br /> <br /> <br />
                 </div>
-                
               </div>
             </div>
-            
           </div>
-           
         </div>
       </div>
       <Footer cargo='Administrador' />
