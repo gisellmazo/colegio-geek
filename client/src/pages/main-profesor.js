@@ -22,14 +22,13 @@ function Main({ history }) {
         <div class="PM">
           <div className="mt-4">
             <div className="main align-middle d-flex pl-4 pr-4">
-              <div class="row">
+              <div class="row PEP">
                 <div class="col-sm-6">
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">Ver tu perfil</h5>
                       <p class="card-text">
-                        With supporting text below as a natural lead-in to
-                        additional content.
+                        ver mi materia, código de mi grupo, grupo.
                       </p>
                       <button
                         type="button"
@@ -47,8 +46,7 @@ function Main({ history }) {
                     <div class="card-body">
                       <h5 class="card-title">Ver tus estudiantes</h5>
                       <p class="card-text">
-                        With supporting text below as a natural lead-in to
-                        additional content.
+                        clic para ver todos los estudiantes matriculados a mi materia
                       </p>
                       <button
                         type="button"
@@ -60,24 +58,7 @@ function Main({ history }) {
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6 mt-5 bottom-pa">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Ver tus grupos</h5>
-                      <p class="card-text">
-                        With supporting text below as a natural lead-in to
-                        additional content.
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => history.push("/ver_grupos_profesor")}
-                        class="btn-p btn-primary"
-                      >
-                        Ir
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>

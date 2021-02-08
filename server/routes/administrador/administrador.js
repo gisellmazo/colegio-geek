@@ -145,6 +145,8 @@ router.post('/registrar_estudiante', async (req, res) => {
   }
 });
 
+
+
 router.post('/registrar_profesor', async (req, res) => {
   try {
     const {
@@ -703,6 +705,69 @@ router.get('/promedio_notas_materia', async (req, res) => {
 
 router.get('/descargar_promedio_notas_materia', function (req, res) {
   var file = __dirname + '/reportes/promedio_notas_materia.pdf';
+  res.download(file);
+});
+
+//reporte final
+router.get('/reporte_final', async (req, res) => {
+  const client = await pool.connect();
+  client.query(
+    `SELECT avg(nota) as nota_final, estudiantes.nombres_apellidos
+  FROM notas 
+  INNER JOIN estudiantes ON estudiantes.id_estudiante = notas.id_estudiante
+  GROUP BY estudiantes.nombres_apellidos`,
+    (error, resulset) => {
+      client.release(true);
+      if (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .send('Se presento un error en la base de datos.');
+      } else {
+        let doc = new PDF();
+        doc.pipe(
+          fs.createWriteStream(
+            __dirname + '/reportes/reporte_final.pdf'
+          )
+        );
+        doc.image(__dirname + '/logo-colegio-geek.png', 5, 15, { width: 210 });
+        doc.text('Reporte de estudiantesque aprueban o desaprueban:', {
+          align: 'center',
+        });
+        doc.text(' ', {
+          align: 'left',
+        });
+        let respuesta = resulset.rows;
+        for (let i = 0; i < resulset.rows.length; i++) {
+          doc.text('Nombre del estudiante: ' + respuesta[i].nombres_apellidos, {
+            align: 'left',
+          });
+          doc.text('Nota final: '+ respuesta[i].nota_final, {
+            align: 'left',
+          });
+          if(respuesta[i].nota_final < 3){
+            doc.text('El estudiante NO aprobó', {
+            align: 'left',
+          });
+          }else{
+            doc.text('El estudiante aprobó, felicitaciones!', {
+            align: 'left',
+          });
+          }
+
+          doc.text(' ', {
+            align: 'left',
+          });
+        }
+        doc.end(); 
+        return res.json(resulset.rows)
+      }
+    }
+  );
+});
+
+router.get('/descargar_reporte_final', function (req, res) {
+  var file = __dirname + '/reportes/reporte_final.pdf';
   res.download(file);
 });
 

@@ -6,16 +6,23 @@ import Card from '../components/card';
 import '../styles/pantallasPrincipales.css';
 
 const GenerarReportesAdministrador = () => {
+
+  function reporteFinal(){
+    
+  }
+
   function reporteCantidadEstudiantesAsignatura() {
     fetch('/cantidad_estudiantes_asignatura', {
       method: 'GET',
     });
   }
+  
   function reporteCalificacionesPorEstudiante() {
     fetch('/reporte_calificaciones_por_estudiante', {
       method: 'GET',
     });
   }
+
   function reportePromedio() {
     fetch('/promedio_notas_grupo', {
       method: 'GET',
@@ -26,7 +33,11 @@ const GenerarReportesAdministrador = () => {
     fetch('/promedio_notas_materia', {
       method: 'GET',
     });
+    fetch('/reporte_final',{
+      method: 'GET'
+    })
   }
+
   function reporteCantidadEstudiantesPorProfesorGrado() {
     fetch('/cantidad_estudiantes_profesor_grado', {
       method: 'GET',
@@ -162,9 +173,36 @@ const GenerarReportesAdministrador = () => {
                     </div>
                   </div>
                 </div>
+
+                <div class='col-sm-6 mt-5 bottom-pa'>
+                  <div className='card'>
+                    <div className='card-body'>
+                      <h5 className='card-title'>
+                        Reporte final
+                      </h5>
+                      <p className='card-text'>
+                        Clic para descargar pdf con el reporte
+                      </p>
+                      <a
+                        href='http://localhost:5002/descargar_reporte_final'
+                        download>
+                        <button
+                          type='button'
+                          className='btn-p btn-primary'
+                          onClick={reporteFinal()}>
+                          Descargar
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                  <br/><br/> <br/> <br/>
+                </div>
+                
               </div>
             </div>
+            
           </div>
+           
         </div>
       </div>
       <Footer cargo='Administrador' />

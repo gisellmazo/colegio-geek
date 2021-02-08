@@ -9,9 +9,10 @@ function VerEstudiantesProfesor(props) {
 
 
   const [datos, setdatos] = useState([{}])
+  const id_usuario= localStorage.getItem('id')
 
   useEffect(() => {
-    fetch('/ver_estudiantes_profesor?id_profesor=1')
+    fetch(`/ver_estudiantes_profesor?id_profesor=${id_usuario}`)
         .then(response => response.json())
         .then(data => setdatos(data));
 }, [])

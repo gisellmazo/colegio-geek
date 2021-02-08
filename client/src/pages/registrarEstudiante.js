@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
+//import $ from 'jquery';
+
 //Componentes
 import Footer from "../components/footer";
 import Sidebar from "../components/sidebar";
@@ -10,6 +12,34 @@ import CampoFormulario from "../components/CampoFormulario"
 
 import "../styles/pantallasPrincipales.css";
 import "../styles/registros.css"
+
+/* $(function(){
+  const form = $("#formulario_registrar_estudiante")
+
+  form.on("submit", function(event){
+    event.preventDefault()
+
+    const file = $("#image")[0].files[0]
+
+    console.log(file)
+
+    const formData = new FormData
+
+    formData.append("file", file)
+
+    $.ajax({
+      type: 'POST',
+      url: "/upload_image",
+      data: FormData,
+      contentType:false,
+      processData: false
+    }).then(result => {
+      console.log(result);
+      return false;
+    })
+
+    })
+}) */
 
 function RegistrarEstudiante() {
 
@@ -48,7 +78,7 @@ function RegistrarEstudiante() {
             alert('Estudiante registrado con exito')
           }
         })
-        
+
       );
 
     fetch('/send_mail', {
@@ -125,7 +155,7 @@ function RegistrarEstudiante() {
                   registrar(values);
                 }}>
                 {(formik) => (
-                  <Form>
+                  <Form id="formulario_registrar_estudiante">
                     <div className='PEP'>
                       <div className='main align-middle d-flex pl-4 pr-4'>
                         <div class='container-row'>
@@ -187,6 +217,7 @@ function RegistrarEstudiante() {
                             label='Foto:'
                             type='file'
                             name='foto'
+                            id="image"
                             estilo='texto-blanco'
                             className='form-control diseno-imputs'
                           />

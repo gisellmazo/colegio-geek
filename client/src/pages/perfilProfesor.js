@@ -9,9 +9,9 @@ import "../styles/perfil.css";
 function Perfil() {
 
   const [datos, setdatos] = useState([{}])
-    
+  const id_usuario= localStorage.getItem('id')
     useEffect(() => {
-        fetch('/perfil_profesor?id_profesor=2')
+        fetch(`/perfil_profesor?id_profesor=${id_usuario}`)
             .then(response => response.json())
             .then(data => setdatos(data));
             console.log(datos)

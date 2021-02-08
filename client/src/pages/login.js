@@ -24,7 +24,7 @@ function iniciarSesion(values) {
       .then((response) => response.json())
       .then((data) => setdatos(data))
       .then(()=>{
-        console.log(datos)
+        console.log(datos[0])
         if(datos.length >0){
           let respuesta = datos[0];
           console.log(respuesta.tipo_usuario)
